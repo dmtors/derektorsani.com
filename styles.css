@@ -1,0 +1,99 @@
+* {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #1D1D1D;
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    max-width: 664px;
+    margin: 64px auto;
+    padding: 0 24px;
+    text-align: left;
+}
+
+img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 24px;
+    margin-bottom: -32px;
+}
+
+h1 {
+    font-weight: 700;
+    margin-top: 64px;
+}
+
+span {
+    opacity: 0.35;
+}
+
+a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/*Social Links*/
+#twitter:after {
+    content: 'Twitter';
+}
+
+#twitter:hover:after {
+    content: '@dmtors';
+}
+
+#dribbble:after {
+    content: 'Dribbble';
+}
+
+#dribbble:hover:after {
+    content: '@dmtors';
+}
+
+#codepen:after {
+    content: 'CodePen';
+}
+
+#codepen:hover:after {
+    content: '@dmtors';
+}
+
+#github:after {
+    content: 'GitHub';
+}
+
+#github:hover:after {
+    content: '@dmtors';
+}
+
+#medium:after {
+    content: 'Medium';
+}
+
+#medium:hover:after {
+    content: '@dmtors';
+}
+
+#unsplash:after {
+    content: 'Unsplash';
+}
+
+#unsplash:hover:after {
+    content: '@dmtors';
+}
+
+#email:after {
+    content: 'Email';
+}
+
+#email:hover:after {
+    content: 'derektorsani@gmail.com';
+}
