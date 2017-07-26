@@ -4,7 +4,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 22px;
-    color: #7F768B;
+    color: #3c3c3c;
     transition: all 0.235s ease-in-out;
     margin: 0;
     padding: 0;
@@ -39,14 +39,14 @@ a {
     font-size: 18px;
     line-height: 26px;
     margin-top: 16px;
-    color: #ACA6B3;
+    color: #7e7e7e;
 }
 
 .banner h2 span {
     font-size: 18px;
     line-height: 26px;
     font-weight: 900;
-    color: #ACA6B3;
+    color: #7e7e7e;
 }
 
 .banner-buttons {
@@ -115,7 +115,7 @@ a {
 }
 
 .steps h2 {
-    color: #ACA6B3;
+    color: #7e7e7e;
 }
 
 .last-step {
@@ -128,13 +128,13 @@ a {
 }
 
 .last-step h1 {
-    color: #4A148C;
+    color: #3d3d3d;
     font-size: 18px;
     line-height: 26px;
 }
 
 .last-step h1 span {
-    color: #4A148C;
+    color: #3d3d3d;
     font-weight: 900;
     font-size: 18px;
     line-height: 26px;
@@ -181,7 +181,7 @@ a {
 }
 
 .section h2 {
-    color: #ACA6B3;
+    color: #7e7e7e;
     margin-top: 24px;
 }
 
@@ -212,6 +212,7 @@ a {
 
 .tools h2 {
     margin-top: 16px;
+    color: #7e7e7e;
 }
 
 .tools h3 {
@@ -227,7 +228,8 @@ a {
 }
 
 .tools img {
-    background-color: #ACA6B3;
+    background-color: #7e7e7e;
+    object-fit: cover;
     border-radius: 16px;
     width: 136px;
     height: 136px;
@@ -244,20 +246,20 @@ a {
 }
 
 .house-rules h1 {
-    color: #AA00FF;
+    color: #3c3c3c;
     font-size: 18px;
     line-height: 26px;
     font-weight: 900;
 }
 
 .house-rules h2 {
-    color: #AA00FF;
+    color: #3c3c3c;
     font-weight: 900;
     margin-top: 24px;
 }
 
 .house-rules h3 {
-    color: #4A148C;
+    color: #7e7e7e;
     margin-top: 16px;
 }
 
@@ -272,7 +274,7 @@ a {
 }
 
 .footer div p, a {
-    color: #ACA6B3;
+    color: #7e7e7e;
     text-decoration: none;
 }
 
