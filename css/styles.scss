@@ -8,14 +8,14 @@ $white: #FFFFFF;
 //Variables
 $transition: all 0.25s ease-in-out;
 $box-shadow: 0 8px 64px 0 rgba(34,34,34,0.10);
-$bold: 500;
-$normal: 300;
+$bold: 600;
+$normal: 400;
 $border-radius: 8px;
 
 //Defaults
 * {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-weight: 300;
+    font-weight: 400;
     font-size: 16px;
     line-height: 24px;
     color: $blue;
@@ -204,6 +204,27 @@ a {
                 border-radius: $border-radius;
                 h3 {
                     opacity: 1;
+                }
+            }
+        }
+        .samcart {
+            svg {
+                fill: $blue;
+            }
+            &:hover {
+                svg {
+                    animation: move 2s ease-in-out infinite;
+                    margin: -48px 0 0 -96px;
+                }
+                @keyframes move {
+                    0% {transform: translate(0px,0px); opacity: 0;}
+                    2% {opacity: 0}
+                    19% {transform: translate(56px,28px); opacity: 1;}
+                    27% {transform: translate(50px,25px);}
+                    73% {transform: translate(50px,25px);}
+                    81% {transform: translate(44px,22px);}
+                    92% {opacity: 1;}
+                    100% {transform: translate(100px,50px); opacity: 0;}
                 }
             }
         }
@@ -603,6 +624,20 @@ a {
     p {
         margin-top: 16px;
         color: $black;
+        span {
+            font-weight: $bold;
+            color: $black;
+        }
+    }
+    a {
+        margin-top: 24px;
+        display: block;
+        text-decoration: underline;
+        transition: $transition;
+        &:hover {
+            opacity: 0.5;
+            text-decoration: none;
+        }
     }
     .image {
         width: 100%;
@@ -655,6 +690,56 @@ a {
                 width: 100%;
                 object-fit: cover;
             }
+        }
+    }
+    .phone {
+        width: 40%;
+        height: auto;
+        margin: 48px auto;
+        border-radius: $border-radius;
+        box-shadow: $box-shadow;
+        position: relative;
+        transition: $transition;
+        @media screen and (max-width: 599px) {
+            width: 60%;
+        }
+        .topbar {
+            width: 100%;
+            height: 24px;
+            background-color: $grey1;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+        }
+        .bottombar {
+            width: 100%;
+            height: 24px;
+            background-color: $grey1;
+            border-radius: 0 0 8px 8px;
+            display: flex;
+            margin-top: -6px;
+        }
+        .phone-body {
+            width: 100%;
+            height: calc(100% - 48px);
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        padding-top: 25px;
+        height: 0;
+        margin: 48px 0 -8px;
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
     }
 }
