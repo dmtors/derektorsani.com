@@ -1,0 +1,51 @@
+/* ==== GRID SYSTEM ==== */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.col {
+  background: white;
+  border-left: 1px solid grey;
+  border-bottom: 1px solid grey;
+  width: 100%;
+  height: 100vh;
+  display: inline-block;
+  box-sizing: content-box;
+  margin: -2px;
+}
+
+.col-1 {
+  width: 100%;
+}
+
+.col-2 {
+  width: calc(100% / 2);
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.col-3 {
+  width: calc(100% / 3);
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.col-4 {
+  width: calc(100% / 4);
+}
+
+@media only screen and (max-width: 1023px) {
+  .col {
+    width: 100%;
+  }
+}
+
+/* ==== LAYOUT ==== */
+
+.navbar {
+    height: 88px;
+}

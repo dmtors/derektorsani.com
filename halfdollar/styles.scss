@@ -1,0 +1,111 @@
+/* ==== COLORS ==== */
+
+$white: #FFFFFF;
+$slate-1: #F5F6F6;
+$slate-2: #EBECEE;
+$slate-3: #CED1D5;
+$slate-4: #9CA3AB;
+$slate-5: #6C7681;
+$slate-6: #3A4857;
+$slate-7: #29333E;
+$blue: #0080FF;
+$green: #40C070;
+$yellow: #F6D70B;
+$red: #EC472D;
+
+/* ==== TYPE ==== */
+
+body {
+    font-size:
+}
+
+/* ==== GRID ==== */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.col {
+  background: $white;
+  border-left: 1px solid $slate-2;
+  border-top: 1px solid $slate-2;
+  width: 100%;
+  height: calc(100vh - 88px);
+  display: inline-block;
+  box-sizing: content-box;
+  margin: -2px;
+}
+
+.row {
+  background: $white;
+  border-left: 1px solid $slate-2;
+  border-top: 1px solid $slate-2;
+  width: 100%;
+  height: auto;
+  display: block;
+  box-sizing: content-box;
+  margin: -1px;
+}
+
+.row-1 {
+  height: 100%;
+}
+
+.row-2 {
+  height: calc(100% / 2);
+}
+
+.row-3 {
+  height: calc(100% / 3);
+}
+
+.row-4 {
+  height: calc(100% / 4);
+}
+
+.col-1 {
+  width: 100%;
+}
+
+.col-2 {
+  width: calc(100% / 2);
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.col-3 {
+  width: calc(100% / 3);
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.col-4 {
+  width: calc(100% / 4);
+}
+
+@media only screen and (max-width: 1023px) {
+  .col {
+    width: 100%;
+  }
+}
+
+/* ==== LAYOUT ==== */
+
+.navbar {
+    height: 88px;
+    border: none;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+/* ==== COMPONENTS ==== */
+
+input {
+    outline: none;
+    appearance: none;
+    border: none;
+    color: $slate-6;
+}
