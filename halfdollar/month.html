@@ -12,12 +12,38 @@
 
 <div>
     <div class="col col-1 navbar">
-        <img src="halfdollar-logo.svg"/>
-        <input class="input-search" type="text" placeholder="Search for a transaction..."></input>
+        <div id="nav-1">
+            <img src="halfdollar-logo.svg"/>
+            <label style="position: relative;">
+                <img style="position: absolute; top: 13px; left: 40px;" src="icon-search.svg"/>
+                <input id="input-search" type="text" placeholder="Search for a transaction..."></input>
+            </label>
+        </div>
+        <div id="nav-2">
+            <button type="button" class="button-primary" id="today-button">Today</button>
+            <button type="button" class="button-icon"><img style="margin-left: -2px; margin-top: 2px;" src="icon-chevron-left.svg"/></button>
+            <button type="button" class="button-icon" style="margin-left: 0;"><img style="margin-left: 2px; margin-top: 2px;" src="icon-chevron-right.svg"/></button>
+            <div id="select-date">
+                <p>April 2019</p>
+                <img src="icon-caret-down.svg"/>
+            </div>
+        </div>
+        <div id="nav-3">
+            <a class="nav-link" id="sign-out" href="">Sign Out</a>
+            <div id="avatar">
+                <!-- <input type="file"></input> -->
+                <img src="avatar.jpg"/>
+            </div>
+            <a class="nav-link" href="">Budgets</a>
+            <a class="nav-link" href="">Settings</a>
+            <a class="nav-link" href="">Share</a>
+            <a class="nav-link" href="">Overview</a>
+            <a class="nav-link nav-link-current" href="">Month</a>
+        </div>
     </div>
     <div class="col col-3">
         <div class="row row-4">
-
+            <p class="section-title"><span>Total Leftover</span> for April 2019</p>
         </div>
         <div class="row row-4">
 

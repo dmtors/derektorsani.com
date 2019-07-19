@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="14px" viewBox="0 0 8 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Path 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M7.50343664,11.8944251 C7.83218779,12.2235952 7.83218779,12.7572855 7.50343664,13.0864557 C7.1746855,13.4156259 6.64167458,13.4156259 6.31292344,13.0864557 L0.496563357,7.26268199 C0.167812214,6.93351182 0.167812214,6.39982152 0.496563357,6.07065134 L6.31292344,0.246877631 C6.64167458,-0.0822925435 7.1746855,-0.0822925435 7.50343664,0.246877631 C7.83218779,0.576047805 7.83218779,1.1097381 7.50343664,1.43890828 L2.28233316,6.66666667 L7.50343664,11.8944251 Z" id="path-1"></path>
+    </defs>
+    <g id="hifi" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="hd-search" transform="translate(-530.000000, -37.000000)">
+            <g id="Group" transform="translate(530.000000, 37.333333)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Path-2" fill="#9CA3AB" fill-rule="nonzero" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>
