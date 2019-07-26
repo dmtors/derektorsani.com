@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="20px" viewBox="0 0 26 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>UI</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="home4" transform="translate(-493.000000, -725.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <path d="M504.560694,725 L509.030829,725 L509.030829,738.025048 C509.030829,742.533719 505.793834,745 501.05395,745 C496.27553,745 493,742.533719 493,738.025048 L493,725 L497.470135,725 L497.470135,737.870906 C497.470135,739.797688 498.934489,740.992293 501.05395,740.992293 C503.17341,740.992293 504.560694,739.797688 504.560694,737.870906 L504.560694,725 Z M518.981609,725 L518.981609,744.73025 L514.511474,744.73025 L514.511474,725 L518.981609,725 Z" id="UI"></path>
+        </g>
+    </g>
+</svg>
