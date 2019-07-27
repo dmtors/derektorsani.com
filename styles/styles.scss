@@ -12,7 +12,7 @@ $bold: 700;
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
     font-weight: 400;
     font-size: 14px;
     color: $dark;
@@ -95,6 +95,11 @@ span {
 
 .mr-16 {
     margin-right: 16px;
+    @media only screen and (max-width: 491px) {
+        margin-right: 0;
+        display: block;
+        margin-bottom: 12px;
+    }
 }
 
 .title {
@@ -237,9 +242,9 @@ span {
         width: auto;
     }
     a {
-        color: #208bfb;
+        color: $dark;
         &:hover {
-            border-color: #208bfb;
+            border-color: $dark;
         }
     }
 }
@@ -247,9 +252,9 @@ span {
 #weiigh {
     background-color: #D55150;
     a {
-        color: #1ffac8;
+        color: $dark;
         &:hover {
-            border-color: #1ffac8;
+            border-color: $dark;
         }
     }
 }
@@ -260,9 +265,9 @@ span {
         color: $light;
     }
     a {
-        color: #F6D70B;
+        color: $light;
         &:hover {
-            border-color: #F6D70B;
+            border-color: $light;
         }
     }
 }
@@ -300,9 +305,9 @@ span {
         width: auto;
     }
     a {
-        color: #978e7b;
+        color: $dark;
         &:hover {
-            border-color: #978e7b;
+            border-color: $dark;
         }
     }
 }
