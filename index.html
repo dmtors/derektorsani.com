@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="styles/styles.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:500,500i,600,600i&display=swap" rel="stylesheet">
     <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
     <title>Derek Torsani</title>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -17,122 +17,213 @@
 
         gtag('config', 'UA-144041212-1');
     </script>
+    <script type="text/javascript">
+        function playSound(soundobj) {
+            var thissound=document.getElementById(soundobj);
+            thissound.play();
+        }
+        function stopSound(soundobj) {
+            var thissound=document.getElementById(soundobj);
+            thissound.pause();
+            thissound.currentTime = 0;
+        }
+    </script>
+    <audio loop id="antibalas" src="projects/jukebox/antibalas.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="dexter-story" src="projects/jukebox/dexter-story.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="khruangbin" src="projects/jukebox/khruangbin.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="olympians" src="projects/jukebox/olympians.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="sudan-archives" src="projects/jukebox/sudan-archives.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="gogo-penguin" src="projects/jukebox/gogo-penguin.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="kamaal-return" src="projects/jukebox/kamaal-return.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="kamaal-heights" src="projects/jukebox/kamaal-heights.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="makaya" src="projects/jukebox/makaya.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="yin-yin" src="projects/jukebox/yin-yin.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="kemet-burn" src="projects/jukebox/kemet-burn.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="kemet-queen" src="projects/jukebox/kemet-queen.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="we-out-here" src="projects/jukebox/we-out-here.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="black-focus" src="projects/jukebox/black-focus.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="cannonball" src="projects/jukebox/cannonball.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="take-five" src="projects/jukebox/take-five.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="byrd-125" src="projects/jukebox/byrd-125.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="byrd-aces" src="projects/jukebox/byrd-aces.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="damn-right" src="projects/jukebox/damn-right.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="horny-horns" src="projects/jukebox/horny-horns.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="howard-79" src="projects/jukebox/howard-79.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="jaco" src="projects/jukebox/jaco.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="idris" src="projects/jukebox/idris.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="big-fun" src="projects/jukebox/big-fun.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="on-the-corner" src="projects/jukebox/on-the-corner.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="davis-coltrane" src="projects/jukebox/davis-coltrane.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="noel-pointer" src="projects/jukebox/noel-pointer.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="otis" src="projects/jukebox/otis.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="rrk" src="projects/jukebox/rrk.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="randy-weston" src="projects/jukebox/randy-weston.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="creque" src="projects/jukebox/creque.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio loop id="jazz-samba" src="projects/jukebox/jazz-samba.mp3" type="audio/mpeg" preload="auto"></audio>
 </head>
 
 <body>
 
 <div class="side">
     <div class="nav">
-        <a href="derektorsani-resume-2019.pdf">Resume</a>
+        <a aria-label="Home" href="#images">Sequoia</a> •
+        <a aria-label="About" href="#about">About</a> •
+        <a aria-label="Labs" href="#labs">Labs</a> •
+        <a aria-label="Contact" href="#contact">Contact</a> •
+        <a aria-label="Résumé" href="derektorsani-resume-2019.pdf">Résumé</a>
     </div>
     <div class="title">
-        <h1>Derek Torsani</h1>
-        <p>— designer, musician, friend to all.</p>
+        <h1>Sequoia</h1>
+        <h2>/səˈk(w)oiə/</h2>
+        <p><span>noun</span> • a redwood tree, especially the California redwood.</p>
+        <h6>from Sequoya, the name of the Cherokee Indian who invented the Cherokee syllabary.</h6>
     </div>
-    <a class="contact" href="mailto:derektorsani@gmail.com" target="_blank"><div>
+    <!-- <a class="contact" href="mailto:derektorsani@gmail.com" target="_blank"><div>
         <h6>Lets Talk</h6>
-    </div></a>
+    </div></a> -->
 </div>
 
-<div class="images">
-    <img class="imgA" src="images/dmtors.gif"/>
-    <img class="imgB" src="images/637.gif"/>
+<div id="images" class="images">
+    <img class="imgA" src="images/637.gif"/>
+    <img id="about" class="imgB" src="images/dmtors.gif"/>
 </div>
 
 <div class="main">
     <div class="content">
         <h5>About</h5>
-        <p>I create through a lens of self-expression and not validation, nor judgement on any other way of living. Design and music are avenues of global change, interlingual communication, and the way we understand one another. It brings access of familiarity to individuals unfamiliar with accessibility and opens pathways of inclusivity.</p>
-        <p>Let's change the way we eat, the change the way live, and let's change the way we treat each other. —Tupac Shakur, 1992</p>
+        <p><i>Sequoia is a creative initiative by multidisciplinary designer and multi-instrumentalist Derek Torsani. Currently, Derek lives and works out of Washington, DC, designing digital products and managing a design system for Oracle.</i></p>
+        <p><i>Let's change the way we eat, the change the way live, and let's change the way we treat each other. —Tupac Shakur, 1992</i></p>
         </br></br>
-        <h5>Value</h5>
-        <h1>Choosing to Not Wear a Smart Watch</h1>
-        <p>I value honest and open communication and listening over knowing the latest notification I've received. I keep my phone on silent and do not disturb to ensure I'm engaged in the conversation or activity I'm in at the moment rather than being distracted and not giving the human or task I'm focused on my respect and attention. Besides, the watch I wear was my grandfathers.</p>
+        <h5>Principles</h5>
+        <h2>Communication</h2>
+        <p><i>Honest and transparent communication are important to understand the perspectives around oneself. Listening to those speaking takes presedence over checking the latest notification received. Devices are kept on 'do not disturb' to ensure full engagement in the present moment over distraction and not giving the human or task the attention it deserves.</i></p>
         </br></br>
-        <h5>Value</h5>
-        <h1>Reading in a Tangible Format</h1>
-        <p>I spend the greater part of my day on my laptop either designing or making music. Instead of endlessly scrolling through feeds of friends I don't truly connect with, mostly filled with gossip, complaints, or non-cerebral memes, I choose to not be on social media and would rather read a book. The health of my eyes and my mind are important to me, so I read in printed format on environmental and social topics that help me reflect on the world and positively contribute to moving it forward.</p>
+        <h2>Tangibility</h2>
+        <p><i>Social media is a human-made construct to falsely validate our value in society. In-person interactions provide a more welcoming space for emotive transmission as well as appropriate moments for silence. With the adoption of screens has also come the adaptation of emotional ignorance. Connection with the world beyond the screen promotes the wealth of the mind and the health of the heart.</i></p>
         </br></br>
-        <h5>Value</h5>
-        <h1>Giving of My Resources</h1>
-        <p>I stand for accessible education and volunteering more than I do earning a dollar. As much as I'm able to, I give away design assets I create and never start a side project with a goal of monetizing. In my spare time, I'd rather get outside and clean up trash from the park than freelance for extra income. I recognize my privilege to be able to choose to do this, and commend people like teachers (my sister) who are underpaid for the amount of effort they invest in their students and impact they have on future generations and society.</p>
+        <h2>Altruism</h2>
+        <p><i>Giving back of ones resources and gifts is worth more than the receipt of clout and money. We are not promised tomorrow. We do not go to the grave with what we've been giving, but leave behind what we have given. Monetization is never the first goal of any project. Cleaning up the earth and lending a hand to marginialized communities allow us to mother nature and one another in ways we all need but are sometimes not humble enough to admit. The more empathy is learned for the ones we don't see in the mirror, the more harmonious we can live among each other.</i></p>
         </br></br>
-        <h5>Value</h5>
-        <h1>Learning from Podcasts, Music, and Video</h1>
-        <p>I'm influenced creativity and spiritually mostly by hearing people who are different than myself tell their stories. Everyday I digest media and current events by listening to a variety of different podcasts by people with similar and vastly different lived experiences than my own, music that comes from all over the world, and watching films that explore new ideas and explain different perspectives visually.</p>
+        <h2>Recognition</h2>
+        <p><i>Creative and spiritual inspiration occurs when we listen to people who are different than ourselves tell their stories. Recognition of privilege by way of race, class, access to resources is necessary for acknowledgement of contrasting perspectives. This recognition can be found in music, podcasts, books, film, and other forms of dialogue.</i></p>
         </br></br>
-        <h5>Value</h5>
-        <h1>Fine Tuning My Craft</h1>
-        <p>I'm not a techie. I don't even like that word, or any buzz word or acronym for that matter. I don't enjoy exclusive language that doesn't allow different demographics and identities of people to understand a message and join in conversation. This is why I design and make music. I believe these are universal languages that allow for inclusivity and challenge us to think about how others see and experience the world. I don't believe I need to know the latest cryptocurrency or use the same illustration style and color palette that every other designer is using to further my knowledge in my industry and refine my craft.</p>
-        </br></br></br>
+        <h2>Studiousness</h2>
+        <p><i> Practice makes progress. Striving for perfection limits the ability to reach people hoping for connection to purpose and relation. Exclusive language does not allow different demographics and identities of people to understand a message and join in conversation. Design and music are both languages that can transcend barriers of culture, language, and emotion. Universal languages that allow for inclusivity and challenge us to think about how others experience the world.</i></p>
+        </br></br></br></br>
     </div>
-    <div class="section" id="present">
+    <div class="section" id="labs">
         <div class="content">
-            <img class="logo" src="images/oracle.svg"/>
-            <h5>Senior Product Designer</h5>
-            <p>Currently, I am leading design systems at <span>Oracle Data Cloud</span>, designing responsive web interfaces in the data management and analytics workspaces, and animating marketing videos.</p>
+            <h5>Labs</h5>
+            <p><i>The Lab provides a space to experiment in visual, sonic, and emotive mediums. Projects are generally focused on diverse inclusion, social impact, and explore the boundaries of art, language, and literature.</i></p>
         </div>
     </div>
-    <div class="section" id="history">
-        <div class="content">
-            <img class="logo mr-16" src="images/alarm.svg"/><img class="logo mr-16" src="images/samcart.svg"/><img class="logo mr-16" src="images/sandals.svg"/><img class="logo" src="images/mica.svg"/>
-            <h5>User Experience, Web, Motion, Graphic Design</h5>
-            <p>In the past decade, I have worked with small agencies animating motion graphics, large brands telling visual stories through film, fast-paced startups intersecting business goals with design, and tech companies conducting user research, drawing wireframes, and prototyping interfaces.</p>
-            <p>For the past two years, I've been focused on building cohesively elaborate design systems for distributed teams at large software companies. While this may come with great challenges, it is rewarding to enable people to work together more consistently, efficiently, and in stronger communicative bounds.</p>
-            <img class="image" src="images/samcart.gif"/>
-        </div>
-    </div>
+    <img class="image" alt="Android Marshmallow Booting Animation" src="images/dailyui-076.gif"/>
     <div class="section" id="halfdollar">
         <div class="content">
-            <img class="logo" src="images/halfdollar.svg"/>
-            <h5>Maker</h5>
-            <p><span>Halfdollar</span> is a free spreadsheet budgeting template built for collaboration. It enables you to manually log transactions of varying frequencies, then calculates leftover amounts, plan to actual comparisons, and predict annual forecasts.</p>
-            <img class="image" src="images/halfdollar.gif"/>
-            <a href="http://halfdollar.org">Visit Halfdollar →</a>
+            <h5>Halfdollar</h5>
+            <p><i>A free spreadsheet budgeting template built for collaboration. It enables you to manually log transactions of varying frequencies, then calculates leftover amounts, plan to actual comparisons, and predict annual forecasts.</i></p>
+            </br>
+            <a aria-label="Visit Halfdollar" href="https://halfdollar.org">Visit halfdollar.org</a>
         </div>
     </div>
+    <img class="image" alt="Halfdollar animated explanation" src="projects/halfdollar/halfdollar.gif"/>
+    <!-- <div class="section" id="sound">
+        <div class="content">
+            <h5>Supersonicas</h5>
+            <p><i>An exploration to make sound accessible to people who experience hearing loss. (Currently in progress)</i></p>
+            </br>
+            <a aria-label="Visit Supersonicas" href="https://supersonicas.com">Visit Supersonicas</a>
+        </div>
+    </div>
+    <div class="section" id="game">
+        <div class="content">
+            <h5>••••••</h5>
+            <p><i>A scoring dice game that is not limited by the bounds of language, even down to the explanation of rules. (Currently in progress)</i></p>
+            </br>
+            <a aria-label="Visit the Dice Game" href="">Learn more about this game</a>
+        </div>
+    </div> -->
     <div class="section" id="weiigh">
         <div class="content">
-            <img class="logo" src="images/weiigh.svg"/>
-            <h5>Maker</h5>
-            <p><span>Weiigh</span> is a spreadsheet that helps you weigh your options and preferences, and decide between two or more choices.</p>
-            <a href="http://weiigh.com">Visit Weiigh →</a>
+            <h5>Weiigh</h5>
+            <p><i>A spreadsheet assisting in determining the weight of personal options and preferences, and deciding between two or more choices.</i></p>
+            </br>
+            <a aria-label="Visit Weiigh" href="https://weiigh.com">Visit weiigh.com</a>
         </div>
     </div>
-    <div class="section" id="sound">
+    <iframe class="image" style="height:600px;" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRkmoiUTYAJd64hlpXMHKEpyHM5-QcgXBLhKB7elC8QKsptXJQVuHEEfznZUv1k17ooB7OHWQPWwexR/pubhtml?widget=true&amp;headers=false"></iframe>
+    <div class="section" id="jukebox">
         <div class="content">
-            <img class="logo" src="images/sound.svg"/>
-            <h5>Maker</h5>
-            <p><span>SeeSound</span> is an exploration to make sound accessible to people who experience hearing loss.</p>
-            <a href="http://seesound.org">See Sound for Yourself →</a>
+            <h5>Jukebox</h5>
+            <p><i>An ongoing personal collection of vinyl and accompanying samples.</i></p>
         </div>
     </div>
-    <div class="section" id="intermission">
+    <div id="records">
+        <img alt="record album cover" src="projects/jukebox/antibalas.jpg" onmouseover="playSound('antibalas')" onmouseleave="stopSound('antibalas')"/>
+        <img alt="record album cover" src="projects/jukebox/big-fun.jpg" onmouseover="playSound('big-fun')" onmouseleave="stopSound('big-fun')"/>
+        <img alt="record album cover" src="projects/jukebox/black-focus.jpg" onmouseover="playSound('black-focus')" onmouseleave="stopSound('black-focus')"/>
+        <img alt="record album cover" src="projects/jukebox/byrd-125.jpg" onmouseover="playSound('byrd-125')" onmouseleave="stopSound('byrd-125')"/>
+        <img alt="record album cover" src="projects/jukebox/byrd-aces.jpg" onmouseover="playSound('byrd-aces')" onmouseleave="stopSound('byrd-aces')"/>
+        <img alt="record album cover" src="projects/jukebox/cannonball.jpg" onmouseover="playSound('cannonball')" onmouseleave="stopSound('cannonball')"/>
+        <img alt="record album cover" src="projects/jukebox/creque.jpg" onmouseover="playSound('creque')" onmouseleave="stopSound('creque')"/>
+        <img alt="record album cover" src="projects/jukebox/damn-right.jpg" onmouseover="playSound('damn-right')" onmouseleave="stopSound('damn-right')"/>
+        <img alt="record album cover" src="projects/jukebox/davis-coltrane.jpg" onmouseover="playSound('davis-coltrane')" onmouseleave="stopSound('davis-coltrane')"/>
+        <img alt="record album cover" src="projects/jukebox/dexter-story.jpg" onmouseover="playSound('dexter-story')" onmouseleave="stopSound('dexter-story')"/>
+        <img alt="record album cover" src="projects/jukebox/gogo-penguin.jpg" onmouseover="playSound('gogo-penguin')" onmouseleave="stopSound('gogo-penguin')"/>
+        <img alt="record album cover" src="projects/jukebox/horny-horns.jpg" onmouseover="playSound('horny-horns')" onmouseleave="stopSound('horny-horns')"/>
+        <img alt="record album cover" src="projects/jukebox/howard-79.jpg" onmouseover="playSound('howard-79')" onmouseleave="stopSound('howard-79')"/>
+        <img alt="record album cover" src="projects/jukebox/idris.jpg" onmouseover="playSound('idris')" onmouseleave="stopSound('idris')"/>
+        <img alt="record album cover" src="projects/jukebox/jaco.jpg" onmouseover="playSound('jaco')" onmouseleave="stopSound('jaco')"/>
+        <img alt="record album cover" src="projects/jukebox/jazz-samba.jpg" onmouseover="playSound('jazz-samba')" onmouseleave="stopSound('jazz-samba')"/>
+        <img alt="record album cover" src="projects/jukebox/kamaal-heights.jpg" onmouseover="playSound('kamaal-heights')" onmouseleave="stopSound('kamaal-heights')"/>
+        <img alt="record album cover" src="projects/jukebox/kamaal-return.jpg" onmouseover="playSound('kamaal-return')" onmouseleave="stopSound('kamaal-return')"/>
+        <img alt="record album cover" src="projects/jukebox/kemet-burn.jpg" onmouseover="playSound('kemet-burn')" onmouseleave="stopSound('kemet-burn')"/>
+        <img alt="record album cover" src="projects/jukebox/kemet-queen.jpg" onmouseover="playSound('kemet-queen')" onmouseleave="stopSound('kemet-queen')"/>
+        <img alt="record album cover" src="projects/jukebox/khruangbin.jpg" onmouseover="playSound('khruangbin')" onmouseleave="stopSound('khruangbin')"/>
+        <img alt="record album cover" src="projects/jukebox/makaya.jpg" onmouseover="playSound('makaya')" onmouseleave="stopSound('makaya')"/>
+        <img alt="record album cover" src="projects/jukebox/noel-pointer.jpg" onmouseover="playSound('noel-pointer')" onmouseleave="stopSound('noel-pointer')"/>
+        <img alt="record album cover" src="projects/jukebox/olympians.jpg" onmouseover="playSound('olympians')" onmouseleave="stopSound('olympians')"/>
+        <img alt="record album cover" src="projects/jukebox/on-the-corner.jpg" onmouseover="playSound('on-the-corner')" onmouseleave="stopSound('on-the-corner')"/>
+        <img alt="record album cover" src="projects/jukebox/otis.jpg" onmouseover="playSound('otis')" onmouseleave="stopSound('otis')"/>
+        <img alt="record album cover" src="projects/jukebox/randy-weston.jpg" onmouseover="playSound('randy-weston')" onmouseleave="stopSound('randy-weston')"/>
+        <img alt="record album cover" src="projects/jukebox/rrk.jpg" onmouseover="playSound('rrk')" onmouseleave="stopSound('rrk')"/>
+        <img alt="record album cover" src="projects/jukebox/sudan-archives.jpg" onmouseover="playSound('sudan-archives')" onmouseleave="stopSound('sudan-archives')"/>
+        <img alt="record album cover" src="projects/jukebox/take-five.jpg" onmouseover="playSound('take-five')" onmouseleave="stopSound('take-five')"/>
+        <img alt="record album cover" src="projects/jukebox/we-out-here.jpg" onmouseover="playSound('we-out-here')" onmouseleave="stopSound('we-out-here')"/>
+        <img alt="record album cover" src="projects/jukebox/yin-yin.jpg" onmouseover="playSound('yin-yin')" onmouseleave="stopSound('yin-yin')"/>
+    </div>
+    <div class="section" id="sketchbook">
         <div class="content">
-            <img class="logo" src="images/intermission.svg"/>
-            <h5>Musician</h5>
-            <p>One half of <span>Intermission</span>, a rhythm and blues music duo.</p>
-            <iframe class="image" width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/631486881&color=%23fdb913&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
-            <a href="https://soundcloud.com/intermissiondc">Listen to Intermission →</a>
+            <h5>Quick Sketches</h5>
+            <p><i>Quick sketching is a way to step back from rigid guidelines of everyday work, and draw without looking at the canvas or lifting up the medium.</i></p>
         </div>
     </div>
-    <div class="section" id="dailyui">
-        <div class="content">
-            <img class="logo" src="images/dailyui.svg"/>
-            <h5>Contributor</h5>
-            <p>I became one of the first to complete all 100 days of the <span>DailyUI</span> design challenge, and animated every single one. Even got a feature on their homepage.</p>
-            <p>My most popular prompt was awarded "Best of the Day in Android" by <span>UpLabs</span>.</p>
-            <img class="image" src="images/android.gif"/>
-            <a href="https://dribbble.com/dmtors/projects/319430-Daily-UI">View My DailyUI →</a>
-        </div>
+    <div id="pages">
+        <img alt="sketchbook page" src="projects/sketchbook/sketch1.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch2.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch3.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch4.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch5.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch6.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch7.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch8.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch9.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch10.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch11.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch12.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch13.jpg"/>
+        <img alt="sketchbook page" src="projects/sketchbook/sketch14.jpg"/>
     </div>
-    <div class="section" id="unsplash">
+    <div class="section" id="contact">
         <div class="content">
-            <img class="logo" src="images/unsplash.svg"/>
-            <h5>Contributor</h5>
-            <p>One of my hobbies is taking and editing photography on my phone and I'm thankful for communities like <span>Unsplash</span> which allow my photos to have been viewed over 10,000,000 times.</p>
-            <img class="image" src="images/unsplash.jpg"/>
-            <a href="https://unsplash.com/@dmtors">View All My Photos →</a>
+            <h5>Contact</h5>
+            <a aria-label="Email" href="mailto:derektorsani@gmail.com">Email</a> •
+            <a aria-label="Twitter" href="https://twitter.com/dmtors">Twitter</a> •
+            <a aria-label="Instagram" href="https://instagram.com/derektorsani">Instagram</a> •
+            <a aria-label="Dribbble" href="https://dribbble.com/dmtors">Dribbble</a> •
+            <a aria-label="Medium" href="https://medium.com/@dmtors">Medium</a> •
+            <a aria-label="Unsplash" href="https://unsplash.com/dmtors">Unsplash</a> •
+            <a aria-label="LinkedIn" href="https://linkedin.com/in/derektorsani">LinkedIn</a>
         </div>
     </div>
 </div>
