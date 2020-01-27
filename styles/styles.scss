@@ -102,6 +102,9 @@ span {
     color: $mid;
     a {
         color: $grey;
+        &:hover {
+            color: $yellow;
+        }
     }
 }
 
