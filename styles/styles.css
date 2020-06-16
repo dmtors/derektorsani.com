@@ -62,9 +62,10 @@ p a {
 
 /* LAYOUT */
 
-.content {
+#content {
     width: 100%;
     max-width: 1232px;
+    margin: 0 auto;
 }
 
 header {
