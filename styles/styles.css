@@ -193,10 +193,13 @@ iframe {
     margin: -24px 0 0 -24px;
     transition: all 0.25s ease;
     display: block;
+    border: 2px solid #e9ecef;
+    box-sizing: border-box;
 }
 
 .card:hover {
     background-color: white;
+    border-color: transparent;
     box-shadow: 0 8px 24px rgba(10,15,17,0.05);
 }
 
@@ -204,6 +207,13 @@ iframe {
     color: #0057FF;
     font-size: 16px;
     margin-bottom: 8px;
+}
+
+#section-reviews article {
+    background-color: #e9ecef;
+    padding: 24px;
+    border-radius: 4px;
+    display: inline-table;
 }
 
 /* #section-process {
