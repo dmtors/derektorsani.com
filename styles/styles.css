@@ -310,22 +310,8 @@ footer a {
     #volunteering-2 {
         margin-top: 22px;
     }
-    #process-ideation div {
-        grid-template-columns: repeat(auto-fill, 100%);
-    }
-    #process-research div {
-        grid-template-columns: repeat(auto-fill, 100%);
-    }
-    #process-wireframe div {
-        grid-template-columns: repeat(auto-fill, 100%);
-    }
-    #process-animation div {
-        grid-template-columns: repeat(auto-fill, 100%);
-    }
-    #process-designsystems div {
-        grid-template-columns: repeat(auto-fill, 100%);
-    }
-    #process-hifi div {
-        grid-template-columns: repeat(auto-fill, 100%);
+    #section-process img:hover {
+        transform: none;
+        box-shadow: none;
     }
 }
