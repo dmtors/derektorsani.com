@@ -44,6 +44,7 @@ h5 {
     font-size: 14px;
     line-height: 22px;
     color: #828587;
+    font-weight: 700;
 }
 
 p {
@@ -81,6 +82,7 @@ body {
 a {
     cursor: pointer;
     text-decoration: none;
+    font-weight: 700;
 }
 
 .link, .link-hz {
