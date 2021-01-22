@@ -85,6 +85,11 @@ a {
     font-weight: 600;
 }
 
+a span {
+    margin-right: 4px;
+    font-size: 12px;
+}
+
 .link {
     font-size: 16px;
     line-height: 24px;
