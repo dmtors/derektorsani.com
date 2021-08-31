@@ -94,10 +94,11 @@ a span {
     font-size: 16px;
     line-height: 24px;
     color: #0057FF;
+    text-decoration: underline;
 }
 
 .link:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 
