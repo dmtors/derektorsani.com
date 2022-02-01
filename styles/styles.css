@@ -32,7 +32,7 @@ body {
 h1 {
     font-size: 24px;
     line-height: 32px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 h2 {
@@ -40,11 +40,17 @@ h2 {
     line-height: 32px;
 }
 
-h5 {
+h3 {
     font-size: 14px;
     line-height: 22px;
-    color: #828587;
-    font-weight: 600;
+    color: #878682;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 700;
 }
 
 p {
@@ -52,12 +58,18 @@ p {
     line-height: 24px;
 }
 
+p span {
+    font-size: 16px;
+    line-height: 24px;
+    color: #878682;
+}
+
 
 /* LAYOUT */
 
 body {
-    max-width: 800px;
-    margin: 128px auto;
+    max-width: 712px;
+    margin: 88px auto;
 }
 
 
@@ -82,7 +94,7 @@ body {
 a {
     cursor: pointer;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 a span {
@@ -95,9 +107,22 @@ a span {
     line-height: 24px;
     color: #0057FF;
     text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 .link:hover {
+    text-decoration: none;
+}
+
+.link-secondary {
+    font-size: 16px;
+    line-height: 24px;
+    color: #878682;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.link-secondary:hover {
     text-decoration: none;
 }
 
