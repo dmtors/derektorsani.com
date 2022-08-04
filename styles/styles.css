@@ -106,9 +106,13 @@ section {
     }
     .half {
         width: 100%;
+        padding: 48px;
     }
     .half:first-child {
         border-right: none;
         border-bottom: 1px solid #0A0F11;
+    }
+    section {
+        padding: 48px;
     }
 }
