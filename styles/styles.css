@@ -9,120 +9,83 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
     color: #0A0F11;
     font-size: 16px;
-    line-height: 1.4;
-    font-weight: 500;
+    line-height: 20px;
+    font-weight: 400;
 }
 
 body {
-    background-color: #FDFDFA;
-    padding: 40px;
+    background-color: #FDFDF5;
 }
 
-::-moz-selection {
+/* ::-moz-selection {
     background: #FDD651;
 }
 
 ::selection {
     background: #FDD651;
-}
+} */
 
 
 /* TYPOGRAPHY */
 
-h1 {
-    font-size: 24px;
-    line-height: 32px;
-    font-weight: 700;
+a {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
-h2 {
-    font-size: 24px;
-    line-height: 32px;
+b {
+    font-weight: 600;
 }
 
-h3 {
-    font-size: 14px;
-    line-height: 22px;
-    color: #767570;
-    font-weight: 700;
-}
-
-h4 {
-    font-size: 14px;
-    line-height: 22px;
-    font-weight: 700;
-}
-
-p {
-    font-size: 16px;
-    line-height: 24px;
-}
-
-p span {
-    font-size: 16px;
-    line-height: 24px;
-    color: #767570;
+a:hover {
+    text-decoration: none;
 }
 
 
 /* LAYOUT */
 
-body {
-    max-width: 712px;
-    margin: 88px auto;
+p {
+    max-width: 48ch;
 }
 
+section {
+    padding: 72px;
+}
+
+#main {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid #0A0F11;
+    border-bottom: 1px solid #0A0F11;
+}
+
+.half {
+    width: 50%;
+    height: auto;
+    padding: 72px;
+}
+
+.half:first-child {
+    border-right: 1px solid #0A0F11;
+}
 
 /* COMPONENTS */
 
 .spacer-8 {
-    margin-bottom: 64px;
-}
-
-.spacer-4 {
     margin-bottom: 32px;
 }
 
 .spacer-2 {
-    margin-bottom: 16px;
-}
-
-.spacer-1 {
     margin-bottom: 8px;
 }
 
-a {
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: 700;
-}
-
-a span {
-    margin-right: 8px;
-    font-size: 12px;
-}
-
-.link {
-    font-size: 16px;
-    line-height: 24px;
-    color: #0057FF;
-    text-decoration: underline;
-    text-underline-offset: 2px;
+.spacer-1 {
+    margin-bottom: 4px;
 }
 
 .link:hover {
-    text-decoration: none;
-}
-
-.link-secondary {
-    font-size: 16px;
-    line-height: 24px;
-    color: #767570;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-
-.link-secondary:hover {
     text-decoration: none;
 }
 
@@ -134,87 +97,18 @@ a span {
     height: 40px;
 }
 
-/* TICKER */
-@-webkit-keyframes ticker {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    visibility: visible;
-  }
-  100% {
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-@keyframes ticker {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    visibility: visible;
-  }
-  100% {
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-.ticker-wrap {
-  position: fixed;
-  top: 4px;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  height: 48px;
-  background-color: transparent;
-  padding-left: 100%;
-  box-sizing: content-box;
-}
-
-.ticker {
-  display: inline-block;
-  height: 48px;
-  line-height: 48px;
-  white-space: nowrap;
-  padding-right: 100%;
-  box-sizing: content-box;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
- -webkit-animation-name: ticker;
-         animation-name: ticker;
-  -webkit-animation-duration: 20s;
-          animation-duration: 20s;
-}
-
-.ticker:hover {
-    animation-play-state: paused;
-}
-
-.ticker__item {
-  display: inline-block;
-  padding: 4px 12px;
-  font-size: 12px;
-  line-height: 20px;
-  background-color: #FDD651;
-  border-radius: 4px;
-  margin-right: 8px;
-}
-
-.ticker__item:hover {
-    background-color: #0057FF;
-    color: #FFFFFF;
-}
-
 
 /* RESPONSIVE */
 
 @media only screen and (max-width: 767px) {
-    body {
-        padding: 48px;
+    #main {
+        display: block;
     }
-    * {
-        font-size: 16px;
+    .half {
+        width: 100%;
+    }
+    .half:first-child {
+        border-right: none;
+        border-bottom: 1px solid #0A0F11;
     }
 }
