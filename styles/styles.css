@@ -52,6 +52,11 @@ section {
     padding: 72px;
 }
 
+#projects {
+    width: 100%;
+    border-top: 1px solid #0A0F11;
+}
+
 #main {
     width: 100%;
     padding: 0;
@@ -75,6 +80,10 @@ section {
 
 .spacer-8 {
     margin-bottom: 32px;
+}
+
+.spacer-4 {
+    margin-bottom: 16px;
 }
 
 .spacer-2 {
