@@ -163,11 +163,23 @@ h1 {
   font-size: 48px;
   line-height: 56px;
 }
+@media only screen and (max-width: 599px) {
+  h1 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
 
 h2 {
   font-family: "Be Vietnam Pro", sans-serif;
   font-size: 20px;
   line-height: 28px;
+}
+@media only screen and (max-width: 599px) {
+  h2 {
+    font-size: 16px;
+    line-height: 28px;
+  }
 }
 
 p, p span {
@@ -178,6 +190,18 @@ p, p span {
 p a, p span a {
   font-size: 18px;
   line-height: 32px;
+}
+@media only screen and (max-width: 599px) {
+  p a, p span a {
+    font-size: 16px;
+    line-height: 28px;
+  }
+}
+@media only screen and (max-width: 599px) {
+  p, p span {
+    font-size: 16px;
+    line-height: 28px;
+  }
 }
 
 img {
@@ -200,6 +224,12 @@ a:hover {
 a:active {
   border: none;
   opacity: 0.6;
+}
+@media only screen and (max-width: 599px) {
+  a {
+    font-size: 14px;
+    line-height: 20px;
+  }
 }
 
 button {
