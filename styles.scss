@@ -10,7 +10,8 @@ $font-serif: 'Libre Baskerville', serif;
 $font-mono: 'Inconsolata', mono;
 
 // Spacing
-$spacing-xs: 1px;
+$spacing-xxs: 3px;
+$spacing-xs: 5px;
 $spacing-s: 13px;
 $spacing-m: 21px;
 $spacing-l: 34px;
@@ -130,11 +131,6 @@ p {
     }
 }
 
-small {
-    font-size: 14px;
-    line-height: 24px;
-}
-
 b {
     font-weight: 700;
 }
@@ -144,12 +140,13 @@ b {
 a {
     font-family: $font-mono;
     font-size: 16px;
-    line-height: 24px;
+    line-height: 32px;
     border-bottom: 1px solid;
+    box-sizing: border-box;
     padding-bottom: 3px;
     text-decoration: none;
     &:hover {
-        border: none;
+        border-color: transparent;
     }
     &:active {
         border-bottom: 1px solid;
@@ -169,7 +166,7 @@ nav {
         margin-right: $spacing-xl;
     }
     p {
-        margin-bottom: $spacing-s;
+        margin-bottom: $spacing-xs;
         &:last-of-type {
             margin-bottom: 0;
         }
@@ -219,7 +216,7 @@ nav {
     a {
         margin-right: $spacing-s;
         &:last-of-type {
-            margin-left: 0;
+            margin-right: 0;
         }
     }
 }
@@ -260,4 +257,9 @@ svg {
         width: 100%;
         margin-left: 0;
     }
+}
+
+.text-container {
+    display: grid;
+    grid-gap: $spacing-xxs;
 }
