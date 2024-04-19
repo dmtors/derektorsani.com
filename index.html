@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;800&family=Newsreader:opsz,wght@6..72,200;6..72,300;6..72,400&family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Inter:wght@100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
     <title>Derek Torsani</title>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -23,224 +23,72 @@
 
 <body>
 
-    <div id="actions">
-        <button id="galleryButton" class="current" type="button" aria-label="Enable the gallery layout of this website.">gallery</button>
-        <button id="biographyButton" type="button" aria-label="Enable the biography layout of this website.">biography</button>
-    </div>
-
-    <header>
-        <h1>Derek Torsani is a multidisciplinary artist in Baltimore, Maryland.</h1>
-        <div>
-            <h2>Let's change the way we eat, let's change the way we live, and let's change the way we treat each other.</h2>
-            <h2>— Tupac Shakur, 1992</h2>
-        </div>
+    <div class="nav">
+        <a class="img-link" href="index.html">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M32 0H0V32H32V0ZM17.0768 8.68225C20.1064 8.68225 22.5625 11.0923 22.5625 14.0654C22.5625 17.0385 20.1064 19.4486 17.0768 19.4486V21.1309C21.0532 21.1309 24.2768 17.9675 24.2768 14.0654C24.2768 10.1633 21.0532 7 17.0768 7V8.68225ZM12.6946 15.0748V25H14.4089V15.0748H19.3804V13.3925H7.72321V15.0748H12.6946Z"/>
+            </svg>
+        </a>
         <nav>
-            <a href="archive.html" title="Archive" aria-label="Open a list of Derek Torsani's previous versions of his website in the same tab.">archive</a>
-            <a href="writings.html" title="Writings" aria-label="Open a list of Derek Torsani's writings in the same tab.">writings</a>
-            <a href="features.html" title="Features" aria-label="Open a list of Derek Torsani's features in the same tab.">features</a>
-            <a href="discography.html" title="Discography" aria-label="Open a list of Derek Torsani's discography in the same tab.">discography</a>
-            <a href="assets/derektorsani-resume.pdf" target="_blank" title="Résumé" aria-label="Open Derek Torsani's résumé in a new tab.">résumé</a>
-            <a href="https://www.linkedin.com/in/derektorsani/" target="_blank" title="LinkedIn" aria-label="Visit Derek Torsani on LinkedIn in a new tab." target="_blank">linkedin</a>
+            <p><a class="current" href="index.html" title="About" aria-label="Read about Derek Torsani in the same tab.">About</a></p>
+            <p><a href="projects.html" title="Projects" aria-label="Open a list of Derek Torsani's projects in the same tab.">Projects</a></p>
+            <p><a href="contributions.html" title="Contributions" aria-label="Open a list of Derek Torsani's contributions in the same tab.">Contributions</a></p>
+            <p><a href="discography.html" title="Discography" aria-label="Open a list of Derek Torsani's discography in the same tab.">Discography</a></p>
+            <p><a href="templates.html" title="Templates" aria-label="Open a list of productivity templates made by Derek Torsani in the same tab.">Templates</a></p>
         </nav>
-    </header>
-
-    <div id="gallery">
-        <div class="gallery-column">
-            <section>
-                <img src="assets/looping-patterns.gif" alt="A looping animation of five different transforming patterns."/>
-                <p><i>Looping Patterns</i>, 2023</p>
-                <p>Vector</p>
-                <a href="https://medium.com/plaid-design/visually-accessible-data-visualization-ff884121479b" target="_blank" title="Plaid Data Visualization Article" aria-label="Read more about accessible data visualization for Plaid in a new tab.">accessible data visualization</a>
-            </section>
-            <section>
-                <iframe src="https://www.youtube.com/embed/G-zZRb5CPi8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="aspect-ratio: 16 / 9;"></iframe>
-                <p><i>Highland (Live)</i>, 2021</p>
-                <p>Live performance</p>
-                <a href="https://open.spotify.com/album/7BuA46PPxJrpsa9joDpc4i?si=J-IOx0iaRNK7fb9YrJqepg" target="_blank" title="Highland (Live)" aria-label="Listen to Highland Live by Derek Torsani on Spotify in a new tab.">listen</a>
-            </section>
-            <section>
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/3lJKPjmktLZBaoZF442UMI?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                <p><i>Tsimtsum, g(host)</i>, 2021</p>
-                <p>Alternative</p>
-                <a href="https://open.spotify.com/album/3lJKPjmktLZBaoZF442UMI?si=kkVKbxmPQtaKHkxtqz3i3Q" target="_blank" title="Spotify" aria-label="Listen to Ghost by Tsimtsum on Spotify in a new tab.">spotify</a>
-            </section>
-            <section>
-                <img src="assets/arthur.jpg" alt="A painting of a portrait of a dog sitting in a regal manner."/>
-                <p><i>Arthur</i>, 2022</p>
-                <p>Acrylic on canvas</p>
-            </section>
-            <section>
-                <img src="assets/halfdollar.jpg" alt="Logo for Halfdollar."/>
-                <p><i>Halfdollar</i>, 2018</p>
-                <p>Budgeting software</p>
-                <a href="halfdollar.html" target="_blank" title="Halfdollar" aria-label="Open Halfdollar in a new tab.">visit halfdollar</a>
-            </section>
-            <section>
-                <img src="assets/expandable-search.gif" alt="A search field expanding and showing text being typed in."/>
-                <p><i>Expandable Search</i>, 2017</p>
-                <p>HTML/CSS</p>
-                <a href="https://codepen.io/dmtors/pen/MJLMWN" target="_blank" title="CodePen" aria-label="Open CodePen in a new tab.">open codepen</a>
-            </section>
-            <section>
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/6wuFeJtukTHBtHYihk2TlA?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                <p><i>Derek Torsani, Say Their Names</i>, 2021</p>
-                <p>Jazz</p>
-                <a href="https://derektorsani.bandcamp.com/album/say-their-names" target="_blank" title="Bandcamp" aria-label="Listen to Say Their Names by Derek Torsani on Bandcamp in a new tab.">bandcamp</a>
-            </section>
-        </div>
-        <div class="gallery-column">
-            <section>
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/47JM2Shp4fAK7IUg3SZDHj?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                <p><i>Derek Torsani, Seeds</i>, 2021</p>
-                <p>Ambient</p>
-                <a href="https://open.spotify.com/album/47JM2Shp4fAK7IUg3SZDHj?si=PVbt_JrMSrqPPTd4_VNLWw" target="_blank" title="Spotify" aria-label="Listen to Seeds by Derek Torsani on Spotify in a new tab.">spotify</a>
-            </section>
-            <section>
-                <video autoplay playsinline muted loop>
-                    <source src="assets/sound-color-project.webm" type="video/webm">
-                    <meta itemprop="description" content="Derek Torsani playing multiple instruments while the room fills with colorful light.">
-                </video>
-                <p><i>Sound Color Project</i>, 2020</p>
-                <p>Spectrum translation</p>
-                <a href="https://soundcolorproject.com/" target="_blank" title="Sound Color Project" aria-label="Visit Sound Color Project in a new tab.">visit sound color</a>
-            </section>
-            <section>
-                <img src="assets/jantar-mantar.jpg" alt="A photograph of three separate black and white abstract line drawings."/>
-                <p><i>Study of Jantar Mantar</i>, 2022</p>
-                <p>Wax pencil on paper</p>
-            </section>
-            <section>
-                <iframe src="https://www.youtube.com/embed/NT9N7wiy0Dk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                <p><i>Below the Line</i>, 2011</p>
-                <p>Title sequence</p>
-            </section>
-            <section>
-                <img src="assets/twitter-notification.gif" alt="A bell icon ringing to initiate a number appearing as a notification."/>
-                <p><i>Twitter Notification</i>, 2015</p>
-                <p>2d animation</p>
-            </section>
-            <section>
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/3AuUvPQDc22u7VKZSEk7Mf?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                <p><i>Intermission, New Life</i>, 2022</p>
-                <p>Contemporary Rnb</p>
-                <a href="https://open.spotify.com/album/3AuUvPQDc22u7VKZSEk7Mf?si=foFoIdE4TnCD8QhJM8OyzA" target="_blank" title="Spotify" aria-label="Listen to New Life by Intermission on Spotify in a new tab.">spotify</a>
-            </section>
-            <section>
-                <img src="assets/weiigh.jpg" alt="Logo for Weigh."/>
-                <p><i>Weiigh</i>, 2018</p>
-                <p>Spreadsheet</p>
-                <a href="https://www.airtable.com/universe/expFr123awk7OObi4/weiigh-make-better-decisions" target="_blank" title="Weiigh" aria-label="Open the Weiigh Airtable template in a new tab.">open</a>
-            </section>
-            <section>
-                <img src="assets/alarm-design-system.gif" alt="Colorful animated shapes on a dark background, the Android Marshmallow Booting screen."/>
-                <p><i>Signals</i>, 2018</p>
-                <p>2d animation</p>
-                <a href="https://medium.com/@dmtors/signals-b456ab01b387" target="_blank" title="Signals Design System Article" aria-label="Read more about the Signals design system in a new tab.">signals design system</a>
-            </section>
-        </div>
-        <div class="gallery-column">
-            <section>
-                <img src="assets/android-marshmallow-boot.gif" alt="Colorful animated shapes on a dark background, the Android Marshmallow Booting screen."/>
-                <p><i>Android Marshmallow Boot</i>, 2015</p>
-                <p>2d animation</p>
-                <a href="https://medium.com/@dmtors/my-4-5-month-journey-with-daily-ui-1ce0f103d2bb" target="_blank" title="My 4.5 Month Journey With Daily UI on Medium" aria-label="Open My 4.5 Month Journey With Daily UI on Medium in a new tab.">4.5 months with daily ui</a>
-            </section>
-            <section>
-                <img src="assets/srsly.jpg" alt="A series of white index cards, each with black yard letters threaded to spell out an abbreviation for 'dance with me'."/>
-                <p><i>srsly</i>, 2010</p>
-                <p>Yarn weaved in paper</p>
-            </section>
-            <section>
-                <img src="assets/step-sequence.gif" alt="A timeline animating from steps 1 to 2."/>
-                <p><i>Step Sequence</i>, 2016</p>
-                <p>2d animation</p>
-            </section>
-            <section>
-                <img src="assets/dj-joey-d.jpg" alt="Logo for DJ Joey D."/>
-                <p><i>DJ Joey D</i>, 2017</p>
-                <p>Vector</p>
-            </section>
-            <section>
-                <img src="assets/eyeball-menu.gif" alt="A line drawing of an eye being animated from opened to closed."/>
-                <p><i>Eyeball Menu</i>, 2015</p>
-                <p>HTML/CSS/JS</p>
-                <a href="https://medium.com/prototypr/the-show-hide-eyeball-in-ui-design-7514991611b6" target="_blank" title="Show/Hide Menu Article" aria-label="Read more about the eyeball menu concept in a new tab.">read more</a>
-            </section>
-            <section>
-                <iframe src="https://www.youtube.com/embed/1_bHvFZfrLg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                <p><i>Last Month</i>, 2015</p>
-                <p>Film</p>
-            </section>
-            <section>
-                <img src="assets/flight-search.gif" alt="A circular button with an airplane symbol inside. Once the button is activated, the airplane flies away and returns as if loading."/>
-                <p><i>Flight Search</i>, 2016</p>
-                <p>2d animation</p>
-            </section>
-            <section>
-                <img src="assets/samcart-website.gif" alt="An animation scrolling down a marketing website including photographs, graphics, and icons."/>
-                <p><i>Samcart</i>, 2017</p>
-                <p>Website</p>
-            </section>
-        </div>
     </div>
 
-    <div id="biography">
-        <p>It’s no wonder Derek found himself at the <a href="https://mica.edu/" target="_blank" title="Maryland Institute College of Art" aria-label="Open the Maryland Institute College of Art website in a new tab.">Maryland Institute College of Art</a> (MICA) earning his Bachelor’s of Fine Arts in Graphic Design, after getting lost in the graphite worlds he created during his childhood. More recently, his past and present worlds collided when he moved back to Baltimore, Maryland with his partner, their child, and their dog—finding solace near the arts district he once called home.</p>
-        <p>Derek works for the <a href="https://wikimediafoundation.org/" target="_blank" title="Wikimedia Foundation" aria-label="Open the Wikimedia Foundation website in a new tab.">Wikimedia Foundation</a>, an organization at which he first became a donor, then an editing volunteer. Later in the same year, he joined as Lead Visual Designer, after building design systems at Plaid, Gusto, and Oracle, among others post college.</p>
-        <p>During his first stint in Baltimore, Derek not only learned how to utilize design to communicate a message but also how to tell a story using interactive media. When his grandfather tagged along to move Derek over a thousand miles to Miami in 2014, they were unaware that these would be some of their last moments together. Through a film titled, “<a href="https://www.youtube.com/watch?v=1_bHvFZfrLg" target="_blank" title="Last Month - memorial film" aria-label="Open Last Month, a memorial film, on YouTube in a new tab.">Last Month</a>”, Derek commemorated the life of his grandfather after his passing later that year.</p>
-        <p>This loss sparked a longing to be back near family, and so Derek began a transition northward. A geographic change was quickly followed by a career shift. What started as an exploration at the intersection of animation and design, turned into 100 consecutive days of creating user interface design prompts. The journey of completing the <a href="https://medium.com/@dmtors/my-4-5-month-journey-with-daily-ui-1ce0f103d2bb" target="_blank" title="My 4.5 Month Journey With Daily UI on Medium" aria-label="Open My 4.5 Month Journey With Daily UI on Medium in a new tab.">Daily UI</a> helped Derek land his first role as a designer at a tech startup.</p>
-        <p>It wasn’t for another year, <span id="resultParagraph"></span> years ago now, that during ​a routine visit to the optometrist that Derek learned he views the world through the lens of deuteranopia — a type of red-green color blindness. Questions and self-doubt flooded his mind. What began as shame transformed into a <a href="https://medium.com/@dmtors/being-a-color-blind-designer-aa6828c09a42" target="_blank" title="Being a Color Blind Designer on Medium" aria-label="Open Being a Color Blind Designer on Medium in a new tab.">public confession</a>, and has since been a resource for theses from students globally.</p>
-        <p>The enlightenment of seeing differently led Derek to dedicate his design practice to the work of accessibility — helping others who are commonly marginalized feel included when using software. As a natural progression of this newly discovered passion, he created <a href="https://medium.com/plaid-design/visually-accessible-data-visualization-ff884121479b" target="_blank" title="Plaid Data Visualization Article" aria-label="Read more about accessible data visualization for Plaid in a new tab.">logical patterns</a> to visualize data for people with varying degrees of color blindness.</p>
-        <p>Thinking about accessibility as the translation of a functional object for people with different abilities, Derek began conducting research to examine alternative forms of connecting with music and sounds. As he delved into converting live audio into the visual spectrum, he founded the <a href="https://soundcolorproject.com/" target="_blank" title="Sound Color Project" aria-label="Visit Sound Color Project in a new tab.">Sound Color Project</a>, which was featured in the Sound Scene 2020 exhibit with the Hirshhorn Museum in Washington, DC.</p>
-        <p>Derek used the visual output of the Sound Color Project project as a way to guide the recording of his improvised, debut album, <a href="https://open.spotify.com/album/47JM2Shp4fAK7IUg3SZDHj?si=jwVi4rK2R8GmKc0-ebUZzg" target="_blank" title="Seeds" aria-label="Listen to Seeds by Derek Torsani on Spotify in a new tab.">Seeds</a>, released in 2021. The environmental light and color show also made an appearance during the live recording of Highland, one of the songs from the album.</p>
-        <p>In the same year, Derek wrote and released a protest jazz EP, <a href="https://derektorsani.bandcamp.com/album/say-their-names" target="_blank" title="Say Their Names" aria-label="Listen to Say Their Names by Derek Torsani on Bandcamp in a new tab.">Say Their Names</a>. During the pandemic, Derek continued working with artists and friends across the country, releasing an alternative single, <a href="https://open.spotify.com/album/3lJKPjmktLZBaoZF442UMI?si=kkVKbxmPQtaKHkxtqz3i3Q" target="_blank" title="g(host)" aria-label="Listen to Ghost by Tsimtsum on Spotify in a new tab.">g(host)</a>. The years following, Derek would collaborate with his late friend, Shelley, recording what would become their twelve song, contemporary rnb album, <a href="https://open.spotify.com/album/3AuUvPQDc22u7VKZSEk7Mf?si=UozM6CijS-WQYlKsmPRaqg" target="_blank" title="New Life" aria-label="Listen to New Life by Intermission on Spotify in a new tab.">New Life</a>, released the same year of her passing on what would have been a monumental birthday.</p>
-        <p>His time at MICA constructed a mindset of including only what is truly intentional when communicating a message through a form of media, permeating through everything Derek produces, from incorporating rests in music to considering every tool within a design system. This mindset is rooted in one of his earliest physical pieces, “srsly” — a commentary on the threads of communication between people of his generation.</p>
-        <p>Intentionality has caused Derek to question everything in his practice. He wrote about the subconscious and the notion of good design going unnoticed in his article about the <a href="https://medium.com/@dmtors/the-psychological-component-of-design-systems-ded716d253d1" target="_blank" title="The Psychological Component of Design Systems on Medium" aria-label="Open The Psychological Component of Design Systems on Medium in a new tab.">psychological component of design systems</a>.</p>
-        <p>Building tools to help people work better together came naturally. But managing decision making for many different types of people can carry a burden. Derek created <a href="https://www.airtable.com/universe/expFr123awk7OObi4/weiigh-make-better-decisions" target="_blank" title="Weiigh" aria-label="Open the Weiigh Airtable template in a new tab.">Weiigh</a>, a formula to guide decision making. This tool has helped him navigate many changes in life, enabling Derek to consider the weight of options when he is privileged to have them.</p>
-        <p>Financial decision-making can also present its challenges when managing a personal budget. To help manage his own personal finances, Derek created <a href="halfdollar.html" target="_blank" title="Halfdollar" aria-label="Open Halfdollar in a new tab.">Halfdollar</a>, which began as a spreadsheet, was built into a software product, and has returned to its most simple and helpful form. Halfdollar has been used by people around the world in over ten different currencies such as baht and rupees.</p>
-        <p>Though he has never ventured to Thailand (yet), he has been to India in 2019, where he fell back in love with the feeling of putting pencil to paper, doing thirty-second gestural sketches during times of inspiration. Fleeting moments, like a meditation at the Lotus Temple, pickup cricket at Lodhi Garden, and a walk through Jantar Mantar.</p>
-        <p>On the other hand, painting has historically had a more troubling relationship with the quick sketcher, having been one of the studio classes he dreaded every week during his foundational year at MICA. In an attempt to reconcile the dislike he had for oil and canvas, Derek took to an old canvas he found in the basement to nurture his rapport with painting, scraping on paint with only a palette knife — eventually meeting face-to-face with his dog.</p>
-        <p id="bottom">Derek keeps an ongoing <a href="archive.html" title="Archive" aria-label="Open a list of Derek Torsani's previous versions of his website in the same tab.">archival log</a> of the versions of his website, which he builds himself using HTML and CSS.</p>
+    <div class="page">
+        <div class="header">
+            <h1>About</h1>
+        </div>
+        <div class="section">
+            <p><b>Derek Torsani</b> is a practitioner of music, graphic art, cooking, writing, drawing, and photography. He leads visual design at the Wikimedia Foundation, and lives with his family in Baltimore, Maryland.</p>
+            <p>"Let's change the way we eat, let's change the way we live, and let's change the way we treat each other." <b>— Tupac Shakur, 1992</b></p>
+        </div>
+        <div class="section">
+            <h2>Work</h2>
+            <div>
+                <h3>Wikimedia Foundation</h3>
+                <p>Lead Visual Designer, Design Systems, October 2023 – present</p>
+            </div>
+            <div>
+                <h3>Plaid</h3>
+                <p>Senior Product Designer, Design Systems, February 2022 – October 2023</p>
+            </div>
+            <div>
+                <h3>Gusto</h3>
+                <p>Senior Product Designer, Design Systems, November 2020 – January 2022</p>
+            </div>
+            <div>
+                <h3>Oracle</h3>
+                <p>Senior Product Designer, April 2018 – October 2020</p>
+            </div>
+            <p><a href="assets/derektorsani-resume.pdf" target="_blank" title="Résumé" aria-label="Open Derek Torsani's résumé in a new tab.">Full résumé</a></p>
+        </div>
+        <div class="section">
+            <h2>Education</h2>
+            <div>
+                <h3>Maryland Institute College of Art</h3>
+                <p>Bachelor of Fine Arts, Graphic Design</p>
+                <p>January 2008 – May 2011, Cum Laude</p>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Elsewhere</h2>
+            <div class="link-group">
+                <p>
+                    <a href="https://www.linkedin.com/in/derektorsani" target="_blank" title="LinkedIn" aria-label="Visit Derek Torsani on LinkedIn in a new tab." target="_blank">LinkedIn</a>
+                    <a href="https://medium.com/@dmtors" target="_blank" title="Medium" aria-label="Visit Derek Torsani on Medium in a new tab.">Medium</a>
+                    <a href="https://unsplash.com/@dmtors" target="_blank" title="Unsplash" aria-label="Visit Derek Torsani on Unsplash in a new tab.">Unsplash</a>
+                    <a href="https://vimeo.com/dmtors" target="_blank" title="Unsplash" aria-label="Visit Derek Torsani on Vimeo in a new tab.">Vimeo</a>
+                    <a href="https://www.youtube.com/channel/UCove4Z3eTye9jpBD4ShAFZA" target="_blank" title="Unsplash" aria-label="Visit Derek Torsani on YouTube in a new tab.">YouTube</a>
+                    <a href="https://codepen.io/dmtors" target="_blank" title="Unsplash" aria-label="Visit Derek Torsani on Codepen in a new tab.">Codepen</a>
+                    <a href="https://dribbble.com/dmtors" target="_blank" title="Dribbble" aria-label="Visit Derek Torsani on Dribbble in a new tab.">Dribbble</a>
+                </p>
+            </div>
+        </div>
     </div>
-
-<script>
-    const galleryButton = document.getElementById('galleryButton');
-    const biographyButton = document.getElementById('biographyButton');
-    const gallery = document.getElementById('gallery');
-    const biography = document.getElementById('biography');
-
-    galleryButton.addEventListener('click', function() {
-        gallery.style.display = 'grid';
-        biography.style.display = 'none';
-        galleryButton.classList.add('current');
-        biographyButton.classList.remove('current');
-    });
-
-    biographyButton.addEventListener('click', function() {
-        gallery.style.display = 'none';
-        biography.style.display = 'grid';
-        galleryButton.classList.remove('current');
-        biographyButton.classList.add('current');
-    });
-
-    // Function to calculate years difference
-    function calculateYearsDifference(dateString) {
-        const currentDate = new Date();
-        const inputDate = new Date(dateString);
-        const timeDiff = currentDate - inputDate;
-        
-        // Calculate years
-        const years = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 365.25));
-        
-        return years;
-    }
-
-    // Calculate years difference from the year 2016
-    const yearsDifference = calculateYearsDifference("2016-01-01");
-
-    // Display only the number of years in HTML
-    document.getElementById("resultParagraph").textContent = yearsDifference;
-</script>
 
 </body>
 

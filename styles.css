@@ -1,345 +1,256 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
   font-weight: 400;
 }
-*:focus-visible {
-  outline: auto 5px;
-  outline-offset: 6px;
-}
-
-body, #biography {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 100%);
-  grid-auto-flow: row;
-}
 
 body {
-  padding: 84px 56px 56px 56px;
-  width: calc(100% - 112px);
-  grid-gap: 56px;
+  padding: 89px;
+  width: calc(100% - 178px);
+  max-width: 987px;
+  margin: 0 auto;
+  display: flex;
+}
+@media only screen and (max-width: 767px) {
+  body {
+    padding: 34px;
+    width: calc(100% - 68px);
+  }
 }
 @media only screen and (max-width: 599px) {
   body {
-    padding: 56px 28px 28px 28px;
-    width: calc(100% - 56px);
+    display: block;
+    padding: 34px;
+    width: calc(100% - 68px);
   }
 }
 
 html,
 html[data-theme=light] {
   color-scheme: light;
-  color: #10100F;
-  background-color: #F7F7F5;
+  color: #1a1919;
+  background-color: #fefdf6;
 }
 html *:focus-visible,
 html[data-theme=light] *:focus-visible {
-  outline-color: #10100F;
-}
-html button,
-html[data-theme=light] button {
-  background-color: #F7F7F5;
-  color: #10100F;
-}
-html button:hover,
-html[data-theme=light] button:hover {
-  background-color: #10100F;
-  color: #F7F7F5;
-}
-html button:active,
-html[data-theme=light] button:active {
-  background-color: #F7F7F5;
-  color: #10100F;
-}
-html button.current,
-html[data-theme=light] button.current {
-  background-color: #10100F;
-  color: #F7F7F5;
-}
-html a,
-html[data-theme=light] a {
-  color: #10100F;
-  border-color: #10100F;
-}
-html a:hover,
-html[data-theme=light] a:hover {
-  background-color: #10100F;
-  color: #F7F7F5;
-}
-html a:active,
-html[data-theme=light] a:active {
-  background-color: #F7F7F5;
-  color: #10100F;
+  outline-color: #1a1919;
 }
 html svg,
 html[data-theme=light] svg {
-  fill: #10100F;
+  fill: #1a1919;
+}
+html a,
+html[data-theme=light] a {
+  color: #1a1919;
+  border-color: #1a1919;
+}
+html section,
+html[data-theme=light] section {
+  border-color: #1a1919;
 }
 
 html[data-theme=dark] {
   color-scheme: dark;
-  color: #F7F7F5;
-  background-color: #10100F;
+  color: #fefdf6;
+  background-color: #1a1919;
 }
 html[data-theme=dark] *:focus-visible {
-  outline-color: #F7F7F5;
-}
-html[data-theme=dark] button {
-  background-color: #10100F;
-  color: #F7F7F5;
-}
-html[data-theme=dark] button:hover {
-  background-color: #F7F7F5;
-  color: #10100F;
-}
-html[data-theme=dark] button:active {
-  background-color: #10100F;
-  color: #F7F7F5;
-}
-html[data-theme=dark] button.current {
-  background-color: #F7F7F5;
-  color: #10100F;
-}
-html[data-theme=dark] a {
-  color: #F7F7F5;
-  border-color: #F7F7F5;
-}
-html[data-theme=dark] a:hover {
-  background-color: #F7F7F5;
-  color: #10100F;
-}
-html[data-theme=dark] a:active {
-  background-color: #10100F;
-  color: #F7F7F5;
+  outline-color: #fefdf6;
 }
 html[data-theme=dark] svg {
-  fill: #F7F7F5;
+  fill: #fefdf6;
+}
+html[data-theme=dark] a {
+  color: #fefdf6;
+  border-color: #fefdf6;
+}
+html[data-theme=dark] section {
+  border-color: #fefdf6;
 }
 
 @media (prefers-color-scheme: dark) {
   html:not([data-theme]) {
     color-scheme: dark;
-    color: #F7F7F5;
-    background-color: #10100F;
+    color: #fefdf6;
+    background-color: #1a1919;
   }
   html:not([data-theme]) *:focus-visible {
-    outline-color: #F7F7F5;
-  }
-  html:not([data-theme]) button {
-    background-color: #10100F;
-    color: #F7F7F5;
-  }
-  html:not([data-theme]) button:hover {
-    background-color: #F7F7F5;
-    color: #10100F;
-  }
-  html:not([data-theme]) button:active {
-    background-color: #10100F;
-    color: #F7F7F5;
-  }
-  html:not([data-theme]) button.current {
-    background-color: #F7F7F5;
-    color: #10100F;
-  }
-  html:not([data-theme]) a {
-    color: #F7F7F5;
-    border-color: #F7F7F5;
-  }
-  html:not([data-theme]) a:hover {
-    background-color: #F7F7F5;
-    color: #10100F;
-  }
-  html:not([data-theme]) a:active {
-    background-color: #10100F;
-    color: #F7F7F5;
+    outline-color: #fefdf6;
   }
   html:not([data-theme]) svg {
-    fill: #F7F7F5;
+    fill: #fefdf6;
+  }
+  html:not([data-theme]) a {
+    color: #fefdf6;
+    border-color: #fefdf6;
+  }
+  html:not([data-theme]) section {
+    border-color: #fefdf6;
   }
 }
 h1 {
-  font-family: "Newsreader", serif;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 56px;
-}
-@media only screen and (max-width: 599px) {
-  h1 {
-    font-size: 32px;
-    line-height: 40px;
-  }
+  font-family: "Libre Baskerville", serif;
+  font-size: 24px;
+  line-height: 32px;
 }
 
 h2 {
-  font-family: "Be Vietnam Pro", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 20px;
   line-height: 28px;
 }
-@media only screen and (max-width: 599px) {
-  h2 {
-    font-size: 16px;
-    line-height: 28px;
-  }
-}
 
-p, p span {
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 18px;
-  line-height: 32px;
-}
-p a, p span a {
-  font-size: 18px;
-  line-height: 32px;
-}
-@media only screen and (max-width: 599px) {
-  p a, p span a {
-    font-size: 16px;
-    line-height: 28px;
-  }
-}
-@media only screen and (max-width: 599px) {
-  p, p span {
-    font-size: 16px;
-    line-height: 28px;
-  }
-}
-
-img {
-  font-family: "Be Vietnam Pro", sans-serif;
+h3 {
+  font-family: "Inter", sans-serif;
   font-size: 16px;
   line-height: 24px;
+  font-weight: 700;
+}
+
+p {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+}
+p.large {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+small {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+b {
+  font-weight: 700;
 }
 
 a {
-  text-decoration: none;
-  font-family: "Space Mono", mono;
+  font-family: "Inconsolata", mono;
   font-size: 16px;
   line-height: 24px;
-  font-weight: 400;
-  border-bottom: 1.5px solid;
+  border-bottom: 1px solid;
+  padding-bottom: 3px;
+  text-decoration: none;
 }
 a:hover {
-  font-style: italic;
+  border: none;
 }
 a:active {
+  border-bottom: 1px solid;
+}
+a.current {
   border: none;
-  opacity: 0.6;
+  pointer-events: none;
 }
-@media only screen and (max-width: 599px) {
-  a {
-    font-size: 14px;
-    line-height: 20px;
+a.current::after {
+  content: " •";
+}
+
+nav {
+  margin-right: 89px;
+}
+@media only screen and (max-width: 767px) {
+  nav {
+    margin-right: 55px;
   }
 }
-
-button {
-  background: none;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  font-family: "Space Mono", mono;
-  font-size: 12px;
-  line-height: 12px;
-  font-weight: 400;
-  width: 100%;
-  height: 28px;
+nav p {
+  margin-bottom: 13px;
 }
-
-#actions {
-  display: grid;
-  grid-auto-flow: column;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-}
-
-header {
-  max-width: 752px;
-}
-header h1 {
-  margin-bottom: 28px;
-}
-header h2:last-child {
-  margin-bottom: 14px;
-}
-
-nav a {
-  margin-right: 14px;
-  margin-top: 14px;
-  display: inline-block;
-}
-nav a:last-child {
-  margin-right: 0;
-}
-
-#gallery {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 56px;
-}
-@media only screen and (max-width: 1023px) {
-  #gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media only screen and (max-width: 599px) {
-  #gallery {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-#gallery section {
-  margin-bottom: 56px;
-}
-#gallery section:last-child {
+nav p:last-of-type {
   margin-bottom: 0;
 }
-#gallery section * {
+@media only screen and (max-width: 599px) {
+  nav {
+    margin-right: 0;
+    margin-bottom: 55px;
+  }
+}
+
+.header {
   width: 100%;
+  height: 36px;
+  border-bottom: 1px solid;
 }
-#gallery p {
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 14px;
-  line-height: 20px;
+
+.section {
+  display: grid;
+  grid-gap: 21px;
+  margin-top: 34px;
+  margin-bottom: 55px;
 }
-#gallery a {
-  font-size: 14px;
-  line-height: 20px;
+.section:last-of-type {
+  margin-bottom: 0;
 }
-#gallery img, #gallery video, #gallery iframe {
-  margin-bottom: 14px;
+.section img, .section video {
+  border-radius: 13px;
+  width: 100%;
+  aspect-ratio: 16/11;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-#gallery iframe {
+.section iframe {
+  border-radius: 13px;
+  width: 100%;
   aspect-ratio: 16/9;
 }
-
-#biography {
-  max-width: 752px;
-  grid-gap: 14px;
-  display: none;
-}
-
-.subpage {
-  width: 100%;
+.section .image-grid {
+  border-radius: 13px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 100%);
-  grid-auto-flow: row;
-  grid-gap: 14px;
+  grid-template-columns: repeat(3, 2fr);
 }
-.subpage h1 {
-  margin: 28px 0 7px;
+.section .image-grid img {
+  border-radius: 0;
 }
-.subpage a {
-  width: -moz-fit-content;
-  width: fit-content;
+
+.link-group a {
+  margin-right: 13px;
 }
-.subpage p {
-  max-width: 752px;
+.link-group a:last-of-type {
+  margin-left: 0;
 }
-.subpage img {
-  margin: 28px 0;
+
+.img-link {
+  border-bottom: none;
+  padding-bottom: 0;
+  text-decoration: none;
 }
-.subpage iframe {
-  margin: 56px 0 0;
+.img-link:hover {
+  border: none;
+}
+.img-link:active {
+  border-bottom: none;
+}
+
+svg {
+  margin-bottom: 34px;
+}
+
+.nav {
+  position: fixed;
+}
+@media only screen and (max-width: 599px) {
+  .nav {
+    position: relative;
+  }
+}
+
+.page {
+  width: calc(100% - 177px);
+  margin-left: 177px;
+}
+@media only screen and (max-width: 767px) {
+  .page {
+    width: calc(100% - 143px);
+    margin-left: 143px;
+  }
+}
+@media only screen and (max-width: 599px) {
+  .page {
+    width: 100%;
+    margin-left: 0;
+  }
 }/*# sourceMappingURL=styles.css.map */
