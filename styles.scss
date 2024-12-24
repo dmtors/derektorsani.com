@@ -1,7 +1,6 @@
 // Variables
 
 // Breakpoints
-$screen-xsmall: 399px;
 $screen-small: 599px;
 $screen-medium: 767px;
 
@@ -98,6 +97,12 @@ h1 {
     line-height: 1;
     text-transform: uppercase;
     margin-top: 2%;
+    @media only screen and (max-width: $screen-medium) {
+        margin-top: 3%;    
+    }
+    @media only screen and (max-width: $screen-small) {
+        margin-top: 4%;    
+    }
 }
 
 h2, .quote {
