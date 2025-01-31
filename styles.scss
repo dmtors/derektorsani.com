@@ -42,7 +42,7 @@ body {
             stroke: $color-dark;
         }
     }
-    #banner, .quote {
+    #banner, .full-text {
         background-color: $color-light;
     }
     a {
@@ -67,7 +67,7 @@ body {
             stroke: $color-light;
         }
     }
-    #banner, .quote {
+    #banner, .full-text {
         background-color: $color-dark;
     }
     a {
@@ -96,6 +96,7 @@ h1 {
     font-weight: bold;
     line-height: 1;
     text-transform: uppercase;
+    padding: 3% 5% 5% !important;
     margin-top: 2%;
     @media only screen and (max-width: $screen-medium) {
         margin-top: 3%;    
@@ -105,14 +106,14 @@ h1 {
     }
 }
 
-h2, .quote {
+h2, .full-text {
     font-family: $font-mono;
-    font-size: 5vw;
-    line-height: 1.5;
+    font-size: 3vw;
+    line-height: 1.6;
 }
 
-.quote {
-    padding: 5px;
+.full-text {
+    padding: 10% 5% !important;
 }
 
 // Components
@@ -128,7 +129,8 @@ h2, .quote {
     justify-content: start;
     align-items: center;
     padding: 5px;
-    position: absolute;
+    position: fixed;
+    z-index: 1;
     p {
         font-family: $font-mono;
         font-size: 13px;
@@ -165,7 +167,15 @@ h2, .quote {
 }
 
 section {
-    margin-bottom: 10%;
+    width: 50%;
+    margin: 0 auto 8%;
+    &:last-of-type {
+        margin: 0;
+    }
+}
+
+.full {
+    width: 100%;
 }
 
 .image {
@@ -180,7 +190,7 @@ section {
 
 .text {
     position: relative;
-    padding: 3%;
+    padding: 3% 0% 5%;
 }
 
 a {

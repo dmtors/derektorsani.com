@@ -30,9 +30,9 @@ html svg path,
 html[data-theme=light] svg path {
   stroke: #111;
 }
-html #banner, html .quote,
+html #banner, html .full-text,
 html[data-theme=light] #banner,
-html[data-theme=light] .quote {
+html[data-theme=light] .full-text {
   background-color: #fafafa;
 }
 html a,
@@ -57,7 +57,7 @@ html[data-theme=dark] svg circle {
 html[data-theme=dark] svg path {
   stroke: #fafafa;
 }
-html[data-theme=dark] #banner, html[data-theme=dark] .quote {
+html[data-theme=dark] #banner, html[data-theme=dark] .full-text {
   background-color: #111;
 }
 html[data-theme=dark] a {
@@ -82,7 +82,7 @@ html[data-theme=dark] a {
   html:not([data-theme]) svg path {
     stroke: #fafafa;
   }
-  html:not([data-theme]) #banner, html:not([data-theme]) .quote {
+  html:not([data-theme]) #banner, html:not([data-theme]) .full-text {
     background-color: #111;
   }
   html:not([data-theme]) a {
@@ -95,6 +95,7 @@ h1 {
   font-weight: bold;
   line-height: 1;
   text-transform: uppercase;
+  padding: 3% 5% 5% !important;
   margin-top: 2%;
 }
 @media only screen and (max-width: 767px) {
@@ -108,14 +109,14 @@ h1 {
   }
 }
 
-h2, .quote {
+h2, .full-text {
   font-family: "Fragment Mono", monospace;
-  font-size: 5vw;
-  line-height: 1.5;
+  font-size: 3vw;
+  line-height: 1.6;
 }
 
-.quote {
-  padding: 5px;
+.full-text {
+  padding: 10% 5% !important;
 }
 
 #page {
@@ -129,7 +130,8 @@ h2, .quote {
   justify-content: start;
   align-items: center;
   padding: 5px;
-  position: absolute;
+  position: fixed;
+  z-index: 1;
 }
 #banner p {
   font-family: "Fragment Mono", monospace;
@@ -166,7 +168,15 @@ h2, .quote {
 }
 
 section {
-  margin-bottom: 10%;
+  width: 50%;
+  margin: 0 auto 8%;
+}
+section:last-of-type {
+  margin: 0;
+}
+
+.full {
+  width: 100%;
 }
 
 .image {
@@ -181,7 +191,7 @@ section {
 
 .text {
   position: relative;
-  padding: 3%;
+  padding: 3% 0% 5%;
 }
 
 a {
