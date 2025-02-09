@@ -34,15 +34,7 @@ body {
     h1 {
         color: $color-light;
     }
-    svg {
-        circle {
-            fill: $color-dark;
-        }
-        path {
-            stroke: $color-dark;
-        }
-    }
-    #banner, .full-text {
+    .full-text {
         background-color: $color-light;
     }
     a {
@@ -59,15 +51,7 @@ body {
     h1 {
         color: $color-dark;
     }
-    svg {
-        circle {
-            fill: $color-light;
-        }
-        path {
-            stroke: $color-light;
-        }
-    }
-    #banner, .full-text {
+    .full-text {
         background-color: $color-dark;
     }
     a {
@@ -122,50 +106,6 @@ h2, .full-text {
     width: 100%;
 }
 
-#banner {
-    display: grid;
-    gap: 5px;
-    grid-auto-flow: column;
-    justify-content: start;
-    align-items: center;
-    padding: 5px;
-    position: fixed;
-    z-index: 1;
-    p {
-        font-family: $font-mono;
-        font-size: 13px;
-        line-height: 1;
-    }
-    svg {
-        width: 13px;
-        height: 13px;
-    }
-    .half-circle {
-        transform-origin: 50% 50%;
-        animation: spin var(--duration, 2s) linear infinite;
-    }
-    .inner-half-circle {
-        transform-origin: 50% 50%;
-        animation: spin-reverse var(--inner-duration, 2s) linear infinite;
-    }
-    @keyframes spin {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-    @keyframes spin-reverse {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(-360deg);
-        }
-    }
-}
-
 section {
     width: 50%;
     margin: 0 auto 8%;
@@ -202,4 +142,46 @@ a {
     &:active {
         opacity: 0;
     }
+}
+
+.bisnoni {
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    } 
+    .content {
+        padding: 30px;
+        display: grid;
+        gap: 20px;
+    }
+    .button-group {
+        display: flex;
+        gap: 10px;
+    }
+    p {
+        font-family: $font-mono;
+        font-size: 11px;
+        line-height: 17px;
+        max-width: 510px;
+    }
+    .menu-item {
+        display: grid;
+        gap: 0;
+        div {
+            display: flex;
+            gap: 5px;
+        }
+    }
+    #content-en, #content-it {
+        display: grid;
+        gap: 20px;
+    }
+    a {
+        color: blue;
+    }
+}
+
+.hidden {
+    display: none !important;
 }

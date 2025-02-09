@@ -22,16 +22,7 @@ html h1,
 html[data-theme=light] h1 {
   color: #fafafa;
 }
-html svg circle,
-html[data-theme=light] svg circle {
-  fill: #111;
-}
-html svg path,
-html[data-theme=light] svg path {
-  stroke: #111;
-}
-html #banner, html .full-text,
-html[data-theme=light] #banner,
+html .full-text,
 html[data-theme=light] .full-text {
   background-color: #fafafa;
 }
@@ -51,13 +42,7 @@ html[data-theme=dark] *:focus-visible {
 html[data-theme=dark] h1 {
   color: #111;
 }
-html[data-theme=dark] svg circle {
-  fill: #fafafa;
-}
-html[data-theme=dark] svg path {
-  stroke: #fafafa;
-}
-html[data-theme=dark] #banner, html[data-theme=dark] .full-text {
+html[data-theme=dark] .full-text {
   background-color: #111;
 }
 html[data-theme=dark] a {
@@ -76,13 +61,7 @@ html[data-theme=dark] a {
   html:not([data-theme]) h1 {
     color: #111;
   }
-  html:not([data-theme]) svg circle {
-    fill: #fafafa;
-  }
-  html:not([data-theme]) svg path {
-    stroke: #fafafa;
-  }
-  html:not([data-theme]) #banner, html:not([data-theme]) .full-text {
+  html:not([data-theme]) .full-text {
     background-color: #111;
   }
   html:not([data-theme]) a {
@@ -123,50 +102,6 @@ h2, .full-text {
   width: 100%;
 }
 
-#banner {
-  display: grid;
-  gap: 5px;
-  grid-auto-flow: column;
-  justify-content: start;
-  align-items: center;
-  padding: 5px;
-  position: fixed;
-  z-index: 1;
-}
-#banner p {
-  font-family: "Fragment Mono", monospace;
-  font-size: 13px;
-  line-height: 1;
-}
-#banner svg {
-  width: 13px;
-  height: 13px;
-}
-#banner .half-circle {
-  transform-origin: 50% 50%;
-  animation: spin var(--duration, 2s) linear infinite;
-}
-#banner .inner-half-circle {
-  transform-origin: 50% 50%;
-  animation: spin-reverse var(--inner-duration, 2s) linear infinite;
-}
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-@keyframes spin-reverse {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
 section {
   width: 50%;
   margin: 0 auto 8%;
@@ -203,4 +138,44 @@ a:hover {
 }
 a:active {
   opacity: 0;
+}
+
+.bisnoni button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.bisnoni .content {
+  padding: 30px;
+  display: grid;
+  gap: 20px;
+}
+.bisnoni .button-group {
+  display: flex;
+  gap: 10px;
+}
+.bisnoni p {
+  font-family: "Fragment Mono", monospace;
+  font-size: 11px;
+  line-height: 17px;
+  max-width: 510px;
+}
+.bisnoni .menu-item {
+  display: grid;
+  gap: 0;
+}
+.bisnoni .menu-item div {
+  display: flex;
+  gap: 5px;
+}
+.bisnoni #content-en, .bisnoni #content-it {
+  display: grid;
+  gap: 20px;
+}
+.bisnoni a {
+  color: blue;
+}
+
+.hidden {
+  display: none !important;
 }/*# sourceMappingURL=styles.css.map */
