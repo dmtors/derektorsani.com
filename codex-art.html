@@ -137,6 +137,8 @@
         <button class="icon-button" onclick="toggleCorner(6)">⌟</button>
     </div>
 
+    <p>Drag each image around to change its position.</p>
+
     <canvas id="canvas" width="600" height="300"></canvas>
 
     <fieldset>
@@ -169,9 +171,11 @@
 
     <br><br>
 
-    <button onclick="downloadImage('webp')">Download WEBP</button>
-    <button onclick="downloadImage('png')">Download PNG</button>
-    <button onclick="downloadImage('jpg')">Download JPG</button>
+    <div class="button-group">
+        <button onclick="downloadImage('webp')">Download WEBP</button>
+        <button onclick="downloadImage('png')">Download PNG</button>
+        <button onclick="downloadImage('jpg')">Download JPG</button>
+    </div>
 
     <script>
         const canvas = document.getElementById("canvas");
@@ -194,7 +198,7 @@
         canvas.addEventListener("mouseup", () => isDragging = false);
 
         function applyDithering(image) {
-            let scaleFactor = 0.17; // **Reduce image to 17% of its original size**
+            let scaleFactor = 0.25; // **Reduce image to 25% of its original size**
             
             let tempCanvas = document.createElement("canvas");
             let tempCtx = tempCanvas.getContext("2d");
@@ -212,7 +216,7 @@
             let pixels = imageData.data;
 
             function quantize(value) {
-                let levels = [32, 64, 96, 128, 160, 192, 224, 255]; // **Reduce color depth**
+                let levels = [32, 64, 96, 128, 160, 192, 224]; // **Reduce color depth**
                 return levels.reduce((prev, curr) => Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
             }
 
@@ -366,21 +370,7 @@
             canvas.toBlob(blob => {
                 link.href = URL.createObjectURL(blob);
                 link.click();
-            }, `image/${format}`, 0.9);
-        }
-
-        // ✅ Function to Download Image (With Compression)
-        function downloadCanvas(canvas, format = "webp", quality = 0.8) {
-            let mimeType = `image/${format}`;
-            let link = document.createElement("a");
-            link.download = `dithered_image.${format}`;
-
-            // Convert to Blob for better compression
-            canvas.toBlob((blob) => {
-                link.href = URL.createObjectURL(blob);
-                link.click();
-                URL.revokeObjectURL(link.href);
-            }, mimeType, quality);
+            }, `image/${format}`, 0.5);
         }
 
     </script>
