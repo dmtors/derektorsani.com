@@ -144,7 +144,7 @@ a {
     }
 }
 
-.bisnoni {
+#bisnoni {
     button {
         background: none;
         border: none;
@@ -179,6 +179,49 @@ a {
     }
     a {
         color: blue;
+    }
+}
+
+#music {
+    padding: 100px 30px;
+
+    section {
+        width: 100%;
+        max-width: 800px;
+        margin-bottom: 75px;
+        &:last-of-type {
+            margin: 0 auto;
+        }
+    }
+
+    h1, h2 {
+        font-size: 20px;
+        line-height: 1.6;
+        font-weight: bold;
+        color: $color-dark;
+        margin: 0;
+        padding: 0 !important;
+    }
+
+    p {
+        font-family: $font-mono;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    h3 {
+        font-family: $font-mono;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-top: 5px;
+    }
+
+    iframe {
+        margin-bottom: 10px;
+    }
+
+    .link-group {
+        margin-top: 10px;
     }
 }
 

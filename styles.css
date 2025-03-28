@@ -140,40 +140,77 @@ a:active {
   opacity: 0;
 }
 
-.bisnoni button {
+#bisnoni button {
   background: none;
   border: none;
   cursor: pointer;
 }
-.bisnoni .content {
+#bisnoni .content {
   padding: 30px;
   display: grid;
   gap: 20px;
 }
-.bisnoni .button-group {
+#bisnoni .button-group {
   display: flex;
   gap: 10px;
 }
-.bisnoni p {
+#bisnoni p {
   font-family: "Fragment Mono", monospace;
   font-size: 11px;
   line-height: 17px;
   max-width: 510px;
 }
-.bisnoni .menu-item {
+#bisnoni .menu-item {
   display: grid;
   gap: 0;
 }
-.bisnoni .menu-item div {
+#bisnoni .menu-item div {
   display: flex;
   gap: 5px;
 }
-.bisnoni #content-en, .bisnoni #content-it {
+#bisnoni #content-en, #bisnoni #content-it {
   display: grid;
   gap: 20px;
 }
-.bisnoni a {
+#bisnoni a {
   color: blue;
+}
+
+#music {
+  padding: 100px 30px;
+}
+#music section {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 75px;
+}
+#music section:last-of-type {
+  margin: 0 auto;
+}
+#music h1, #music h2 {
+  font-size: 20px;
+  line-height: 1.6;
+  font-weight: bold;
+  color: #111;
+  margin: 0;
+  padding: 0 !important;
+}
+#music p {
+  font-family: "Fragment Mono", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+#music h3 {
+  font-family: "Fragment Mono", monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-top: 5px;
+}
+#music iframe {
+  margin-bottom: 10px;
+}
+#music .link-group {
+  margin-top: 10px;
 }
 
 .hidden {
