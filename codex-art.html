@@ -198,7 +198,7 @@
         canvas.addEventListener("mouseup", () => isDragging = false);
 
         function applyDithering(image) {
-            let scaleFactor = 0.25; // **Reduce image to 25% of its original size**
+            let scaleFactor = 0.5; // **Reduce image to 50% of its original size**
             
             let tempCanvas = document.createElement("canvas");
             let tempCtx = tempCanvas.getContext("2d");
@@ -221,10 +221,10 @@
             }
 
             let bayer4x4 = [
-                [  0,  8,  2, 10 ],
-                [ 12,  4, 14,  6 ],
-                [  3, 11,  1,  9 ],
-                [ 15,  7, 13,  5 ]
+                [  9,  1, 14,  6 ],
+                [  7, 11,  3, 15 ],
+                [  0, 13,  4, 10 ],
+                [ 12,  5,  8,  2 ]
             ]; // **4×4 Bayer matrix for dithering**
 
             for (let y = 0; y < smallHeight; y++) {
