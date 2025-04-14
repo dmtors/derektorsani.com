@@ -10,8 +10,8 @@
             letter-spacing: 1px;
             text-align: center;
             margin: 0;
-            background: white;
-            color: black;
+            background: #b3aca6;
+            color: #454140;
             width: 100vw;
             height: 100vh;
         }
@@ -39,7 +39,7 @@
         #needle {
             width: 2px;
             height: 25px;
-            background: black;
+            background: #454140;
             position: absolute;
             bottom: 0;
             left: 50%;
@@ -57,20 +57,20 @@
         html,
         html[data-theme=light] body {
             color-scheme: light;
-            color: black;
-            background-color: white;
+            color: #454140;
+            background-color: #b3aca6;
         }
         html[data-theme=light] #needle {
-            background: black;
+            background: #454140;
         }
         @media (prefers-color-scheme: dark) {
             html:not([data-theme]) body {
                 color-scheme: dark;
-                color: white;
-                background-color: black;
+                color: #b3aca6;
+                background-color: #454140;
             }
             html:not([data-theme]) #needle {
-                background: white;
+                background: #b3aca6;
             }
         }
     </style>
