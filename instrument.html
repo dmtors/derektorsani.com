@@ -1,33 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Drone Instrument</title>
-  <script src="https://unpkg.com/tone@latest/build/Tone.js"></script>
-  <style>
-    body { font-family: monospace; padding: 1rem; max-width: 400px; margin: auto; }
-    h1 { font-size: 1rem; margin-bottom: 1rem; }
-    label { display: block; margin-top: 1rem; }
-    select, button { margin-top: 1rem; padding: 0.5rem; width: 100%; text-align: center; }
-  </style>
-</head>
-<body>
-  <h1>Instrument</h1>
+<html>
 
-  <label for="key">Key:</label>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <script src="https://unpkg.com/tone@latest/build/Tone.js"></script>
+    <title>instrument</title>
+</head>
+
+<body id="instrument-container">
+
+  <label for="key">Key</label>
   <select id="key">
     <option>C</option><option>C#</option><option>D</option><option>D#</option><option>E</option><option>F</option>
     <option>F#</option><option>G</option><option>G#</option><option>A</option><option>A#</option><option>B</option>
   </select>
 
-  <label for="scale">Scale:</label>
+  <label for="scale">Scale</label>
   <select id="scale">
     <option value="major">Major</option>
     <option value="minor">Minor</option>
   </select>
 
   <button id="toggle">Start Drone</button>
+
+  <label for="bpm">Metronome BPM</label>
+  <input id="bpm" type="number" min="20" max="300" value="100" />
+
+  <label for="metronomeOctave">Metronome Octave</label>
+  <input id="metronomeOctave" type="number" min="1" max="6" value="4" />
+
+  <button id="toggleMetronome">Start Metronome</button>
 
   <script>
     const scales = {
@@ -37,7 +45,7 @@
 
     let synth = new Tone.PolySynth(Tone.Synth, {
       maxPolyphony: 16,
-      volume: -20,
+      volume: -25,
       oscillator: {
         type: "sine"
       },
@@ -56,12 +64,20 @@
     let activeNotes = new Set();
     let intervalId;
     let rootNote;
+    let rootSynth;
+
+    let metronomeSynth = new Tone.Synth({
+      oscillator: { type: "sine" },
+      envelope: { attack: 0.01, decay: 0.1, sustain: 0, release: 0.2 }
+    }).toDestination();
+
+    let metronomeInterval;
 
     function getNotes(key, scaleName, baseOctave = 3) {
       const semitones = scales[scaleName];
       const fullNotes = [];
 
-      for (let i = 0; i <= 12; i++) { // cover up to 1.5 octaves
+      for (let i = 0; i <= 12; i++) {
         const octaveShift = Math.floor(i / semitones.length);
         const semitone = semitones[i % semitones.length];
         const midi = Tone.Frequency(`${key}${baseOctave}`, "note").toMidi() + semitone + (12 * octaveShift);
@@ -106,6 +122,33 @@
       activeNotes.clear();
     }
 
+    function startMetronome() {
+      const bpm = parseInt(document.getElementById('bpm').value);
+      const key = document.getElementById('key').value;
+      const octave = parseInt(document.getElementById('metronomeOctave').value);
+      const root = Tone.Frequency(`${key}${octave}`).toNote();
+      const interval = (60 / bpm) * 500;
+
+      metronomeInterval = setInterval(() => {
+        if (Math.random() < 0.6) {
+          const jump = Math.random() < 0.2 ? 12 : 0; // 10% chance to jump an octave
+          const rootFreq = Tone.Frequency(`${key}${octave}`, "note").toMidi() + jump;
+          const root = Tone.Frequency(rootFreq, "midi").toNote();
+          const randVol = -24 + Math.random() * 24;
+          const metVol = new Tone.Volume(randVol).toDestination();
+          const beep = new Tone.Synth({
+            oscillator: { type: 'sine' },
+            envelope: { attack: 0.01, decay: 0.1, sustain: 0, release: 0.2 }
+          }).connect(metVol);
+          beep.triggerAttackRelease(root, '8n');
+        }
+      }, interval);
+    }
+
+    function stopMetronome() {
+      clearInterval(metronomeInterval);
+    }
+
     document.getElementById('toggle').addEventListener('click', function () {
       if (this.textContent === 'Start Drone') {
         startDrone();
@@ -113,6 +156,16 @@
       } else {
         stopDrone();
         this.textContent = 'Start Drone';
+      }
+    });
+
+    document.getElementById('toggleMetronome').addEventListener('click', function () {
+      if (this.textContent === 'Start Metronome') {
+        startMetronome();
+        this.textContent = 'Stop Metronome';
+      } else {
+        stopMetronome();
+        this.textContent = 'Start Metronome';
       }
     });
   </script>

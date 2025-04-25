@@ -1,26 +1,36 @@
 // Variables
 
-// Breakpoints
-$screen-small: 599px;
-$screen-medium: 767px;
-
 // Color
-$color-light: #fafafa;
-$color-dark: #111;
+$color-light: #fff;
+$color-mid: #b3aca6;
+$color-dark: #000;
+$color-accent: #0000FF;
 
 // Font
-$font-sans: 'Helvetica', sans-serif;
 $font-mono: 'Fragment Mono', monospace;
 
 // Global
 * {
     margin: 0;
     padding: 0;
-    font-weight: 400;
+    font-family: $font-mono;
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 500;
+    &::selection {
+        background-color: $color-accent;
+        color: $color-light;
+    }
 }
 
 body {
     display: grid;
+    gap: 15px;
+    padding: 30px;
+}
+
+.hidden {
+    display: none !important;
 }
 
 // Theme
@@ -31,31 +41,25 @@ body {
     *:focus-visible {
         outline-color: $color-dark;
     }
-    h1 {
-        color: $color-light;
-    }
-    .full-text {
-        background-color: $color-light;
-    }
     a {
-        color: $color-dark;
+        color: $color-accent;
+    }
+    #needle {
+        background: $color-dark;
     }
 }
 @mixin theme-dark() {
     color-scheme: dark;
-    color: $color-light;
+    color: $color-mid;
     background-color: $color-dark;
     *:focus-visible {
-        outline-color: $color-light;
-    }
-    h1 {
-        color: $color-dark;
-    }
-    .full-text {
-        background-color: $color-dark;
+        outline-color: $color-dark;
     }
     a {
         color: $color-light;
+    }
+    #needle {
+        background: $color-light;
     }
 }
   
@@ -74,157 +78,132 @@ html[data-theme="dark"] {
 
 // Type
 
-h1 {
-    font-size: 14vw;
-    font-family: $font-sans;
-    font-weight: bold;
-    line-height: 1;
-    text-transform: uppercase;
-    padding: 3% 5% 5% !important;
-    margin-top: 2%;
-    @media only screen and (max-width: $screen-medium) {
-        margin-top: 3%;    
-    }
-    @media only screen and (max-width: $screen-small) {
-        margin-top: 4%;    
-    }
-}
-
-h2, .full-text {
-    font-family: $font-mono;
-    font-size: 3vw;
-    line-height: 1.6;
-}
-
-.full-text {
-    padding: 10% 5% !important;
+h2 {
+    margin-top: 15px;
 }
 
 // Components
 
-#page {
-    width: 100%;
-}
-
-section {
-    width: 50%;
-    margin: 0 auto 8%;
-    &:last-of-type {
-        margin: 0;
-    }
-}
-
-.full {
-    width: 100%;
-}
-
-.image {
-    position: absolute;
-    z-index: -1000;
-}
-
-.image, .project {
-    display: block;
-    width: 100%;
-}
-
-.text {
-    position: relative;
-    padding: 3% 0% 5%;
-}
-
 a {
     text-decoration: underline;
-    text-underline-offset: 6px;
     &:hover {
         text-decoration: none;
     }
     &:active {
         opacity: 0;
     }
-}
-
-#bisnoni {
-    button {
-        background: none;
-        border: none;
-        cursor: pointer;
-    } 
-    .content {
-        padding: 30px;
-        display: grid;
-        gap: 20px;
-    }
-    .button-group {
-        display: flex;
-        gap: 10px;
-    }
-    p {
-        font-family: $font-mono;
-        font-size: 11px;
-        line-height: 17px;
-        max-width: 510px;
-    }
-    .menu-item {
-        display: grid;
-        gap: 0;
-        div {
-            display: flex;
-            gap: 5px;
-        }
-    }
-    #content-en, #content-it {
-        display: grid;
-        gap: 20px;
-    }
-    a {
-        color: blue;
+    &:visited {
+        text-decoration: none;
     }
 }
 
-#music {
-    padding: 100px 30px;
+ul {
+    display: grid;
+    gap: 5px;
+}
 
-    section {
+li {
+    list-style: square;
+}
+
+iframe {
+    margin-top: 30px;
+    &:first-of-type {
+        margin-top: 15px;
+    }
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#content-en, #content-it {
+    display: grid;
+    gap: 15px;
+}
+
+.inline-text-group {
+    display: flex;
+    gap: 5px;
+}
+
+#tuner-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    text-align: center;
+}
+
+#needle-container {
+    width: 100%;
+    height: 25px;
+    margin: 0 auto 30px;
+    position: relative;
+    background: transparent;
+}
+
+#needle {
+    width: 2px;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transition: left 0.125s ease-in-out;
+}
+
+#tuning-select {
+    padding: 5px;
+    margin: 30px auto 0;
+    border: 0;
+    outline: 1px solid;
+    border-right: 5px solid transparent;
+}
+
+#instrument-container {
+    select, button, input {
+        padding: 5px;
         width: 100%;
-        max-width: 800px;
-        margin-bottom: 75px;
-        &:last-of-type {
-            margin: 0 auto;
-        }
+        box-sizing: border-box;
+        outline: none;
+        background-color: transparent;
     }
-
-    h1, h2 {
-        font-size: 20px;
-        line-height: 1.6;
-        font-weight: bold;
-        color: $color-dark;
-        margin: 0;
-        padding: 0 !important;
+    button {
+        border: 1px solid; 
     }
-
-    p {
-        font-family: $font-mono;
-        font-size: 14px;
-        line-height: 1.6;
-    }
-
-    h3 {
-        font-family: $font-mono;
-        font-size: 16px;
-        line-height: 1.6;
-        margin-top: 5px;
-    }
-
-    iframe {
-        margin-bottom: 10px;
-    }
-
-    .link-group {
-        margin-top: 10px;
+    label {
+        display: block;
+        margin-top: 15px;
     }
 }
 
-.hidden {
-    display: none !important;
+#sketch-controls {
+    position: fixed;
+    bottom: 20px;
+    z-index: 10;
+    justify-self: center;
+    width: calc(100% - 40px);
+    justify-content: space-between;
+    button {
+        border: 1px solid $color-dark;
+        padding: 3px 7px;
+    }
+}
+
+#drawingCanvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
 }
