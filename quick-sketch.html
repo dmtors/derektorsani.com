@@ -21,8 +21,8 @@
 
 <body>
   <div class="button-group" id="sketch-controls">
-    <button id="clearBtn">Clear</button>
-    <button id="saveBtn">Save</button>
+    <button id="clearBtn" style="color: #000;">Clear</button>
+    <button id="saveBtn" style="color: #000;">Save</button>
   </div>
   <canvas id="drawingCanvas"></canvas>
 
@@ -38,8 +38,8 @@
     let bleedTick = 0;
     let bleedPos = null;
     let movementTimeout = null;
-    const pixelSize = 5;
-    const maxBleedSize = 30; // Maximum size for bleed effect
+    const pixelSize = 2;
+    const maxBleedSize = 25; // Maximum size for bleed effect
     let mouseDownTimer = null; // Timer to track how long the mouse is down
 
     ctx.imageSmoothingEnabled = false;
@@ -194,6 +194,9 @@
       stopBleedEffect();
       lastPos = null;
       clearTimeout(mouseDownTimer);
+      clearTimeout(movementTimeout);
+      isCleared = true;
+      ctx.fillStyle = 'black';
     });
 
     saveBtn.addEventListener('click', () => {
@@ -211,12 +214,6 @@
       link.download = 'drawing.png';
       link.href = tempCanvas.toDataURL();
       link.click();
-    });
-
-    // Listen for dark mode change and re-render bg if needed
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', () => {
-      fillBackground();
     });
   </script>
 </body>
