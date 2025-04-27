@@ -198,5 +198,6 @@ button {
   position: absolute;
   top: 0;
   left: 0;
-  background: #b3aca6;
+  background: #fff;
+  cursor: crosshair;
 }/*# sourceMappingURL=styles.css.map */

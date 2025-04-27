@@ -12,17 +12,18 @@
     <title>quick sketch</title>
     <style>
         html, body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background: #fff;
         }
       </style>
 </head>
 
 <body>
   <div class="button-group" id="sketch-controls">
-    <button id="clearBtn" style="color: #000;">Clear</button>
-    <button id="saveBtn" style="color: #000;">Save</button>
+    <button id="clearBtn">Clear</button>
+    <button id="saveBtn">Save</button>
   </div>
   <canvas id="drawingCanvas"></canvas>
 
@@ -34,187 +35,94 @@
 
     let drawing = false;
     let lastPos = null;
-    let bleedTimer = null;
-    let bleedTick = 0;
-    let bleedPos = null;
-    let movementTimeout = null;
-    const pixelSize = 2;
-    const maxBleedSize = 25; // Maximum size for bleed effect
-    let mouseDownTimer = null; // Timer to track how long the mouse is down
-
-    ctx.imageSmoothingEnabled = false;
-
-    function getBackgroundColor() {
-      return getComputedStyle(document.body).backgroundColor;
-    }
-
-    function fillBackground(ctxTarget = ctx) {
-      const bg = getBackgroundColor();
-      ctxTarget.fillStyle = bg;
-      ctxTarget.fillRect(0, 0, canvas.width, canvas.height);
-    }
 
     function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * ratio;
+      canvas.height = window.innerHeight * ratio;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.scale(ratio, ratio);
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#000';
     }
 
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+    });
 
-    function getPosition(e) {
-      if (e.touches) {
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function getPos(e) {
+      if (e.touches && e.touches.length > 0) {
         return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-      }
-      return { x: e.clientX, y: e.clientY };
-    }
-
-    function drawSharpBleed(x, y, size) {
-      // Toning down the randomness
-      const numPixels = Math.floor(Math.random() * 3) + 5; // Reduce the number of pixels for a more controlled effect
-      for (let i = 0; i < numPixels; i++) {
-        const randomAngle = Math.random() * Math.PI * 2; // Random angle
-        const randomRadius = Math.random() * (size * 0.5); // Reduced spread distance
-        const offsetX = Math.cos(randomAngle) * randomRadius;
-        const offsetY = Math.sin(randomAngle) * randomRadius;
-        const gridX = Math.floor((x + offsetX) / pixelSize) * pixelSize;
-        const gridY = Math.floor((y + offsetY) / pixelSize) * pixelSize;
-        ctx.fillRect(gridX, gridY, pixelSize, pixelSize);
-      }
-    }
-
-    function handleDraw(pos) {
-      if (lastPos) {
-        drawSharpBleed(lastPos.x, lastPos.y, pixelSize);
       } else {
-        drawSharpBleed(pos.x, pos.y, pixelSize);
+        return { x: e.offsetX, y: e.offsetY };
       }
-      if (bleedPos && (Math.abs(pos.x - bleedPos.x) > pixelSize || Math.abs(pos.y - bleedPos.y) > pixelSize)) {
-        stopBleedEffect();
-      }
-      lastPos = pos;
     }
 
-    function startBleedEffect(pos) {
-      bleedPos = pos;
-      bleedTick = 0;
-      bleedTimer = setInterval(() => {
-        bleedTick++;
-        const size = pixelSize + bleedTick * 2;  // Growing bleed size
-        const finalSize = Math.min(size, maxBleedSize); // Limit the max size of the bleed
-        drawSharpBleed(pos.x, pos.y, finalSize);
-      }, 150); // Speed of "spread"
+    function drawLine(from, to) {
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      ctx.lineTo(to.x, to.y);
+      ctx.stroke();
     }
 
-    function stopBleedEffect() {
-      clearInterval(bleedTimer);
-      bleedTimer = null;
-      bleedTick = 0;
-      bleedPos = null;
-    }
-
-    function restartBleedEffectIfNeeded(pos) {
-      if (movementTimeout) {
-        clearTimeout(movementTimeout);
-      }
-
-      movementTimeout = setTimeout(() => {
-        if (drawing) {
-          startBleedEffect(pos);
-        }
-      }, 150); // Restart the effect after movement stops
-    }
-
-    // Mouse events
     canvas.addEventListener('mousedown', (e) => {
       drawing = true;
-      const pos = getPosition(e);
-      handleDraw(pos);
-      startBleedEffect(pos);
-
-      // Timer to check how long the mouse is down
-      mouseDownTimer = setTimeout(() => {
-        stopBleedEffect(); // Force stop the effect if held for too long
-      }, 1000); // 1 second delay for detecting long mouse press
+      lastPos = getPos(e);
     });
 
     canvas.addEventListener('mousemove', (e) => {
       if (!drawing) return;
-      const pos = getPosition(e);
-      handleDraw(pos);
-      restartBleedEffectIfNeeded(pos);  // Restart the bleed effect when movement stops
+      const currentPos = getPos(e);
+      drawLine(lastPos, currentPos);
+      lastPos = currentPos;
     });
 
     canvas.addEventListener('mouseup', () => {
       drawing = false;
-      lastPos = null;
-      stopBleedEffect();
-      clearTimeout(mouseDownTimer); // Clear the timer when the mouse is released
     });
 
     canvas.addEventListener('mouseleave', () => {
       drawing = false;
-      lastPos = null;
-      stopBleedEffect();
-      clearTimeout(mouseDownTimer); // Clear the timer when the mouse leaves
     });
 
-    // Touch events
+    // Touch support
     canvas.addEventListener('touchstart', (e) => {
       e.preventDefault();
       drawing = true;
-      const pos = getPosition(e);
-      handleDraw(pos);
-      startBleedEffect(pos);
+      lastPos = getPos(e);
     });
 
     canvas.addEventListener('touchmove', (e) => {
       e.preventDefault();
       if (!drawing) return;
-      const pos = getPosition(e);
-      handleDraw(pos);
-      restartBleedEffectIfNeeded(pos);  // Restart the bleed effect when movement stops
+      const currentPos = getPos(e);
+      drawLine(lastPos, currentPos);
+      lastPos = currentPos;
     });
 
     canvas.addEventListener('touchend', () => {
       drawing = false;
-      lastPos = null;
-      stopBleedEffect();
-    });
-
-    canvas.addEventListener('touchcancel', () => {
-      drawing = false;
-      lastPos = null;
-      stopBleedEffect();
     });
 
     clearBtn.addEventListener('click', () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      fillBackground();
-      stopBleedEffect();
-      lastPos = null;
-      clearTimeout(mouseDownTimer);
-      clearTimeout(movementTimeout);
-      isCleared = true;
-      ctx.fillStyle = 'black';
+      clearCanvas();
     });
 
     saveBtn.addEventListener('click', () => {
-      const tempCanvas = document.createElement('canvas');
-      const tempCtx = tempCanvas.getContext('2d');
-      tempCanvas.width = canvas.width;
-      tempCanvas.height = canvas.height;
-
-      tempCtx.fillStyle = getBackgroundColor();
-      tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-
-      tempCtx.drawImage(canvas, 0, 0);
-
       const link = document.createElement('a');
-      link.download = 'drawing.png';
-      link.href = tempCanvas.toDataURL();
+      link.download = 'sketch.png';
+      link.href = canvas.toDataURL();
       link.click();
     });
+
+    resizeCanvas();
   </script>
 </body>
 </html>
