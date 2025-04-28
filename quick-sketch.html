@@ -181,27 +181,14 @@
     });
   
     saveBtn.addEventListener('click', () => {
-      const tempCanvas = document.createElement('canvas');
-      const tempCtx = tempCanvas.getContext('2d');
-      const dpr = window.devicePixelRatio || 1;
-      tempCanvas.width = canvas.width;
-      tempCanvas.height = canvas.height;
-      tempCanvas.style.width = window.innerWidth + 'px';
-      tempCanvas.style.height = window.innerHeight + 'px';
-  
-      tempCtx.scale(dpr, dpr);
-      tempCtx.fillStyle = getBackgroundColor();
-      tempCtx.fillRect(0, 0, window.innerWidth, window.innerHeight);
-      tempCtx.drawImage(canvas, 0, 0);
-  
-      const now = new Date();
-      const timestamp = now.toISOString().replace(/[:.]/g, '-');
-      const filename = `quick-sketch-${timestamp}.png`;
-  
-      const link = document.createElement('a');
-      link.download = filename;
-      link.href = tempCanvas.toDataURL();
-      link.click();
+        const now = new Date();
+        const timestamp = now.toISOString().replace(/[:.]/g, '-');
+        const filename = `quick-sketch-${timestamp}.png`;
+
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
     });
   </script>
 </body>
