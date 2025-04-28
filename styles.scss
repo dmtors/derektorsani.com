@@ -188,13 +188,14 @@ button {
 }
 
 #sketch-controls {
-    position: fixed;
+    position: absolute;
     bottom: 20px;
     z-index: 10;
     justify-self: center;
     width: calc(100% - 40px);
     justify-content: space-between;
     button {
+        background-color: $color-light;
         border: 1px solid $color-dark;
         padding: 3px 7px;
     }
@@ -207,4 +208,5 @@ button {
     left: 0;
     background: $color-light;
     cursor: crosshair;
+    touch-action: none;
 }

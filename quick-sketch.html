@@ -25,115 +25,184 @@
     <button id="clearBtn">Clear</button>
     <button id="saveBtn">Save</button>
   </div>
-  <canvas id="drawingCanvas"></canvas>
+  <canvas id="drawingCanvas" style="width: 100vw; height: 100vh;"></canvas>
 
   <script>
     const canvas = document.getElementById('drawingCanvas');
     const ctx = canvas.getContext('2d');
     const clearBtn = document.getElementById('clearBtn');
     const saveBtn = document.getElementById('saveBtn');
-
+  
     let drawing = false;
-    let lastPos = null;
-
+    let points = [];
+    let isTouchDevice = false;
+  
+    const fingerBrushSize = 8;
+    const mouseBrushSize = 2;
+    let currentBrushSize = mouseBrushSize;
+  
     function resizeCanvas() {
-      const ratio = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * ratio;
-      canvas.height = window.innerHeight * ratio;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
-      ctx.scale(ratio, ratio);
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = '#000';
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset any existing transforms
+        ctx.scale(dpr, dpr);
+        fillBackground();
     }
-
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-    });
-
-    function clearCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+    function getBackgroundColor() {
+      return getComputedStyle(document.body).backgroundColor;
     }
-
-    function getPos(e) {
-      if (e.touches && e.touches.length > 0) {
+  
+    function fillBackground(ctxTarget = ctx) {
+      const bg = getBackgroundColor();
+      ctxTarget.fillStyle = bg;
+      ctxTarget.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    }
+  
+    function getPosition(e) {
+      if (e.touches) {
         return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-      } else {
-        return { x: e.offsetX, y: e.offsetY };
       }
+      return { x: e.clientX, y: e.clientY };
     }
-
-    function drawLine(from, to) {
+  
+    function drawSmoothCurve(pts) {
+      if (pts.length < 2) return;
       ctx.beginPath();
-      ctx.moveTo(from.x, from.y);
-      ctx.lineTo(to.x, to.y);
+      ctx.moveTo(pts[0].x, pts[0].y);
+  
+      for (let i = 1; i < pts.length - 2; i++) {
+        const xc = (pts[i].x + pts[i + 1].x) / 2;
+        const yc = (pts[i].y + pts[i + 1].y) / 2;
+        ctx.quadraticCurveTo(pts[i].x, pts[i].y, xc, yc);
+      }
+  
+      ctx.quadraticCurveTo(
+        pts[pts.length - 2].x,
+        pts[pts.length - 2].y,
+        pts[pts.length - 1].x,
+        pts[pts.length - 1].y
+      );
+  
       ctx.stroke();
     }
-
+  
+    function addInterpolatedPoints(newPoint) {
+      const lastPoint = points[points.length - 1];
+      if (!lastPoint) {
+        points.push(newPoint);
+        return;
+      }
+      const dx = newPoint.x - lastPoint.x;
+      const dy = newPoint.y - lastPoint.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const steps = Math.max(Math.floor(distance / 1.5), 1);
+  
+      for (let i = 1; i <= steps; i++) {
+        points.push({
+          x: lastPoint.x + (dx * i) / steps,
+          y: lastPoint.y + (dy * i) / steps
+        });
+      }
+    }
+  
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+  
+    window.addEventListener('touchstart', () => {
+      isTouchDevice = true;
+      currentBrushSize = fingerBrushSize;
+    }, { once: true });
+  
     canvas.addEventListener('mousedown', (e) => {
       drawing = true;
-      lastPos = getPos(e);
+      points.push(getPosition(e));
     });
-
+  
     canvas.addEventListener('mousemove', (e) => {
       if (!drawing) return;
-      const currentPos = getPos(e);
-      drawLine(lastPos, currentPos);
-      lastPos = currentPos;
+      const pos = getPosition(e);
+      addInterpolatedPoints(pos);
+      ctx.lineWidth = currentBrushSize;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = 'black';
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+      ctx.shadowBlur = 1.5;
+      drawSmoothCurve(points);
     });
-
+  
     canvas.addEventListener('mouseup', () => {
       drawing = false;
+      points = [];
     });
-
+  
     canvas.addEventListener('mouseleave', () => {
       drawing = false;
+      points = [];
     });
-
-    // Touch support
+  
     canvas.addEventListener('touchstart', (e) => {
       e.preventDefault();
       drawing = true;
-      lastPos = getPos(e);
+      points.push(getPosition(e));
     });
-
+  
     canvas.addEventListener('touchmove', (e) => {
       e.preventDefault();
       if (!drawing) return;
-      const currentPos = getPos(e);
-      drawLine(lastPos, currentPos);
-      lastPos = currentPos;
+      const pos = getPosition(e);
+      addInterpolatedPoints(pos);
+      ctx.lineWidth = currentBrushSize;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = 'black';
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+      ctx.shadowBlur = 1.5;
+      drawSmoothCurve(points);
     });
-
+  
     canvas.addEventListener('touchend', () => {
       drawing = false;
+      points = [];
     });
-
+  
+    canvas.addEventListener('touchcancel', () => {
+      drawing = false;
+      points = [];
+    });
+  
     clearBtn.addEventListener('click', () => {
-      clearCanvas();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      fillBackground();
     });
-
+  
     saveBtn.addEventListener('click', () => {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-        const day = String(now.getDate()).padStart(2, '0');
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-
-        const timestamp = `${year}-${month}-${day}-${hours}-${minutes}-${seconds}`;
-        const filename = `quick-sketch-${timestamp}.png`;
-
-        const link = document.createElement('a');
-        link.download = filename;
-        link.href = canvas.toDataURL();
-        link.click();
-     });
-
-    resizeCanvas();
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      tempCanvas.width = canvas.width;
+      tempCanvas.height = canvas.height;
+      tempCanvas.style.width = window.innerWidth + 'px';
+      tempCanvas.style.height = window.innerHeight + 'px';
+  
+      tempCtx.scale(dpr, dpr);
+      tempCtx.fillStyle = getBackgroundColor();
+      tempCtx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+      tempCtx.drawImage(canvas, 0, 0);
+  
+      const now = new Date();
+      const timestamp = now.toISOString().replace(/[:.]/g, '-');
+      const filename = `quick-sketch-${timestamp}.png`;
+  
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = tempCanvas.toDataURL();
+      link.click();
+    });
   </script>
 </body>
 </html>
