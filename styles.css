@@ -58,6 +58,9 @@ html[data-theme=dark] a {
 html[data-theme=dark] #needle {
   background: #fff;
 }
+html[data-theme=dark] #bisnoni-image {
+  filter: invert(1);
+}
 
 @media (prefers-color-scheme: dark) {
   html:not([data-theme]) {
@@ -73,6 +76,9 @@ html[data-theme=dark] #needle {
   }
   html:not([data-theme]) #needle {
     background: #fff;
+  }
+  html:not([data-theme]) #bisnoni-image {
+    filter: invert(1);
   }
 }
 h2 {

@@ -61,6 +61,9 @@ body {
     #needle {
         background: $color-light;
     }
+    #bisnoni-image {
+        filter: invert(1);
+    }
 }
   
 html,
