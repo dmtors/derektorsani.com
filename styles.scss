@@ -47,6 +47,16 @@ body {
     #needle {
         background: $color-dark;
     }
+    button {
+        border-color: $color-dark;
+        box-shadow: 0 0 0 $color-dark;
+        &:hover {
+            box-shadow: 3px 3px 0 $color-dark;
+        }
+        &:active {
+            box-shadow: inset 3px 3px 0 $color-dark;
+        }
+    }
 }
 @mixin theme-dark() {
     color-scheme: dark;
@@ -63,6 +73,15 @@ body {
     }
     #bisnoni-image {
         filter: invert(1);
+    }
+    button {
+        border-color: $color-light;
+        &:hover {
+            box-shadow: 3px 3px 0 $color-light;
+        }
+        &:active {
+            box-shadow: inset 3px 3px 0 $color-light;
+        }
     }
 }
   
@@ -174,15 +193,14 @@ button {
 }
 
 #instrument-container {
-    select, button, input {
-        padding: 5px;
+    button {
+        padding: 20px;
         width: 100%;
         box-sizing: border-box;
         outline: none;
         background-color: transparent;
-    }
-    button {
-        border: 1px solid; 
+        border: 1px solid;
+        transition: all 0.125s;
     }
     label {
         display: block;

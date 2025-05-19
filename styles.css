@@ -43,6 +43,19 @@ html #needle,
 html[data-theme=light] #needle {
   background: #000;
 }
+html button,
+html[data-theme=light] button {
+  border-color: #000;
+  box-shadow: 0 0 0 #000;
+}
+html button:hover,
+html[data-theme=light] button:hover {
+  box-shadow: 3px 3px 0 #000;
+}
+html button:active,
+html[data-theme=light] button:active {
+  box-shadow: inset 3px 3px 0 #000;
+}
 
 html[data-theme=dark] {
   color-scheme: dark;
@@ -60,6 +73,15 @@ html[data-theme=dark] #needle {
 }
 html[data-theme=dark] #bisnoni-image {
   filter: invert(1);
+}
+html[data-theme=dark] button {
+  border-color: #fff;
+}
+html[data-theme=dark] button:hover {
+  box-shadow: 3px 3px 0 #fff;
+}
+html[data-theme=dark] button:active {
+  box-shadow: inset 3px 3px 0 #fff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -79,6 +101,15 @@ html[data-theme=dark] #bisnoni-image {
   }
   html:not([data-theme]) #bisnoni-image {
     filter: invert(1);
+  }
+  html:not([data-theme]) button {
+    border-color: #fff;
+  }
+  html:not([data-theme]) button:hover {
+    box-shadow: 3px 3px 0 #fff;
+  }
+  html:not([data-theme]) button:active {
+    box-shadow: inset 3px 3px 0 #fff;
   }
 }
 h2 {
@@ -171,15 +202,14 @@ button {
   border-right: 5px solid transparent;
 }
 
-#instrument-container select, #instrument-container button, #instrument-container input {
-  padding: 5px;
+#instrument-container button {
+  padding: 20px;
   width: 100%;
   box-sizing: border-box;
   outline: none;
   background-color: transparent;
-}
-#instrument-container button {
   border: 1px solid;
+  transition: all 0.125s;
 }
 #instrument-container label {
   display: block;
