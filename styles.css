@@ -202,6 +202,9 @@ button {
   border-right: 5px solid transparent;
 }
 
+#instrument-container .button-group {
+  flex-wrap: wrap;
+}
 #instrument-container button {
   padding: 20px;
   width: 100%;
@@ -210,10 +213,27 @@ button {
   background-color: transparent;
   border: 1px solid;
   transition: all 0.125s;
+  flex: 1 1 5%;
 }
 #instrument-container label {
   display: block;
   margin-top: 15px;
+}
+#instrument-container #current-selection {
+  text-align: center;
+  font-size: 650%;
+  line-height: 1;
+  margin: 10vh 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#instrument-container #toggle {
+  position: absolute;
+  bottom: 30px;
+  width: calc(100% - 60px);
 }
 
 #sketch-controls {

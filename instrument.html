@@ -29,7 +29,7 @@
     <button class="scale-btn">Minor</button>
   </div>
 
-  <div id="current-selection" style="text-align: center; font-size: 1000%; line-height: 1; margin: 100px 0;">C Major</div>
+  <div id="current-selection">C Major</div>
 
   <button id="toggle">Start Drone</button>
 
@@ -56,50 +56,50 @@
     }
 
     async function startDrone() {
-  await Tone.start();
-  droneActive = true;
-  const notes = getScaleNotes();
-  
-  rootSynth = new Tone.PolySynth({
-    maxPolyphony: 5,
-    options: { oscillator: { type: 'triangle' } }
-  }).connect(reverb);
+      await Tone.start();
+      droneActive = true;
+      const notes = getScaleNotes();
 
-  rootSynth.volume.value = -Infinity;  // Start muted
-  rootSynth.triggerAttack([notes[0]]);
+      rootSynth = new Tone.PolySynth({
+        maxPolyphony: 5,
+        options: { oscillator: { type: 'triangle' } }
+      }).connect(reverb);
 
-  // Fade in over 1 second to -6 dB
-  rootSynth.volume.linearRampTo(-6, 1);
+      rootSynth.volume.value = -Infinity;  // Start muted
+      rootSynth.triggerAttack([notes[0]]);
 
-  let lastPlayedIndex = 0;
+      // Fade in over 1 second to -6 dB
+      rootSynth.volume.linearRampTo(-6, 1);
 
-  intervalId = setInterval(() => {
-    if (!droneActive) return;
+      let lastPlayedIndex = 0;
 
-    const availableNotes = notes.slice(1);
-    const rangeStart = Math.max(0, lastPlayedIndex - 2);
-    const rangeEnd = Math.min(availableNotes.length - 1, lastPlayedIndex + 2);
+      intervalId = setInterval(() => {
+        if (!droneActive) return;
 
-    const possibleNotes = availableNotes.slice(rangeStart, rangeEnd + 1);
+        const availableNotes = notes.slice(1);
+        const rangeStart = Math.max(0, lastPlayedIndex - 2);
+        const rangeEnd = Math.min(availableNotes.length - 1, lastPlayedIndex + 2);
 
-    const randomNote = possibleNotes[Math.floor(Math.random() * possibleNotes.length)];
-    const newIndex = availableNotes.indexOf(randomNote);
+        const possibleNotes = availableNotes.slice(rangeStart, rangeEnd + 1);
 
-    if (activeNotes.has(randomNote)) {
-      rootSynth.triggerRelease(randomNote);
-      activeNotes.delete(randomNote);
-    } else if (activeNotes.size < 2) {
-      // Create a smooth fade-in using GainNode
-      const gain = new Tone.Gain(0).toDestination();
-      rootSynth.connect(gain);
-      gain.gain.linearRampTo(1, 1); // 1-second fade-in
-      
-      rootSynth.triggerAttack(randomNote);
-      activeNotes.set(randomNote, { gainNode: gain, note: randomNote });
-      lastPlayedIndex = newIndex;
+        const randomNote = possibleNotes[Math.floor(Math.random() * possibleNotes.length)];
+        const newIndex = availableNotes.indexOf(randomNote);
+
+        if (activeNotes.has(randomNote)) {
+          rootSynth.triggerRelease(randomNote);
+          activeNotes.delete(randomNote);
+          } else if (activeNotes.size < 2) {
+          // Create a smooth fade-in using GainNode
+          const gain = new Tone.Gain(0).toDestination();
+          rootSynth.connect(gain);
+          gain.gain.linearRampTo(1, 1); // 1-second fade-in
+
+          rootSynth.triggerAttack(randomNote);
+          activeNotes.set(randomNote, { gainNode: gain, note: randomNote });
+          lastPlayedIndex = newIndex;
+        }
+      }, 2000);
     }
-  }, 2000);
-}
 
     async function smoothTransition(newKey, newScale) {
       if (droneActive) {
