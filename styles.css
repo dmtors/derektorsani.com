@@ -46,14 +46,17 @@ html[data-theme=light] #needle {
 html button,
 html[data-theme=light] button {
   border-color: #000;
+}
+html #tuning-select,
+html[data-theme=light] #tuning-select {
   box-shadow: 0 0 0 #000;
 }
-html button:hover,
-html[data-theme=light] button:hover {
+html #tuning-select:hover,
+html[data-theme=light] #tuning-select:hover {
   box-shadow: 3px 3px 0 #000;
 }
-html button:active,
-html[data-theme=light] button:active {
+html #tuning-select:active,
+html[data-theme=light] #tuning-select:active {
   box-shadow: inset 3px 3px 0 #000;
 }
 html .active,
@@ -82,10 +85,10 @@ html[data-theme=dark] #bisnoni-image {
 html[data-theme=dark] button {
   border-color: #fff;
 }
-html[data-theme=dark] button:hover {
+html[data-theme=dark] button:hover, html[data-theme=dark] #tuning-select:hover {
   box-shadow: 3px 3px 0 #fff;
 }
-html[data-theme=dark] button:active {
+html[data-theme=dark] button:active, html[data-theme=dark] #tuning-select:active {
   box-shadow: inset 3px 3px 0 #fff;
 }
 html[data-theme=dark] .active {
@@ -114,10 +117,10 @@ html[data-theme=dark] .active {
   html:not([data-theme]) button {
     border-color: #fff;
   }
-  html:not([data-theme]) button:hover {
+  html:not([data-theme]) button:hover, html:not([data-theme]) #tuning-select:hover {
     box-shadow: 3px 3px 0 #fff;
   }
-  html:not([data-theme]) button:active {
+  html:not([data-theme]) button:active, html:not([data-theme]) #tuning-select:active {
     box-shadow: inset 3px 3px 0 #fff;
   }
   html:not([data-theme]) .active {
@@ -208,13 +211,20 @@ button {
 }
 
 #tuning-select {
-  padding: 5px;
+  padding: 20px;
   margin: 30px auto 0;
   border: 0;
   outline: 1px solid;
-  border-right: 5px solid transparent;
+  border-right: 20px solid transparent;
+  transition: all 0.125s;
 }
 
+#instrument-container h1, #instrument-container p {
+  text-align: center;
+}
+#instrument-container h1 {
+  margin-bottom: 20px;
+}
 #instrument-container .button-group {
   flex-wrap: wrap;
   margin-top: 0;

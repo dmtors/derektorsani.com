@@ -49,6 +49,8 @@ body {
     }
     button {
         border-color: $color-dark;
+    }
+    #tuning-select {
         box-shadow: 0 0 0 $color-dark;
         &:hover {
             box-shadow: 3px 3px 0 $color-dark;
@@ -80,6 +82,8 @@ body {
     }
     button {
         border-color: $color-light;
+    }
+    button, #tuning-select {
         &:hover {
             box-shadow: 3px 3px 0 $color-light;
         }
@@ -193,14 +197,21 @@ button {
 }
 
 #tuning-select {
-    padding: 5px;
+    padding: 20px;
     margin: 30px auto 0;
     border: 0;
     outline: 1px solid;
-    border-right: 5px solid transparent;
+    border-right: 20px solid transparent;
+    transition: all 0.125s;
 }
 
 #instrument-container {
+    h1, p {
+        text-align: center;
+    }
+    h1 {
+        margin-bottom: 20px;
+    }
     .button-group {
         flex-wrap: wrap;
         margin-top: 0;
