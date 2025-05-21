@@ -23,118 +23,90 @@
     <button class="key-btn">A</button><button class="key-btn">A#</button><button class="key-btn">B</button>
   </div>
 
-  <label for="scale" style="text-align: center;">Scale</label>
+  <!-- <label for="scale" style="text-align: center;">Scale</label>
   <div class="button-group" style="margin-top: 0;">
     <button class="scale-btn">Major</button>
     <button class="scale-btn">Minor</button>
-  </div>
+  </div> -->
 
-  <div id="current-selection">C Major</div>
+  <div id="current-selection">C</div>
 
   <button id="toggle">Start Drone</button>
 
   <script>
-    const scales = {
-      major: [0, 2, 4, 5, 7, 9],
-      minor: [0, 2, 3, 5, 7, 8, 10]
-    };
+    const keys = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    let currentKey = "C";
+    let isPlaying = false;
 
-    let selectedKey = "C";
-    let selectedScale = "major";
-    let rootSynth, intervalId, droneActive = false;
-    const activeNotes = new Map();
+    const rootNote = () => `${currentKey}3`;
 
-    const reverb = new Tone.Reverb({ decay: 3, wet: 1 }).toDestination();
-    // const delay = new Tone.FeedbackDelay({ delayTime: "8n", feedback: 0.3, wet: 0.6 }).toDestination();
+    // Create synths
+    const fmSynth = new Tone.FMSynth().toDestination();
+    const monoSynth = new Tone.MonoSynth().toDestination();
+    const polySynth = new Tone.PolySynth().toDestination();
 
-    function getScaleNotes() {
-      return scales[selectedScale].map(i => Tone.Frequency(`${selectedKey}3`).transpose(i).toNote());
-    }
+    // Create gain nodes for each synth with low starting volume
+    const fmGain = new Tone.Gain(0).toDestination();
+    const monoGain = new Tone.Gain(0).toDestination();
+    const polyGain = new Tone.Gain(0).toDestination();
 
-    function updateCurrentSelection() {
-      document.getElementById('current-selection').textContent = `${selectedKey} ${selectedScale.charAt(0).toUpperCase() + selectedScale.slice(1)}`;
-    }
+    fmSynth.connect(fmGain);
+    monoSynth.connect(monoGain);
+    polySynth.connect(polyGain);
 
     async function startDrone() {
       await Tone.start();
-      droneActive = true;
-      const notes = getScaleNotes();
+      const note = rootNote();
 
-      rootSynth = new Tone.PolySynth({
-        maxPolyphony: 5,
-        options: { oscillator: { type: 'triangle' } }
-      }).connect(reverb);
+      fmSynth.triggerAttack(note);
+      monoSynth.triggerAttack(note);
+      polySynth.triggerAttack(note);
 
-      rootSynth.volume.value = -Infinity;  // Start muted
-      rootSynth.triggerAttack([notes[0]]);
+      const now = Tone.now();
+      fmGain.gain.cancelAndHoldAtTime(now);
+      monoGain.gain.cancelAndHoldAtTime(now);
+      polyGain.gain.cancelAndHoldAtTime(now);
+      fmGain.gain.linearRampToValueAtTime(0.3, now + 5);
+      monoGain.gain.linearRampToValueAtTime(0.2, now + 5);
+      polyGain.gain.linearRampToValueAtTime(0.2, now + 5);
+    }
 
-      // Fade in over 1 second to -6 dB
-      rootSynth.volume.linearRampTo(-6, 1);
+    function stopDrone() {
+      const now = Tone.now();
+      fmGain.gain.cancelAndHoldAtTime(now);
+      monoGain.gain.cancelAndHoldAtTime(now);
+      polyGain.gain.cancelAndHoldAtTime(now);
+      fmGain.gain.linearRampToValueAtTime(0, now + 5);
+      monoGain.gain.linearRampToValueAtTime(0, now + 5);
+      polyGain.gain.linearRampToValueAtTime(0, now + 5);
 
-      let lastPlayedIndex = 0;
+      setTimeout(() => {
+        fmSynth.triggerRelease(rootNote());
+        monoSynth.triggerRelease(rootNote());
+        polySynth.triggerRelease(rootNote());
+      }, 5200);
+    }
 
-      intervalId = setInterval(() => {
-        if (!droneActive) return;
-
-        const availableNotes = notes.slice(1);
-        const rangeStart = Math.max(0, lastPlayedIndex - 2);
-        const rangeEnd = Math.min(availableNotes.length - 1, lastPlayedIndex + 2);
-
-        const possibleNotes = availableNotes.slice(rangeStart, rangeEnd + 1);
-
-        const randomNote = possibleNotes[Math.floor(Math.random() * possibleNotes.length)];
-        const newIndex = availableNotes.indexOf(randomNote);
-
-        if (activeNotes.has(randomNote)) {
-          rootSynth.triggerRelease(randomNote);
-          activeNotes.delete(randomNote);
-          } else if (activeNotes.size < 2) {
-          // Create a smooth fade-in using GainNode
-          const gain = new Tone.Gain(0).toDestination();
-          rootSynth.connect(gain);
-          gain.gain.linearRampTo(1, 1); // 1-second fade-in
-
-          rootSynth.triggerAttack(randomNote);
-          activeNotes.set(randomNote, { gainNode: gain, note: randomNote });
-          lastPlayedIndex = newIndex;
+    document.querySelectorAll('.key-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentKey = btn.textContent;
+        document.getElementById('current-selection').textContent = `${currentKey}`;
+        if (isPlaying) {
+          stopDrone();
+          setTimeout(startDrone, 5200);
         }
-      }, 2000);
-    }
-
-    async function smoothTransition(newKey, newScale) {
-      if (droneActive) {
-        clearInterval(intervalId);
-        rootSynth.releaseAll();
-        activeNotes.clear();
-        await startDrone();
-      }
-    }
-
-    document.getElementById('toggle').addEventListener('click', async function () {
-      if (this.textContent === 'Start Drone') {
-        await startDrone();
-        this.textContent = 'Stop Drone';
-      } else {
-        clearInterval(intervalId);
-        rootSynth.releaseAll();
-        this.textContent = 'Start Drone';
-        droneActive = false;
-      }
+      });
     });
 
-    document.querySelectorAll('.key-btn').forEach(btn => btn.addEventListener('click', () => {
-      selectedKey = btn.textContent;
-      updateCurrentSelection();
-      smoothTransition(selectedKey, selectedScale);
-    }));
-
-    document.querySelectorAll('.scale-btn').forEach(btn => btn.addEventListener('click', () => {
-      selectedScale = btn.textContent.toLowerCase();
-      updateCurrentSelection();
-      smoothTransition(selectedKey, selectedScale);
-    }));
-
-    updateCurrentSelection();
+    document.getElementById('toggle').addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      document.getElementById('toggle').textContent = isPlaying ? "Stop Drone" : "Start Drone";
+      if (isPlaying) {
+        startDrone();
+      } else {
+        stopDrone();
+      }
+    });
   </script>
 </body>
 </html>

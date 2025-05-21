@@ -56,6 +56,11 @@ html button:active,
 html[data-theme=light] button:active {
   box-shadow: inset 3px 3px 0 #000;
 }
+html .active,
+html[data-theme=light] .active {
+  color: #fff;
+  background-color: #000;
+}
 
 html[data-theme=dark] {
   color-scheme: dark;
@@ -82,6 +87,10 @@ html[data-theme=dark] button:hover {
 }
 html[data-theme=dark] button:active {
   box-shadow: inset 3px 3px 0 #fff;
+}
+html[data-theme=dark] .active {
+  color: #000;
+  background-color: #fff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -110,6 +119,10 @@ html[data-theme=dark] button:active {
   }
   html:not([data-theme]) button:active {
     box-shadow: inset 3px 3px 0 #fff;
+  }
+  html:not([data-theme]) .active {
+    color: #000;
+    background-color: #fff;
   }
 }
 h2 {
@@ -204,33 +217,22 @@ button {
 
 #instrument-container .button-group {
   flex-wrap: wrap;
+  margin-top: 0;
 }
 #instrument-container button {
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
   outline: none;
-  background-color: transparent;
   border: 1px solid;
   transition: all 0.125s;
   flex: 1 1 5%;
 }
-#instrument-container label {
+#instrument-container p {
   display: block;
   margin-top: 15px;
 }
-#instrument-container #current-selection {
-  text-align: center;
-  font-size: 650%;
-  line-height: 1;
-  margin: 10vh 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#instrument-container #toggle {
+#instrument-container #startStop {
   position: absolute;
   bottom: 30px;
   width: calc(100% - 60px);
