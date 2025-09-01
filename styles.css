@@ -173,9 +173,24 @@ button {
   margin-top: 15px;
 }
 
-#content-en, #content-it {
-  display: grid;
-  gap: 15px;
+#bisnoni h1, h2, p {
+  font-family: Helvetica, sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#bisnoni {
+  gap: 30px;
+}
+#bisnoni #bisnoni-image {
+  max-width: 600px;
+  margin: 60px auto 30px;
+}
+#bisnoni h2 {
+  margin-top: 0;
 }
 
 .inline-text-group {
