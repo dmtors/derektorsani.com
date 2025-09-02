@@ -2,7 +2,7 @@
 
 // Color
 $color-light: #fff;
-$color-mid: #b3aca6;
+$color-mid: #d1cbc5;
 $color-dark: #000;
 $color-accent: #0000FF;
 
@@ -141,10 +141,11 @@ li {
 }
 
 iframe {
-    margin-top: 30px;
-    &:first-of-type {
-        margin-top: 15px;
-    }
+    margin: 5px 0 15px;
+    border: 0;
+    width: 600px;
+    height: 120px;
+    display: block;
 }
 
 button {
@@ -159,20 +160,20 @@ button {
     margin-top: 15px;
 }
 
-#bisnoni h1, h2, p {
+h1, h2, h3 {
     font-family: Helvetica, sans-serif;
     font-size: 3rem;
     line-height: 1;
     font-weight: bold;
     text-transform: uppercase;
-    text-align: center;
+    text-align: left;
 }
 
 #bisnoni {
     gap: 30px;
     #bisnoni-image {
         max-width: 600px;
-        margin: 60px auto 30px;
+        margin: 60px auto 15px;
     }
     h2 {
         margin-top: 0;

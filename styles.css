@@ -67,7 +67,7 @@ html[data-theme=light] .active {
 
 html[data-theme=dark] {
   color-scheme: dark;
-  color: #b3aca6;
+  color: #d1cbc5;
   background-color: #000;
 }
 html[data-theme=dark] *:focus-visible {
@@ -99,7 +99,7 @@ html[data-theme=dark] .active {
 @media (prefers-color-scheme: dark) {
   html:not([data-theme]) {
     color-scheme: dark;
-    color: #b3aca6;
+    color: #d1cbc5;
     background-color: #000;
   }
   html:not([data-theme]) *:focus-visible {
@@ -155,10 +155,11 @@ li {
 }
 
 iframe {
-  margin-top: 30px;
-}
-iframe:first-of-type {
-  margin-top: 15px;
+  margin: 5px 0 15px;
+  border: 0;
+  width: 600px;
+  height: 120px;
+  display: block;
 }
 
 button {
@@ -173,13 +174,13 @@ button {
   margin-top: 15px;
 }
 
-#bisnoni h1, h2, p {
+h1, h2, h3 {
   font-family: Helvetica, sans-serif;
   font-size: 3rem;
   line-height: 1;
   font-weight: bold;
   text-transform: uppercase;
-  text-align: center;
+  text-align: left;
 }
 
 #bisnoni {
@@ -187,7 +188,7 @@ button {
 }
 #bisnoni #bisnoni-image {
   max-width: 600px;
-  margin: 60px auto 30px;
+  margin: 60px auto 15px;
 }
 #bisnoni h2 {
   margin-top: 0;
