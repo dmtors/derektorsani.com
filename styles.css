@@ -20,6 +20,9 @@ body {
   gap: 15px;
   padding: 30px;
 }
+body#gallery {
+  display: block;
+}
 
 .hidden {
   display: none !important;
@@ -287,4 +290,16 @@ h1, h2, h3 {
   background: #fff;
   cursor: crosshair;
   touch-action: none;
+}
+
+#gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-auto-rows: minmax(50px, auto);
+  gap: 30px;
+  margin-top: 30px;
+}
+#gallery-grid img {
+  width: 100%;
+  image-rendering: crisp-edges;
 }/*# sourceMappingURL=styles.css.map */
