@@ -96,7 +96,7 @@ ul li {
   list-style: none;
 }
 .link-primary:hover {
-  color: #005ac4;
+  color: rgb(0, 90.3571428571, 195.5);
 }
 
 .link-secondary {
@@ -105,7 +105,7 @@ ul li {
   list-style: none;
 }
 .link-secondary:hover {
-  color: #4c575f;
+  color: rgb(75.9311740891, 86.975708502, 94.5688259109);
 }
 
 .main-content {

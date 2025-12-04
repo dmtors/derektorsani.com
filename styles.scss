@@ -54,12 +54,24 @@ body {
     button {
         border-color: $color-dark;
     }
+    button, #tuning-select {
+        box-shadow: 0 0 0 $color-dark;
+        &:hover {
+            box-shadow: 3px 3px 0 $color-dark;
+        }
+        &:active {
+            box-shadow: inset 3px 3px 0 $color-dark;
+        }
+    }
     .active {
         color: $color-light;
         background-color: $color-dark;
     }
     .card {
         border-color: $color-mid-light;
+    }
+    #needle {
+        background: $color-dark;
     }
 }
 @mixin theme-dark() {
@@ -72,13 +84,10 @@ body {
     a {
         color: $color-mid-light;
     }
-    #bisnoni-image {
-        filter: invert(1);
-    }
     button {
         border-color: $color-light;
     }
-    button {
+    button, #tuning-select {
         &:hover {
             box-shadow: 3px 3px 0 $color-light;
         }
@@ -95,6 +104,9 @@ body {
     }
     img, video {
         opacity: 0.7;
+    }
+    #needle {
+        background: $color-light;
     }
 }
   
@@ -138,6 +150,18 @@ a {
     &:visited {
         text-decoration: none;
     }
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
 }
 
 ul {

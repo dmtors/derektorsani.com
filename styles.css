@@ -46,6 +46,21 @@ html button,
 html[data-theme=light] button {
   border-color: #181819;
 }
+html button, html #tuning-select,
+html[data-theme=light] button,
+html[data-theme=light] #tuning-select {
+  box-shadow: 0 0 0 #181819;
+}
+html button:hover, html #tuning-select:hover,
+html[data-theme=light] button:hover,
+html[data-theme=light] #tuning-select:hover {
+  box-shadow: 3px 3px 0 #181819;
+}
+html button:active, html #tuning-select:active,
+html[data-theme=light] button:active,
+html[data-theme=light] #tuning-select:active {
+  box-shadow: inset 3px 3px 0 #181819;
+}
 html .active,
 html[data-theme=light] .active {
   color: #fefefa;
@@ -54,6 +69,10 @@ html[data-theme=light] .active {
 html .card,
 html[data-theme=light] .card {
   border-color: #e0e0d9;
+}
+html #needle,
+html[data-theme=light] #needle {
+  background: #181819;
 }
 
 html[data-theme=dark] {
@@ -67,16 +86,13 @@ html[data-theme=dark] *:focus-visible {
 html[data-theme=dark] a {
   color: #e0e0d9;
 }
-html[data-theme=dark] #bisnoni-image {
-  filter: invert(1);
-}
 html[data-theme=dark] button {
   border-color: #fefefa;
 }
-html[data-theme=dark] button:hover {
+html[data-theme=dark] button:hover, html[data-theme=dark] #tuning-select:hover {
   box-shadow: 3px 3px 0 #fefefa;
 }
-html[data-theme=dark] button:active {
+html[data-theme=dark] button:active, html[data-theme=dark] #tuning-select:active {
   box-shadow: inset 3px 3px 0 #fefefa;
 }
 html[data-theme=dark] .active {
@@ -88,6 +104,9 @@ html[data-theme=dark] .card {
 }
 html[data-theme=dark] img, html[data-theme=dark] video {
   opacity: 0.7;
+}
+html[data-theme=dark] #needle {
+  background: #fefefa;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -102,16 +121,13 @@ html[data-theme=dark] img, html[data-theme=dark] video {
   html:not([data-theme]) a {
     color: #e0e0d9;
   }
-  html:not([data-theme]) #bisnoni-image {
-    filter: invert(1);
-  }
   html:not([data-theme]) button {
     border-color: #fefefa;
   }
-  html:not([data-theme]) button:hover {
+  html:not([data-theme]) button:hover, html:not([data-theme]) #tuning-select:hover {
     box-shadow: 3px 3px 0 #fefefa;
   }
-  html:not([data-theme]) button:active {
+  html:not([data-theme]) button:active, html:not([data-theme]) #tuning-select:active {
     box-shadow: inset 3px 3px 0 #fefefa;
   }
   html:not([data-theme]) .active {
@@ -123,6 +139,9 @@ html[data-theme=dark] img, html[data-theme=dark] video {
   }
   html:not([data-theme]) img, html:not([data-theme]) video {
     opacity: 0.7;
+  }
+  html:not([data-theme]) #needle {
+    background: #fefefa;
   }
 }
 p, i, small {
@@ -148,6 +167,18 @@ a:active {
 }
 a:visited {
   text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 ul {
