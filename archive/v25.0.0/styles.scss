@@ -1,0 +1,230 @@
+// Variables
+
+// Breakpoints
+$screen-small: 599px;
+$screen-medium: 767px;
+
+// Color
+$color-light: #fafafa;
+$color-dark: #111;
+
+// Font
+$font-sans: 'Helvetica', sans-serif;
+$font-mono: 'Fragment Mono', monospace;
+
+// Global
+* {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+}
+
+body {
+    display: grid;
+}
+
+// Theme
+@mixin theme-light() {
+    color-scheme: light;
+    color: $color-dark;
+    background-color: $color-light;
+    *:focus-visible {
+        outline-color: $color-dark;
+    }
+    h1 {
+        color: $color-light;
+    }
+    .full-text {
+        background-color: $color-light;
+    }
+    a {
+        color: $color-dark;
+    }
+}
+@mixin theme-dark() {
+    color-scheme: dark;
+    color: $color-light;
+    background-color: $color-dark;
+    *:focus-visible {
+        outline-color: $color-light;
+    }
+    h1 {
+        color: $color-dark;
+    }
+    .full-text {
+        background-color: $color-dark;
+    }
+    a {
+        color: $color-light;
+    }
+}
+  
+html,
+html[data-theme="light"] {
+    @include theme-light;
+}
+html[data-theme="dark"] {
+    @include theme-dark;
+}
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme]) {
+        @include theme-dark;
+    }
+}
+
+// Type
+
+h1 {
+    font-size: 14vw;
+    font-family: $font-sans;
+    font-weight: bold;
+    line-height: 1;
+    text-transform: uppercase;
+    padding: 3% 5% 5% !important;
+    margin-top: 2%;
+    @media only screen and (max-width: $screen-medium) {
+        margin-top: 3%;    
+    }
+    @media only screen and (max-width: $screen-small) {
+        margin-top: 4%;    
+    }
+}
+
+h2, .full-text {
+    font-family: $font-mono;
+    font-size: 3vw;
+    line-height: 1.6;
+}
+
+.full-text {
+    padding: 10% 5% !important;
+}
+
+// Components
+
+#page {
+    width: 100%;
+}
+
+section {
+    width: 50%;
+    margin: 0 auto 8%;
+    &:last-of-type {
+        margin: 0;
+    }
+}
+
+.full {
+    width: 100%;
+}
+
+.image {
+    position: absolute;
+    z-index: -1000;
+}
+
+.image, .project {
+    display: block;
+    width: 100%;
+}
+
+.text {
+    position: relative;
+    padding: 3% 0% 5%;
+}
+
+a {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    &:hover {
+        text-decoration: none;
+    }
+    &:active {
+        opacity: 0;
+    }
+}
+
+#bisnoni {
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    } 
+    .content {
+        padding: 30px;
+        display: grid;
+        gap: 20px;
+    }
+    .button-group {
+        display: flex;
+        gap: 10px;
+    }
+    p {
+        font-family: $font-mono;
+        font-size: 11px;
+        line-height: 17px;
+        max-width: 510px;
+    }
+    .menu-item {
+        display: grid;
+        gap: 0;
+        div {
+            display: flex;
+            gap: 5px;
+        }
+    }
+    #content-en, #content-it {
+        display: grid;
+        gap: 20px;
+    }
+    a {
+        color: blue;
+    }
+}
+
+#music {
+    padding: 100px 30px;
+
+    section {
+        width: 100%;
+        max-width: 800px;
+        margin-bottom: 75px;
+        &:last-of-type {
+            margin: 0 auto;
+        }
+    }
+
+    h1, h2 {
+        font-size: 20px;
+        line-height: 1.6;
+        font-weight: bold;
+        color: $color-dark;
+        margin: 0;
+        padding: 0 !important;
+    }
+
+    p {
+        font-family: $font-mono;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    h3 {
+        font-family: $font-mono;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-top: 5px;
+    }
+
+    iframe {
+        margin-bottom: 10px;
+    }
+
+    .link-group {
+        margin-top: 10px;
+    }
+}
+
+.hidden {
+    display: none !important;
+}

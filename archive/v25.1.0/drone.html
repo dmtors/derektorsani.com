@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <script src="https://unpkg.com/tone@latest/build/Tone.js"></script>
+    <title>drone</title>
+</head>
+<body id="instrument-container">
+
+    <h1>e.t. drone home</h1>
+
+    <p>key</p>
+    <div class="button-group" id="noteButtons"></div>
+
+    <p>waveform</p>
+    <div class="button-group" id="waveformButtons"></div>
+
+    <button id="startStop">start</button>
+
+  <script>
+    const NOTES = [
+      { name: "c", freq: 130.81 },
+      { name: "c♯", freq: 138.59 },
+      { name: "d", freq: 146.83 },
+      { name: "d♯", freq: 155.56 },
+      { name: "e", freq: 164.81 },
+      { name: "f", freq: 174.61 },
+      { name: "f♯", freq: 185.00 },
+      { name: "g", freq: 196.00 },
+      { name: "g♯", freq: 207.65 },
+      { name: "a", freq: 220.00 },
+      { name: "a♯", freq: 233.08 },
+      { name: "b", freq: 246.94 }
+    ];
+
+    const harmonics = [1, 2, 3, 0.5]; // base, octave, 12th, subharmonic
+    const fadeDuration = 2.0; // seconds
+
+    let audioCtx;
+    let oscillators = [];
+    let gainNodes = [];
+    let panner, convolver;
+    let isPlaying = false;
+    let baseFreq = 220;
+    let modTimer;
+    let selectedNoteIndex = 9; // Default A
+
+    const noteButtonsContainer = document.getElementById("noteButtons");
+
+    NOTES.forEach((note, index) => {
+      const btn = document.createElement("button");
+      btn.classList.add("note-button");
+      if (index === selectedNoteIndex) btn.classList.add("active");
+      btn.textContent = note.name;
+      btn.addEventListener("click", () => {
+        baseFreq = note.freq;
+        selectedNoteIndex = index;
+        document.querySelectorAll(".note-button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+      noteButtonsContainer.appendChild(btn);
+    });
+
+    const WAVEFORMS = ['sine', 'triangle', 'sawtooth', 'square'];
+let selectedWaveform = 'sawtooth';
+const waveformButtonsContainer = document.getElementById("waveformButtons");
+
+WAVEFORMS.forEach(wave => {
+  const btn = document.createElement("button");
+  btn.classList.add("waveform-button");
+  if (wave === selectedWaveform) btn.classList.add("active");
+  btn.textContent = wave;
+  btn.addEventListener("click", () => {
+    btn.addEventListener("click", () => {
+  if (wave === selectedWaveform) return;
+  if (isPlaying) {
+    crossfadeToNewWaveform(wave);
+  } else {
+    selectedWaveform = wave;
+  }
+
+  document.querySelectorAll(".waveform-button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+});
+    document.querySelectorAll(".waveform-button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+  });
+  waveformButtonsContainer.appendChild(btn);
+});
+
+    function createImpulseResponse(duration = 2, decay = 2) {
+      const rate = audioCtx.sampleRate;
+      const length = rate * duration;
+      const impulse = audioCtx.createBuffer(2, length, rate);
+      for (let c = 0; c < 2; c++) {
+        let channel = impulse.getChannelData(c);
+        for (let i = 0; i < length; i++) {
+          channel[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, decay);
+        }
+      }
+      return impulse;
+    }
+
+    function crossfadeToNewWaveform(newWaveform) {
+  const newOscillators = [];
+  const newGains = [];
+
+  const mainGain = audioCtx.createGain();
+  mainGain.gain.setValueAtTime(1.0, audioCtx.currentTime);
+  mainGain.connect(panner); // reuse existing panner
+
+  harmonics.forEach((ratio, i) => {
+    const freq = baseFreq * ratio;
+    const osc = audioCtx.createOscillator();
+    osc.type = newWaveform;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    osc.detune.setValueAtTime((Math.random() - 0.5) * 10, audioCtx.currentTime);
+
+    const gain = audioCtx.createGain();
+    const level = 0.15 / harmonics.length;
+    gain.gain.setValueAtTime(0, audioCtx.currentTime); // fade in
+
+    osc.connect(gain);
+    gain.connect(mainGain);
+
+    osc.start();
+
+    gain.gain.linearRampToValueAtTime(level, audioCtx.currentTime + fadeDuration);
+
+    newOscillators.push(osc);
+    newGains.push(gain);
+  });
+
+  // Fade out old oscillators
+  gainNodes.forEach((gain, i) => {
+    gain.gain.cancelScheduledValues(audioCtx.currentTime);
+    gain.gain.setValueAtTime(gain.gain.value, audioCtx.currentTime);
+    gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + fadeDuration);
+  });
+
+  setTimeout(() => {
+    oscillators.forEach(osc => osc.stop());
+    oscillators = newOscillators;
+    gainNodes = newGains;
+    selectedWaveform = newWaveform;
+  }, fadeDuration * 1000);
+}
+
+    async function startDrone() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      await audioCtx.resume();
+
+      baseFreq = NOTES[selectedNoteIndex].freq;
+      oscillators = [];
+      gainNodes = [];
+
+      panner = audioCtx.createStereoPanner();
+      panner.pan.setValueAtTime((Math.random() * 2 - 1), audioCtx.currentTime);
+
+      convolver = audioCtx.createConvolver();
+      convolver.buffer = createImpulseResponse();
+
+      // Connect effect chain
+      const mainGain = audioCtx.createGain();
+      mainGain.gain.setValueAtTime(1.0, audioCtx.currentTime);
+      mainGain.connect(panner);
+      panner.connect(convolver);
+      convolver.connect(audioCtx.destination);
+
+      // Create layers
+      harmonics.forEach((ratio, i) => {
+        const freq = baseFreq * ratio;
+        const osc = audioCtx.createOscillator();
+        osc.type = selectedWaveform;
+
+        // Detune slightly for richness
+        const detuneCents = (Math.random() - 0.5) * 10; // ±5 cents
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.detune.setValueAtTime(detuneCents, audioCtx.currentTime);
+
+        const gain = audioCtx.createGain();
+        const level = 0.15 / harmonics.length;
+        gain.gain.setValueAtTime(0, audioCtx.currentTime); // fade in from 0
+
+        osc.connect(gain);
+        gain.connect(mainGain);
+
+        osc.start();
+
+        // Fade in
+        gain.gain.linearRampToValueAtTime(level, audioCtx.currentTime + fadeDuration);
+
+        oscillators.push(osc);
+        gainNodes.push(gain);
+      });
+
+      // Random modulations for motion
+      modTimer = setInterval(() => {
+        harmonics.forEach((ratio, i) => {
+          const freq = baseFreq * ratio;
+          const osc = oscillators[i];
+          const variation = (Math.random() - 0.5) * 2;
+          const targetFreq = freq + variation;
+          osc.frequency.setTargetAtTime(targetFreq, audioCtx.currentTime, 1.5);
+        });
+        panner.pan.setTargetAtTime((Math.random() * 2 - 1), audioCtx.currentTime, 2.0);
+      }, 2000);
+    }
+
+    function stopDrone() {
+      if (!audioCtx) return;
+
+      // Fade out all gains
+      gainNodes.forEach((gain, i) => {
+        gain.gain.cancelScheduledValues(audioCtx.currentTime);
+        gain.gain.setValueAtTime(gain.gain.value, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + fadeDuration);
+      });
+
+      // Stop after fade out
+      setTimeout(() => {
+        clearInterval(modTimer);
+        oscillators.forEach(osc => osc.stop());
+        if (audioCtx) audioCtx.close();
+        audioCtx = null;
+      }, fadeDuration * 1000);
+    }
+
+    document.getElementById("startStop").addEventListener("click", function () {
+      if (!isPlaying) {
+        startDrone();
+        this.textContent = "stop";
+      } else {
+        stopDrone();
+        this.textContent = "start";
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
+</body>
+</html>

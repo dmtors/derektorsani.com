@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codex Art</title>
+    <style>
+        body {
+            text-align: left;
+            font-family: Helvetica, sans-serif;
+            padding: 20px;
+        }
+        p, ul {
+            max-width: 550px;
+            line-height: 1.4;
+        }
+        canvas {
+            display: block;
+            margin: 30px 0;
+            cursor: grab;
+            background: transparent;
+        }
+        #controls {
+            display: grid;
+            grid-auto-flow: row;
+            gap: 10px;
+        }
+        .group {
+            display: grid;
+            gap: 5px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            height: 30px;
+            padding: 0 5px;
+            box-sizing: border-box;
+        }
+        .icon-button {
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+        }
+        button {
+            height: 30px;
+        }
+        .button-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .button-group button:first-of-type {
+            margin-left: 5px;
+        }
+        fieldset {
+            display: flex;
+            gap: 10px;
+        }
+        fieldset input {
+            width: 100px;
+        }
+        select {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Codex Art</h1>
+
+    <h2>About</h2>
+
+    <p>Use this tool to create art for products, features, and more across Wikimedia projects. With this tool, you will create a collage that is meant to serve as a visualization accompanying a body of text. The text should describe the purpose of the message, while the art abstractly depicts the summary of the text, drawing a reader to want to learn more. The art should not attempt to fully depict what the text is describing.</p>
+
+    <h2>Guidance</h2>
+
+    <ul>
+        <li>Use <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a> to find two images for your collage.
+        <li>Find images which abstractly depict the purpose of your message.</li>
+        <li>Choose images which you find striking.</li>
+        <li>Try to find one image which focus on a subject without revealing their identity, and another which might be more abstract or textural.</li>
+        <li>You can use color or grayscale images.</li>
+        <li>Avoid images with anything that someone might find offensive, or that uses strong graphics or imagery.</li>
+        <li>Once you find your images, download them at their original size.</li>
+    </ul>
+
+    <h2>Create</h2>
+
+    <p>Use these tools to customize your art, creating the collage which will best fit your application.</p>
+    
+    <div class="group">
+        <label>
+            First image
+            <input type="file" id="upload1" accept="image/*">
+        </label>
+        <label>
+            Second image
+            <input type="file" id="upload2" accept="image/*">
+        </label>
+    </div>
+
+    <h3>Customize</h3>
+
+    <label>First image</label>
+
+    <div class="button-group">
+        <small>Zoom</small>
+        <button class="icon-button" onclick="scaleImage(img1Pos, 0.9)">-</button>
+        <button class="icon-button" onclick="scaleImage(img1Pos, 1.1)">+</button>
+    </div>
+
+    <div class="button-group">
+        <small>Round corners</small>
+        <button class="icon-button" onclick="toggleCorner(0)">⌜</button>
+        <button class="icon-button" onclick="toggleCorner(1)">⌝</button>
+        <button class="icon-button" onclick="toggleCorner(3)">⌞</button>
+        <button class="icon-button" onclick="toggleCorner(2)">⌟</button>
+    </div>
+
+    <br>
+
+    <label>Second image</label>
+
+    <div class="button-group">
+        <small>Zoom</small>
+        <button class="icon-button" onclick="scaleImage(img2Pos, 0.9)">-</button>
+        <button class="icon-button" onclick="scaleImage(img2Pos, 1.1)">+</button>
+    </div>
+
+    <div class="button-group">
+        <small>Round corners</small>
+        <button class="icon-button" onclick="toggleCorner(4)">⌜</button>
+        <button class="icon-button" onclick="toggleCorner(5)">⌝</button>
+        <button class="icon-button" onclick="toggleCorner(7)">⌞</button>
+        <button class="icon-button" onclick="toggleCorner(6)">⌟</button>
+    </div>
+
+    <p>Drag each image around to change its position.</p>
+
+    <canvas id="canvas" width="600" height="300"></canvas>
+
+    <fieldset>
+        <legend>Canvas</legend>
+        <label>
+            Split
+            <select id="splitType">
+                <option value="vertical">Vertical</option>
+                <option value="horizontal">Horizontal</option>
+            </select>
+        </label>
+        <label>
+            Width (px)
+            <input type="number" id="canvasWidth" value="600" min="100">
+        </label>
+        <label>
+            Height (px)
+            <input type="number" id="canvasHeight" value="300" min="100">
+        </label>
+        <button onclick="resizeCanvas()">Apply</button>
+    </fieldset>
+
+    <br>
+
+    <small>Determine the finished size of your collage. Consider where you will be applying this image and how it will need to fit.</small>
+
+    <br><br>
+
+    <small>This tool downloads a <a href="https://en.wikipedia.org/wiki/WebP" target="_blank">WebP</a> formatted image to minimize file size.</small>
+
+    <br><br>
+
+    <div class="button-group">
+        <button onclick="downloadImage('webp')">Download WEBP</button>
+        <button onclick="downloadImage('png')">Download PNG</button>
+        <button onclick="downloadImage('jpg')">Download JPG</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        let img1 = new Image();
+        let img2 = new Image();
+        let img1Pos = { x: 0, y: 0, scale: 1 };
+        let img2Pos = { x: 0, y: 0, scale: 1 };
+        let isDragging = false;
+        let activeImg = null;
+        let cornerRadius = [0, 0, 0, 0, 0, 0, 0, 0]; // 8 independent corner roundings
+
+        document.getElementById("upload1").addEventListener("change", (e) => loadImage(e, img1, img1Pos));
+        document.getElementById("upload2").addEventListener("change", (e) => loadImage(e, img2, img2Pos));
+        document.getElementById("splitType").addEventListener("change", drawCanvas);
+
+        canvas.addEventListener("mousedown", startDrag);
+        canvas.addEventListener("mousemove", dragImage);
+        canvas.addEventListener("mouseup", () => isDragging = false);
+
+        function applyDithering(image) {
+            let scaleFactor = 0.5; // **Reduce image to 50% of its original size**
+            
+            let tempCanvas = document.createElement("canvas");
+            let tempCtx = tempCanvas.getContext("2d");
+
+            // Scale down
+            let smallWidth = Math.floor(image.width * scaleFactor);
+            let smallHeight = Math.floor(image.height * scaleFactor);
+            tempCanvas.width = smallWidth;
+            tempCanvas.height = smallHeight;
+            
+            tempCtx.drawImage(image, 0, 0, smallWidth, smallHeight);
+
+            // Get pixel data of the small image
+            let imageData = tempCtx.getImageData(0, 0, smallWidth, smallHeight);
+            let pixels = imageData.data;
+
+            function quantize(value) {
+                let levels = [32, 64, 96, 128, 160, 192, 224]; // **Reduce color depth**
+                return levels.reduce((prev, curr) => Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
+            }
+
+            let bayer4x4 = [
+                [  9,  1, 14,  6 ],
+                [  7, 11,  3, 15 ],
+                [  0, 13,  4, 10 ],
+                [ 12,  5,  8,  2 ]
+            ]; // **4×4 Bayer matrix for dithering**
+
+            for (let y = 0; y < smallHeight; y++) {
+                for (let x = 0; x < smallWidth; x++) {
+                    let index = (y * smallWidth + x) * 4;
+
+                    let oldR = pixels[index];
+                    let oldG = pixels[index + 1];
+                    let oldB = pixels[index + 2];
+
+                    // Apply 4×4 Bayer dithering
+                    let bx = x % 4;
+                    let by = y % 4;
+                    let threshold = (bayer4x4[by][bx] / 16) * 180;
+
+                    // Apply dithering and quantization
+                    pixels[index] = quantize(oldR + threshold - 90);
+                    pixels[index + 1] = quantize(oldG + threshold - 90);
+                    pixels[index + 2] = quantize(oldB + threshold - 90);
+                }
+            }
+
+            tempCtx.putImageData(imageData, 0, 0);
+
+            // Scale back up (without smoothing)
+            let finalCanvas = document.createElement("canvas");
+            let finalCtx = finalCanvas.getContext("2d");
+            finalCanvas.width = image.width;
+            finalCanvas.height = image.height;
+            
+            finalCtx.imageSmoothingEnabled = false; // **Keeps pixelated look**
+            finalCtx.drawImage(tempCanvas, 0, 0, smallWidth, smallHeight, 0, 0, image.width, image.height);
+
+            return finalCanvas;
+        }
+
+        function loadImage(event, img, imgPos) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                let tempImg = new Image();
+                tempImg.src = reader.result;
+                tempImg.onload = () => {
+                    let ditheredCanvas = applyDithering(tempImg);
+                    img.src = ditheredCanvas.toDataURL(); // Replace original with dithered
+                    img.onload = () => {
+                        imgPos.x = 0;
+                        imgPos.y = 0;
+                        imgPos.scale = 1;
+                        drawCanvas();
+                    };
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function resizeCanvas() {
+            let width = parseInt(document.getElementById("canvasWidth").value);
+            let height = parseInt(document.getElementById("canvasHeight").value);
+            canvas.width = width;
+            canvas.height = height;
+            drawCanvas();
+        }
+
+        function drawCanvas() {
+            const split = document.getElementById("splitType").value;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            let halfWidth = split === "vertical" ? canvas.width / 2 : canvas.width;
+            let halfHeight = split === "horizontal" ? canvas.height / 2 : canvas.height;
+
+            drawMaskedImage(img1, img1Pos, 0, 0, halfWidth, halfHeight, cornerRadius.slice(0, 4));
+            drawMaskedImage(img2, img2Pos, split === "vertical" ? halfWidth : 0, split === "horizontal" ? halfHeight : 0, halfWidth, halfHeight, cornerRadius.slice(4, 8));
+        }
+
+        function drawMaskedImage(img, imgPos, x, y, w, h, corners) {
+            if (!img.src) return;
+            let scale = Math.max(w / img.width, h / img.height) * imgPos.scale;
+            let imgW = img.width * scale;
+            let imgH = img.height * scale;
+
+            imgPos.x = Math.max(Math.min(imgPos.x, 0), w - imgW);
+            imgPos.y = Math.max(Math.min(imgPos.y, 0), h - imgH);
+
+            // Dynamically scale the corner radius based on the mask size
+            let radius = Math.min(w, h) / 2; // Makes it more rounded
+            let scaledCorners = corners.map(c => (c ? radius : 0));
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(x + scaledCorners[0], y);
+            ctx.lineTo(x + w - scaledCorners[1], y);
+            ctx.arcTo(x + w, y, x + w, y + scaledCorners[1], scaledCorners[1]);
+            ctx.lineTo(x + w, y + h - scaledCorners[2]);
+            ctx.arcTo(x + w, y + h, x + w - scaledCorners[2], y + h, scaledCorners[2]);
+            ctx.lineTo(x + scaledCorners[3], y + h);
+            ctx.arcTo(x, y + h, x, y + h - scaledCorners[3], scaledCorners[3]);
+            ctx.lineTo(x, y + scaledCorners[0]);
+            ctx.arcTo(x, y, x + scaledCorners[0], y, scaledCorners[0]);
+            ctx.closePath();
+            ctx.clip();
+
+            ctx.drawImage(img, x + imgPos.x, y + imgPos.y, imgW, imgH);
+            ctx.restore();
+        }
+
+        function startDrag(e) {
+            const split = document.getElementById("splitType").value;
+            let x = e.offsetX;
+            let y = e.offsetY;
+            let halfWidth = split === "vertical" ? canvas.width / 2 : canvas.width;
+            let halfHeight = split === "horizontal" ? canvas.height / 2 : canvas.height;
+
+            if ((split === "vertical" && x < halfWidth) || (split === "horizontal" && y < halfHeight)) {
+                activeImg = img1Pos;
+            } else {
+                activeImg = img2Pos;
+            }
+            isDragging = true;
+        }
+
+        function dragImage(e) {
+            if (!isDragging || !activeImg) return;
+            activeImg.x += e.movementX;
+            activeImg.y += e.movementY;
+            drawCanvas();
+        }
+
+        function scaleImage(imgPos, factor) {
+            imgPos.scale *= factor;
+            drawCanvas();
+        }
+
+        function toggleCorner(index) {
+            cornerRadius[index] = cornerRadius[index] === 50 ? 0 : 50;
+            drawCanvas();
+        }
+
+        function downloadImage(format) {
+            let link = document.createElement('a');
+            link.download = `split-image.${format}`;
+            canvas.toBlob(blob => {
+                link.href = URL.createObjectURL(blob);
+                link.click();
+            }, `image/${format}`, 0.5);
+        }
+
+    </script>
+
+</body>
+</html>

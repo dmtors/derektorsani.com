@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tuner</title>
+    <style>
+        body {
+            font-family: monospace;
+            letter-spacing: 1px;
+            text-align: center;
+            margin: 0;
+            background: #b3aca6;
+            color: #454140;
+            width: 100vw;
+            height: 100vh;
+        }
+        #main-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 25px;
+        }
+        #note {
+            font-size: 1.5rem;
+        }
+        #frequency, #detune {
+            font-size: 0.75rem;
+        }
+        #needle-container {
+            width: 100%;
+            height: 25px;
+            margin: 0 auto;
+            position: relative;
+            background: transparent;
+        }
+        #needle {
+            width: 2px;
+            height: 25px;
+            background: #454140;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transition: left 0.125s ease-in-out;
+        }
+        #tuning-select {
+            font-size: 0.75rem;
+            font-family: monospace;
+            letter-spacing: 1px;
+            padding: 5px;
+            margin: 0 auto;
+            border: 0;
+            outline: 1px solid;
+            border-right: 5px solid transparent;
+            background-color: #b3aca6;
+        }
+        html,
+        html[data-theme=light] body {
+            color-scheme: light;
+            color: #454140;
+            background-color: #b3aca6;
+        }
+        html[data-theme=light] #needle {
+            background: #454140;
+        }
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme]) body {
+                color-scheme: dark;
+                color: #b3aca6;
+                background-color: #454140;
+            }
+            html:not([data-theme]) #needle {
+                background: #b3aca6;
+            }
+            html:not([data-theme]) #tuning-select {
+                background-color: #454140;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <div id="note">--</div>
+        <div id="frequency">-- Hz</div>
+        <div id="detune">-- cents</div>
+        <div id="needle-container">
+            <div id="needle"></div>
+        </div>
+        <select id="tuning-select">
+          <option value="415">A415</option>
+          <option value="432">A432</option>
+          <option value="440" selected>A440 (default)</option>
+          <option value="442">A442</option>
+          <option value="444">A444</option>
+        </select>
+    </div>
+
+  <script>
+    const noteElem = document.getElementById('note');
+    const frequencyElem = document.getElementById('frequency');
+    const detuneElem = document.getElementById('detune');
+    const needleElem = document.getElementById('needle');
+    const tuningSelect = document.getElementById('tuning-select');
+
+    let referencePitch = parseFloat(tuningSelect.value);
+
+    tuningSelect.addEventListener('change', () => {
+      referencePitch = parseFloat(tuningSelect.value);
+    });
+
+    const noteStrings = ['C', 'C#', 'D', 'D#', 'E', 'F',
+                         'F#', 'G', 'G#', 'A', 'A#', 'B'];
+
+    function noteFromFrequency(freq) {
+      return Math.round(12 * (Math.log2(freq / referencePitch)) + 69);
+    }
+
+    function frequencyFromNoteNumber(note) {
+      return referencePitch * Math.pow(2, (note - 69) / 12);
+    }
+
+    function centsOffFromPitch(freq, note) {
+      return Math.floor(1200 * Math.log2(freq / frequencyFromNoteNumber(note)));
+    }
+
+    function autoCorrelate(buffer, sampleRate) {
+      let SIZE = buffer.length;
+      let rms = 0;
+      for (let i = 0; i < SIZE; i++) {
+        rms += buffer[i] * buffer[i];
+      }
+      rms = Math.sqrt(rms / SIZE);
+      if (rms < 0.005) return -1;
+
+      let r1 = 0, r2 = SIZE - 1, thres = 0.1;
+      for (let i = 0; i < SIZE / 2; i++) {
+        if (Math.abs(buffer[i]) < thres) { r1 = i; break; }
+      }
+      for (let i = 1; i < SIZE / 2; i++) {
+        if (Math.abs(buffer[SIZE - i]) < thres) { r2 = SIZE - i; break; }
+      }
+      buffer = buffer.slice(r1, r2);
+      SIZE = buffer.length;
+
+      let c = new Array(SIZE).fill(0);
+      for (let i = 0; i < SIZE; i++) {
+        for (let j = 0; j < SIZE - i; j++) {
+          c[i] += buffer[j] * buffer[j + i];
+        }
+      }
+
+      let d = 0;
+      while (c[d] > c[d + 1]) d++;
+      let maxval = -1, maxpos = -1;
+      for (let i = d; i < SIZE; i++) {
+        if (c[i] > maxval) {
+          maxval = c[i];
+          maxpos = i;
+        }
+      }
+
+      let T0 = maxpos;
+      let x1 = c[T0 - 1], x2 = c[T0], x3 = c[T0 + 1];
+      let a = (x1 + x3 - 2 * x2) / 2;
+      let b = (x3 - x1) / 2;
+      if (a) T0 = T0 - b / (2 * a);
+
+      return sampleRate / T0;
+    }
+
+    async function startTuner() {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+      const audioContext = new AudioContext();
+      const mic = audioContext.createMediaStreamSource(stream);
+      const analyser = audioContext.createAnalyser();
+      analyser.fftSize = 2048;
+      mic.connect(analyser);
+
+      const buffer = new Float32Array(analyser.fftSize);
+
+      function update() {
+        analyser.getFloatTimeDomainData(buffer);
+        const pitch = autoCorrelate(buffer, audioContext.sampleRate);
+        if (pitch !== -1) {
+          const note = noteFromFrequency(pitch);
+          const noteName = noteStrings[note % 12] + Math.floor(note / 12 - 1);
+          const detune = centsOffFromPitch(pitch, note);
+
+          noteElem.textContent = noteName;
+          frequencyElem.textContent = pitch.toFixed(2) + ' Hz';
+          detuneElem.textContent = (detune === 0) ? "In tune" :
+            (detune > 0 ? "+" + detune + " cents sharp" : detune + " cents flat");
+
+          const maxCents = 50;
+          const clamped = Math.max(-maxCents, Math.min(maxCents, detune));
+          const containerWidth = document.getElementById('needle-container').offsetWidth;
+          const halfWidth = containerWidth / 2;
+          const pixelOffset = (clamped / maxCents) * (halfWidth - 5); // 5px margin
+          needleElem.style.left = `calc(50% + ${pixelOffset}px)`;
+
+        } else {
+          noteElem.textContent = '--';
+          frequencyElem.textContent = '000 Hz';
+          detuneElem.textContent = '00 cents';
+          needleElem.style.left = '50%';
+        }
+
+        requestAnimationFrame(update);
+      }
+
+      update();
+    }
+
+    startTuner();
+  </script>
+</body>
+</html>

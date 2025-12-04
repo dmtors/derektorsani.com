@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drone Instrument</title>
+  <script src="https://unpkg.com/tone@latest/build/Tone.js"></script>
+  <style>
+    body { font-family: monospace; padding: 1rem; max-width: 400px; margin: auto; }
+    h1 { font-size: 1rem; margin-bottom: 1rem; }
+    label { display: block; margin-top: 1rem; }
+    select, button { margin-top: 1rem; padding: 0.5rem; width: 100%; text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>Instrument</h1>
+
+  <label for="key">Key:</label>
+  <select id="key">
+    <option>C</option><option>C#</option><option>D</option><option>D#</option><option>E</option><option>F</option>
+    <option>F#</option><option>G</option><option>G#</option><option>A</option><option>A#</option><option>B</option>
+  </select>
+
+  <label for="scale">Scale:</label>
+  <select id="scale">
+    <option value="major">Major</option>
+    <option value="minor">Minor</option>
+  </select>
+
+  <button id="toggle">Start Drone</button>
+
+  <script>
+    const scales = {
+      major: [0, 2, 4, 5, 7, 9, 11],
+      minor: [0, 2, 3, 5, 7, 8, 10]
+    };
+
+    let synth = new Tone.PolySynth(Tone.Synth, {
+      maxPolyphony: 16,
+      volume: -20,
+      oscillator: {
+        type: "sine"
+      },
+      envelope: {
+        attack: 4,
+        decay: 1,
+        sustain: 0.5,
+        release: 6
+      }
+    }).toDestination();
+
+    const reverb = new Tone.Reverb({ decay: 6, wet: 0.4 }).toDestination();
+    const limiter = new Tone.Limiter(-6).toDestination();
+    synth.chain(reverb, limiter);
+
+    let activeNotes = new Set();
+    let intervalId;
+    let rootNote;
+
+    function getNotes(key, scaleName, baseOctave = 3) {
+      const semitones = scales[scaleName];
+      const fullNotes = [];
+
+      for (let i = 0; i <= 12; i++) { // cover up to 1.5 octaves
+        const octaveShift = Math.floor(i / semitones.length);
+        const semitone = semitones[i % semitones.length];
+        const midi = Tone.Frequency(`${key}${baseOctave}`, "note").toMidi() + semitone + (12 * octaveShift);
+        if (octaveShift < 2) {
+          fullNotes.push(Tone.Frequency(midi, "midi").toNote());
+        }
+      }
+
+      return fullNotes;
+    }
+
+    async function startDrone() {
+      await Tone.start();
+      const key = document.getElementById('key').value;
+      const scale = document.getElementById('scale').value;
+      const notes = getNotes(key, scale);
+
+      rootNote = Tone.Frequency(`${key}3`).toNote();
+      synth.triggerAttack(rootNote);
+      activeNotes.add(rootNote);
+
+      intervalId = setInterval(() => {
+        const candidates = notes.filter(n => !activeNotes.has(n));
+        const chance = Math.random();
+
+        if (chance < 0.8 && candidates.length > 0) {
+          const note = candidates[Math.floor(Math.random() * candidates.length)];
+          synth.triggerAttack(note);
+          activeNotes.add(note);
+        } else if (activeNotes.size > 1) {
+          const removable = Array.from(activeNotes).filter(n => n !== rootNote);
+          const note = removable[Math.floor(Math.random() * removable.length)];
+          synth.triggerRelease(note);
+          activeNotes.delete(note);
+        }
+      }, 1500);
+    }
+
+    function stopDrone() {
+      clearInterval(intervalId);
+      synth.releaseAll();
+      activeNotes.clear();
+    }
+
+    document.getElementById('toggle').addEventListener('click', function () {
+      if (this.textContent === 'Start Drone') {
+        startDrone();
+        this.textContent = 'Stop Drone';
+      } else {
+        stopDrone();
+        this.textContent = 'Start Drone';
+      }
+    });
+  </script>
+</body>
+</html>
