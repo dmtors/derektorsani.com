@@ -261,3 +261,16 @@ li {
         width: calc(100% - 60px);
     }
 }
+
+// Records
+
+#records {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-auto-rows: minmax(50px, auto);
+    gap: 0;
+    img {
+        width: 100%;
+        image-rendering: crisp-edges;
+    }
+}
