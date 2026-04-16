@@ -105,7 +105,7 @@ b {
 
 #gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: minmax(50px, auto);
   gap: 20px 10px;
   margin-top: 75px;
@@ -113,14 +113,9 @@ b {
 #gallery-grid img, #gallery-grid video {
   width: 100%;
 }
-@media screen and (max-width: 768px) {
-  #gallery-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-}
 @media screen and (max-width: 482px) {
   #gallery-grid {
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     gap: 50px;
   }
 }
