@@ -1,217 +1,204 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: "Inter Tight", sans-serif;
-  font-size: 13px;
-  line-height: 1.5;
-  font-weight: 500;
-  color: #181819;
-  background-color: #fefefa;
-}
-*::-moz-selection {
-  background-color: #0000ff;
-  color: #fefefa;
-}
-*::selection {
-  background-color: #0000ff;
-  color: #fefefa;
-}
-
-body {
-  display: grid;
-  gap: 15px;
-  padding: 7.5%;
-}
-body#gallery {
-  display: block;
-}
-
-.hidden {
-  display: none !important;
-}
-
-p, i, small {
-  display: block;
-}
-
 h1 {
-  font-family: "EB Garamond", serif;
-  font-size: 50px;
-  text-transform: uppercase;
-  line-height: 1;
-}
-h1 span {
-  font-family: "EB Garamond", serif;
-  font-size: 50px;
-  font-style: italic;
-  text-transform: lowercase;
-  margin-right: 10px;
+  font-size: 112px;
+  line-height: 0.85;
+  font-weight: 900;
+  font-family: "Akt", sans-serif;
+  letter-spacing: -1.5px;
 }
 
 h2 {
-  font-family: "EB Garamond", serif;
-  font-size: 16px;
+  font-size: 35px;
   line-height: 1;
+  font-family: "Spectral", serif;
+  font-weight: 400;
 }
 
-small {
-  font-size: 13px;
+h3 {
+  font-size: 71px;
+  line-height: 1;
+  font-weight: 400;
 }
 
-mark {
-  background-color: #f4d400;
+h3.font-code {
+  font-size: 71px;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 20px;
+  line-height: 1.3;
+  font-family: "Akt", sans-serif;
+  font-weight: 400;
+}
+
+.font-code {
+  font-family: "Google Sans Code", monospace;
+  font-size: 10px;
+}
+
+.font-old {
+  font-family: "Old Standard TT", serif;
+}
+
+.font-spectral {
+  font-family: "Spectral", serif;
+}
+
+.font-grotesk {
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
+.font-geist {
+  font-family: "Geist", sans-serif;
+}
+
+.font-akt {
+  font-family: "Akt", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+*::-moz-selection {
+  background-color: red;
+  color: snow;
+}
+*::selection {
+  background-color: red;
+  color: snow;
+}
+
+span {
+  color: red;
+}
+
+body {
+  background-color: snow;
+  color: black;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 15px;
+  overflow-x: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+.grid div {
+  display: flex;
+  flex-direction: column;
+}
+.grid .center {
+  align-items: center;
+}
+.grid .right {
+  align-items: flex-end;
+  text-align: right;
+}
+.grid .middle {
+  justify-content: center;
+}
+.grid .bottom {
+  justify-content: flex-end;
+}
+
+.gallery {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  margin-right: -15px;
+  width: calc(100% + 15px);
+  -webkit-overflow-scrolling: touch;
+}
+.gallery * {
+  height: 400px;
+  width: auto;
+  flex-shrink: 0;
+}
+.gallery *:last-child {
+  margin-right: 15px;
+}
+.gallery iframe {
+  width: 711px;
+}
+.gallery a {
+  margin-right: -15px;
+  border-bottom: none;
+}
+
+.bar-large {
+  border-top: 50px solid red;
+  padding-top: 10px;
+}
+
+.bar-medium {
+  border-top: 5px solid black;
+  padding-top: 20px;
+}
+
+.bar-small {
+  border-top: 1px solid black;
+  padding-top: 10px;
 }
 
 a {
-  font-weight: 700;
+  color: red;
+  font-family: "Akt", sans-serif;
+  font-weight: 600;
+  line-height: 2;
   text-decoration: none;
-  color: #181819;
-  cursor: help;
+  padding-bottom: 1px;
+  border-bottom: 2px solid red;
 }
 a:hover {
-  color: #0000ff;
+  border-color: transparent;
 }
 a:active {
-  opacity: 0;
+  color: black;
 }
 
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  border-color: #181819;
+.rotated {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+.rotated a {
+  padding-bottom: 0;
+  border-bottom: none;
+  padding-left: 1px;
+  border-left: 2px solid red;
+}
+.rotated a:hover {
+  border-color: transparent;
 }
 
-.button-group {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
+#codex {
+  flex-direction: row;
+  gap: 6px;
+  align-items: center;
+}
+#codex svg {
+  width: 36px;
+  height: 36px;
+}
+#codex h3 {
+  font-size: 38px;
+  font-weight: 800;
 }
 
-ul {
-  display: grid;
-  gap: 5px;
-  margin-top: 10px;
+.page {
+  position: absolute;
+  margin: 30px 0 0 -7px;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 900;
 }
 
-li {
-  list-style: square;
-  line-height: 1.65;
-}
-
-b {
-  font-weight: 700;
-}
-
-#gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-auto-rows: minmax(50px, auto);
-  gap: 20px 10px;
-  margin-top: 75px;
-}
-#gallery-grid img, #gallery-grid video {
-  width: 100%;
-}
-@media screen and (max-width: 482px) {
-  #gallery-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
-    gap: 50px;
-  }
-}
-
-*:focus-visible {
-  outline-color: #181819;
-}
-
-button, #tuning-select {
-  box-shadow: 0 0 0 #181819;
-}
-button:hover, #tuning-select:hover {
-  box-shadow: 3px 3px 0 #181819;
-}
-button:active, #tuning-select:active {
-  box-shadow: inset 3px 3px 0 #181819;
-}
-
-.active {
-  color: #fefefa;
-  background-color: #181819;
-}
-
-#tuner-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 15px;
-  text-align: center;
-}
-
-#needle-container {
-  width: 100%;
-  height: 25px;
-  margin: 0 auto 30px;
-  position: relative;
-  background: transparent;
-}
-
-#needle {
-  width: 2px;
+#hirshhorn {
+  width: 160px;
   height: 30px;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transition: left 0.125s ease-in-out;
-  background: #181819;
-}
-
-#tuning-select {
-  padding: 20px;
-  margin: 30px auto 0;
-  border: 0;
-  outline: 1px solid;
-  border-right: 20px solid transparent;
-  transition: all 0.125s;
-}
-
-#instrument-container h1, #instrument-container p {
-  text-align: center;
-}
-#instrument-container h1 {
-  margin-bottom: 20px;
-}
-#instrument-container .button-group {
-  flex-wrap: wrap;
-  margin-top: 0;
-}
-#instrument-container button {
-  padding: 20px;
-  width: 100%;
-  box-sizing: border-box;
-  outline: none;
-  border: 1px solid;
-  transition: all 0.125s;
-  flex: 1 1 5%;
-}
-#instrument-container p {
-  display: block;
-  margin-top: 15px;
-}
-#instrument-container #startStop {
-  position: absolute;
-  bottom: 30px;
-  width: calc(100% - 60px);
-}
-
-#records {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  grid-auto-rows: minmax(50px, auto);
-  gap: 0;
-}
-#records img {
-  width: 100%;
-  image-rendering: crisp-edges;
+  margin: 16px 0 0 -15px;
 }/*# sourceMappingURL=styles.css.map */
