@@ -109,10 +109,11 @@ body {
 
 .gallery * {
   display: block;
-  margin: 0 auto;
+  margin: 35px auto;
   width: 100%;
-  max-width: 100%;
+  max-width: 450px;
   height: auto;
+  border-radius: 10px;
 }
 .gallery iframe {
   aspect-ratio: 16/9;
@@ -142,7 +143,6 @@ a {
   font-weight: 600;
   line-height: 2;
   text-decoration: none;
-  padding-bottom: 1px;
   border-bottom: 2px solid red;
 }
 a:hover {
