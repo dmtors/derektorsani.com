@@ -79,7 +79,7 @@ body {
   font-family: "Hanken Grotesk", sans-serif;
   font-size: 12px;
   font-weight: 400;
-  padding: 15px;
+  padding: 20px;
   overflow-x: hidden;
 }
 
@@ -180,15 +180,50 @@ a:active {
   font-weight: 800;
 }
 
-.page {
-  position: absolute;
-  margin: 30px 0 0 -7px;
-  font-family: "Hanken Grotesk", sans-serif;
-  font-weight: 900;
-}
-
 #hirshhorn {
   width: 160px;
   height: 30px;
   margin: 16px 0 0 -15px;
+}
+
+.tldr {
+  -moz-column-count: 1;
+       column-count: 1;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+}
+@media (min-width: 396px) {
+  .tldr {
+    -moz-column-count: 2;
+         column-count: 2;
+  }
+}
+@media (min-width: 768px) {
+  .tldr {
+    -moz-column-count: 3;
+         column-count: 3;
+  }
+}
+@media (min-width: 1200px) {
+  .tldr {
+    -moz-column-count: 4;
+         column-count: 4;
+  }
+}
+.tldr figure {
+  margin: 0 0 20px;
+  -moz-column-break-inside: avoid;
+       break-inside: avoid;
+}
+.tldr img {
+  width: 100%;
+  display: block;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  -moz-column-break-inside: avoid;
+       break-inside: avoid;
+}
+.tldr stageshow-demo {
+  display: block;
+  width: 100%;
 }/*# sourceMappingURL=styles.css.map */

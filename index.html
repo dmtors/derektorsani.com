@@ -9,9 +9,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Akt:wght@100..900&family=Geist:ital,wght@0,100..900;1,100..900&family=Google+Sans+Code:ital,wght,MONO@0,300..800,1;1,300..800,1&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
-    <title>DEREK TORSANI</title>
+    <link rel="stylesheet" href="stageshow-demos.css" />
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.tldr');
+            if (!container) return;
+
+            const items = Array.from(container.children);
+
+            // Fisher-Yates shuffle
+            for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [items[i], items[j]] = [items[j], items[i]];
+            }
+
+            // Re-appending moves each node, so nothing is cloned or reloaded
+            const frag = document.createDocumentFragment();
+            items.forEach(el => frag.appendChild(el));
+            container.appendChild(frag);
+        });
+    </script>
+    <script src="stageshow-demos.js" defer></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144041212-1"></script>
+    <title>DEREK TORSANI</title>
 </head>
 
 <body>
@@ -32,7 +53,7 @@
 
     <div class="grid">
         <div>
-            As a child, art was always the way I expressed myself, drawing Dragon Ball Z characters on the backs of napkins. At fifteen, I knew I wanted to be a designer. My uncle, a graphic designer for the International Monetary Fund in Washington, DC, had just passed away. His legacy drew me to the practice of design, and the allure of communicating in a language all its own.<br><br>
+            As a child, art was always the way I expressed myself, drawing Dragon Ball Z characters on the backs of napkins. At fifteen, I knew I wanted to be a designer. My uncle, a graphic designer for the International Monetary Fund in Washington, DC, had just died. His legacy drew me to the practice of design, and the allure of communicating in a language all its own.<br><br>
             By 2008, I wanted to make art for bands like my own, and I entered the graphic design program at the Maryland Institute College of Art. In just over three years of experimenting in various digital mediums, I graduated with a new dream to animate title sequences for films.<br><br>
             After years working professionally in motion, graphic, and web design, I found my way into digital product design, doing my part to make software feel more tangible and tactile. The more time I spent working alongside engineers, the more I began speaking their language, and I gravitated toward building the systems that helped us work better together.<br><br>
             All the while, I still get to design the art which accompanies my music.
@@ -151,9 +172,91 @@
 
     <br><br><br><br>
 
+    <div class="grid bar-medium">
+        <div class="center middle" style="text-align: center;">
+            <h3 class="font-geist"><span><b>tl;dr</b></span></h3>
+        </div>
+    </div>
+
+    <br>
+
     <div class="grid">
-        <p class="page">1</p>
-        <div class="bar-medium">
+        <div class="center middle">
+            <h4>A gallery ∞ of work.</h4>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="grid">
+        <div class="center middle">
+            <i>( in random order )</i>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="tldr">
+        <figure>
+            <stageshow-demo name="commonplace-article"></stageshow-demo>
+        </figure>
+        <figure>
+            <stageshow-demo name="commonplace-search"></stageshow-demo>
+        </figure>
+        <figure>
+            <stageshow-demo name="commonplace-explore"></stageshow-demo>
+        </figure>
+        <figure>
+            <stageshow-demo name="commonplace-mondrian"></stageshow-demo>
+        </figure>
+        <figure>
+            <stageshow-demo name="wikipedia-login"></stageshow-demo>
+        </figure>
+        <figure>
+            <stageshow-demo name="wikipedia-auto"></stageshow-demo>
+        </figure>
+        <figure>
+            <stageshow-demo name="dataviz-patterns"></stageshow-demo>
+        </figure>
+        <figure>
+            <stageshow-demo name="wikipedia-ios"></stageshow-demo>
+        </figure>
+        <figure>
+            <stageshow-demo name="codex-icons"></stageshow-demo>
+        </figure>
+        <img src="img/wiki-404.png" alt="404 page for Wikipedia"/>
+        <img src="img/wiki-collage-1.jpg" alt="Collage art for Wikipedia"/>
+        <img src="img/wiki-collage-2.jpg" alt="Collage art for Wikipedia"/>
+        <img src="img/wiki-collage-3.jpg" alt="Collage art for Wikipedia"/>
+        <img src="img/ani-marshmallow.gif" alt="Android Marshmallow booting animation"/>
+        <img src="img/ani-bell.gif" alt="Animation of a bell receiving a notification"/>
+        <img src="img/ani-eye.gif" alt="Animation of an open eye closing"/>
+        <img src="img/ani-pin.gif" alt="Animation of a toggle switch being pinned"/>
+        <img src="img/ani-steps.gif" alt="Animation of a step sequence transitioning steps"/>
+        <img src="img/ani-credit-card.gif" alt="Animation of a credit card chip being scanned"/>
+        <img src="img/ani-airplane.gif" alt="Animation of a small airplane flying inside a circle"/>
+        <img src="img/ani-khanacademy.gif" alt="Khan Academy logo spinning up and down"/>
+        <img src="img/ani-sign-code.gif" alt="Buildings and signs being animated into being"/>
+        <img src="img/ani-leak.gif" alt="Filmic light leak"/>
+        <img src="img/belowtheline.gif" alt="Title sequence for cancelled web show"/>
+        <img src="img/datagrid.png" alt="Responsive table component for Gusto"/>
+        <img src="img/datefield.png" alt="Date picker component for Gusto"/>
+        <img src="img/seeds-soundcolor.jpg" alt="In front of a colorful computer screen in the dark"/>
+        <img src="img/soundcolor-example.gif" alt="Projected color changing to the sound of music"/>
+        <img src="img/soundcolor-nav.gif" alt="Navigating the Sound Color Project menu"/>
+        <img src="img/tree-billboard.jpg" alt="Billboard advertising A Tree Like Me"/>
+        <img src="img/tree-book-2.jpg" alt="Page from the book A Tree Like Me"/>
+        <img src="img/tree-yoto.jpg" alt="Page from the book A Tree Like Me"/>
+        <img src="img/tree-record.jpg" alt="Page from the book A Tree Like Me"/>
+        <img src="img/dj-joey-d.jpg" alt="Logo for DJ Joey D"/>
+        <img src="img/halfdollar.jpg" alt="Logo for Halfdollar"/>
+        <img src="img/weiigh.jpg" alt="Logo for Weigh"/>
+    </div>
+
+    <br><br><br><br>
+
+    <div class="grid bar-medium">
+        <div>
             <h3 class="font-old"><span>Interfaces for<br> Human Knowledge</span></h3>
         </div>
         <div class="center middle">
@@ -200,7 +303,6 @@
     <br><br><br><br>
 
     <div class="grid">
-        <p class="page">2</p>
         <div class="bar-medium center">
             <div id="codex">
                 <svg width="78" height="69" viewBox="0 0 78 69" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -288,9 +390,8 @@
 
     <br><br><br><br>
 
-    <div class="grid">
-        <p class="page">3</p>
-        <div class="bar-medium">
+    <div class="grid bar-medium">
+        <div>
             <h3 class="font-code"><span>Sound Color<br> Project</span></h3>
         </div>
         <div class="middle">
@@ -349,7 +450,6 @@
     <br><br><br><br>
 
     <div class="grid bar-medium">
-        <p class="page">4</p>
         <div></div>
         <div>
             <img src="img/atreelikeme.png" alt="" style="width: 230px;"/>
@@ -382,7 +482,7 @@
             Dreams turned into ideas turned to poems — the genesis of A Tree Like Me. Made for the child our own as much as the child in me.
         </div>
         <div class="bottom">
-            <p><a href="https://atreelike.com" target="_blank" aria-label="Visit A Tree Like Me dot com">Visit the website</a> - <a href="https://checkout.square.site/merchant/FK849DB6R9WTT/checkout/J5AFKQ2S72C3PXYXFQNLOXNX" target="_blank" aria-label="Purchase the A Tree Like Me book">Read the illustrative book</a> - <a href="https://derektorsani.bandcamp.com/album/a-tree-like-me" target="_blank" aria-label="Listen to A Tree Like Me on Bandcamp">Feel the magic of music</a> - <a href="https://elasticstage.com/derektorsani/releases/a-tree-like-me-album" target="_blank" aria-label="Purchase A Tree Like Me on vinyl">Listen on vinyl</a> - <a href="https://www.youtube.com/watch?v=rnUvwXm4NDU" target="_blank" aria-label="Watch A Tree Like Me on YouTube">Watch the read-a-long</a> - <a href="https://share.yoto.co/s/6Ps1fhPE3SO7FwCgXWshWP" target="_blank" aria-label="Add A Tree Like Me to your Yoto player">Add to your Yoto player</a></p><br>
+            <p><a href="https://atreelikeme.com" target="_blank" aria-label="Visit A Tree Like Me dot com">Visit the website</a> - <a href="https://checkout.square.site/merchant/FK849DB6R9WTT/checkout/J5AFKQ2S72C3PXYXFQNLOXNX" target="_blank" aria-label="Purchase the A Tree Like Me book">Read the illustrative book</a> - <a href="https://derektorsani.bandcamp.com/album/a-tree-like-me" target="_blank" aria-label="Listen to A Tree Like Me on Bandcamp">Feel the magic of music</a> - <a href="https://elasticstage.com/derektorsani/releases/a-tree-like-me-album" target="_blank" aria-label="Purchase A Tree Like Me on vinyl">Listen on vinyl</a> - <a href="https://www.youtube.com/watch?v=rnUvwXm4NDU" target="_blank" aria-label="Watch A Tree Like Me on YouTube">Watch the read-a-long</a> - <a href="https://share.yoto.co/s/6Ps1fhPE3SO7FwCgXWshWP" target="_blank" aria-label="Add A Tree Like Me to your Yoto player">Add to your Yoto player</a></p><br>
             <p class="font-spectral"><i>_illustrated by Matsya Das, sung by Ama Chandra, narrated by Linton Tulloch</i></p>
         </div>
     </div>
@@ -396,7 +496,6 @@
     <br><br><br><br>
 
     <div class="grid bar-medium">
-        <p class="page">5</p>
         <div class="middle center">
             <span>20</span>
         </div>
@@ -443,15 +542,14 @@
 
     <br><br><br><br>
 
-    <div class="grid">
-        <p class="page">6</p>
-        <div class="bar-medium">
+    <div class="grid bar-medium">
+        <div>
             <h3 class="font-geist" style="font-weight: 900;"><span style="letter-spacing: -0.99px;">N</span><span style="letter-spacing: -1px;">x</span><span style="letter-spacing: -4px;">10</span></span></h3>
         </div>
-        <div class="bar-medium middle">
+        <div class="middle">
             Nx10
         </div>
-        <div class="bar-medium center rotated">
+        <div class="center rotated">
             <b><span>Nx10</span></b>
         </div>
     </div>
@@ -500,9 +598,8 @@
 
     <br><br><br><br>
 
-    <div class="grid">
-        <p class="page">7</p>
-        <div class="bar-medium">
+    <div class="grid bar-medium">
+        <div>
             <h3 class="font-akt"><span>Disco</span></h3>
             <h3 class="font-akt" style="white-space: nowrap;"><span>-graphy</span></h3>
         </div>
@@ -519,7 +616,7 @@
             <h4>of musical releases.</h4>
         </div>
         <div class="bottom">
-            <i>(in reverse chronological order)</i>
+            <i>( in reverse chronological order )</i>
         </div>
     </div>
 
@@ -539,12 +636,18 @@
 
     <br><br><br><br>
     
-    <div class="grid">
-        <p class="page">8</p>
-        <div class="bar-medium">
-            <h3 class="font-spectral"><span>General Fine Arts</span></h3>
+    <div class="grid bar-medium">
+        <div>
+            <h3 class="font-spectral" style="text-align: center;"><span>General Fine Arts</span></h3>
         </div>
-        <div></div>
+    </div>
+
+    <br>
+
+    <div class="grid">
+        <div class="center middle">
+            <i>( grouped by medium )</i>
+        </div>
     </div>
 
     <br><br>
@@ -566,68 +669,7 @@
         <img src="img/art-1111.jpg" alt="Photograph from the 1111 parking garage in Miami"/>
         <img src="img/art-lost.jpg" alt="Photograph of a mountain in Switzerland"/>
         <img src="img/art-luna.jpg" alt="Photograph of the moon next to a mountain"/>
-    </div>
-
-    <br><br><br><br>
-
-    <div class="grid">
-        <p class="page">9</p>
-        <div class="bar-medium">
-            <h3 class="font-code" style="word-break: break-all;"><span>Miscellaneous</span></h3>
-        </div>
-        <div class="bar-medium">
-            <h3 class="font-code" style="word-break: break-all;"><span>Micro-Animations</span></h3>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="grid">
-        <div>
-            <h4>Various</h4>
-        </div>
-        <div class="bottom">
-            <h4>animated musings.</h4>
-        </div>
-    </div>
-
-    <br><br>
-
-    <div class="gallery">
-        <img src="img/ani-marshmallow.gif" alt="Android Marshmallow booting animation"/>
-        <img src="img/ani-bell.gif" alt="Animation of a bell receiving a notification"/>
-        <img src="img/ani-eye.gif" alt="Animation of an open eye closing"/>
-        <img src="img/ani-pin.gif" alt="Animation of a toggle switch being pinned"/>
-        <img src="img/ani-steps.gif" alt="Animation of a step sequence transitioning steps"/>
-        <img src="img/ani-credit-card.gif" alt="Animation of a credit card chip being scanned"/>
-        <img src="img/ani-airplane.gif" alt="Animation of a small airplane flying inside a circle"/>
-        <img src="img/ani-khanacademy.gif" alt="Khan Academy logo spinning up and down"/>
-        <img src="img/ani-sign-code.gif" alt="Buildings and signs being animated into being"/>
-        <img src="img/ani-leak.gif" alt="Filmic light leak"/>
-    </div>
-
-    <br><br><br><br>
-
-    <div class="grid">
-        <div class="center">
-            <svg width="128" height="37" viewBox="0 0 128 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.2583 15.9357C10.4161 15.8835 11.6783 15.9736 12.6029 16.4005C13.2851 16.7153 14.045 17.2166 14.427 18.0964C14.7596 18.8628 15.1849 20.4285 15.3401 22.3266C15.4961 24.2341 15.3857 26.5469 14.5834 28.7832C14.007 30.39 13.4798 31.7888 13.0278 32.877C12.5912 33.9279 12.1853 34.7889 11.8407 35.237C11.3871 35.827 10.5571 36.9395 9.12022 36.9911C7.86132 37.0362 6.52113 36.9225 5.60799 36.3582C4.96212 35.959 3.96487 35.3504 3.34352 34.3442C2.90907 33.6405 2.25921 32.2747 1.66981 30.7261C1.07897 29.1736 0.521475 27.3668 0.302894 25.7804C0.0997599 24.306 6.47331e-06 19.2572 0 17.0891V16.2483H1.71046V17.0891C1.71047 19.2931 1.81338 24.2165 1.99776 25.5549C2.19195 26.964 2.70135 28.6378 3.2717 30.1365C3.84351 31.6389 4.44995 32.8954 4.80565 33.4715C5.18738 34.0897 5.83173 34.5105 6.51834 34.9349C6.96177 35.2088 7.84109 35.3541 9.05786 35.3104C9.57196 35.292 9.94569 34.9136 10.4766 34.2232C10.6636 33.9799 10.9922 33.3291 11.4443 32.2409C11.8809 31.1898 12.397 29.8206 12.9699 28.2237C13.6691 26.2745 13.7785 24.2132 13.6352 22.4613C13.4912 20.7002 13.0979 19.3198 12.8535 18.7567C12.712 18.4309 12.3987 18.1643 11.8758 17.9229C11.3375 17.6745 10.4191 17.567 9.33681 17.6158C8.28252 17.6633 7.20501 17.8522 6.43037 18.0888C6.30076 18.1284 6.06282 18.2454 5.82347 19.2691C5.59065 20.265 5.43649 21.7361 5.15309 23.9372C4.83543 26.4045 4.96986 27.9233 5.24997 28.9545C5.52805 29.9781 5.95772 30.5732 6.4042 31.268C6.4174 31.2885 6.46916 31.3553 6.70375 31.4274C6.95028 31.503 7.2523 31.5436 7.66867 31.602C8.33067 31.6949 8.87763 31.5055 9.21766 31.2697C9.28719 31.2215 9.47055 31.0098 9.68815 30.4485C9.89092 29.9254 10.0774 29.2226 10.2444 28.371C10.5776 26.6714 10.8126 24.4859 10.9721 22.1925C11.0167 21.5514 10.7416 21.26 10.3045 20.7696C10.2278 20.6837 10.0905 20.5968 9.85908 20.5112C9.77308 20.4795 9.74651 20.4811 9.74438 20.4811C9.74312 20.4812 9.73761 20.481 9.72489 20.485C9.71089 20.4893 9.68187 20.5007 9.63748 20.5271C8.17084 21.4013 7.88277 22.8404 7.57958 24.6718C7.47199 25.3221 7.52646 26.4859 7.64027 27.1485C7.66321 27.2819 7.6883 27.3584 7.7043 27.3981C7.71762 27.4014 7.73409 27.4057 7.75441 27.4096C7.88749 27.4357 8.04423 27.4489 8.18704 27.4436C8.24852 27.4413 8.30081 27.4348 8.34294 27.4277C8.3443 27.4219 8.34705 27.4157 8.34851 27.4091C8.36197 27.3465 8.37508 27.2634 8.38804 27.1501C8.4434 26.666 8.46118 26.0024 8.56287 24.5164L8.62078 23.6777L10.3273 23.7905L10.27 24.6297C10.1748 26.0201 10.1485 26.8081 10.0879 27.3379C10.0578 27.6016 10.0106 27.9091 9.88581 28.1859C9.74113 28.5067 9.50099 28.7698 9.1475 28.9326C8.85041 29.0694 8.5212 29.1142 8.25163 29.1242C7.96968 29.1347 7.67887 29.1093 7.41978 29.0585C7.16538 29.0087 6.78862 28.9076 6.47324 28.5834C6.17029 28.2718 6.0278 27.8625 5.9532 27.4282C5.8198 26.6515 5.74417 25.2918 5.89139 24.402C6.17721 22.6754 6.52149 20.4171 8.75107 19.0884C9.05048 18.91 9.36079 18.8119 9.68258 18.8005C9.99597 18.7893 10.2607 18.8633 10.461 18.9373C10.8023 19.0635 11.2445 19.2721 11.5913 19.6611C12.0036 20.1237 12.7766 20.8981 12.6787 22.3069C12.5174 24.626 12.2768 26.8903 11.9242 28.689C11.7483 29.5864 11.5393 30.3956 11.2867 31.0474C11.0489 31.6609 10.7168 32.2881 10.2043 32.6438C9.53202 33.1102 8.54974 33.4244 7.42702 33.2668C7.06748 33.2163 6.60301 33.1586 6.19373 33.033C5.773 32.9039 5.2787 32.666 4.95766 32.1664C4.53974 31.516 3.95461 30.703 3.59742 29.3881C3.2423 28.0806 3.1209 26.3286 3.456 23.7259C3.72819 21.6118 3.89823 19.997 4.15644 18.8924C4.40803 17.8164 4.8281 16.8176 5.92313 16.4831C6.84977 16.2002 8.07247 15.9891 9.2583 15.9357Z" fill="#0000FF"/>
-<path d="M23.5294 9.72596C23.675 9.54231 23.9569 9.35281 24.3301 9.39804C24.6099 9.43208 24.7837 9.58609 24.8345 9.6329C24.9037 9.69663 24.9508 9.75965 24.9743 9.79221C25.0206 9.85658 25.0628 9.92948 25.0745 9.94932C25.1269 10.0383 25.2107 10.1533 25.3579 10.3402C25.4932 10.5119 25.6908 10.7548 25.9069 11.0344C26.3544 11.6133 26.94 12.4214 27.6736 13.6375C27.9976 14.1747 28.3418 14.8502 28.6791 15.5256C29.0227 16.2134 29.3615 16.9057 29.6919 17.5222C30.1966 18.4638 30.617 19.1926 30.967 19.8039C31.1319 19.2694 31.324 18.5822 31.5288 17.8255C31.8219 16.7421 32.139 15.5375 32.4297 14.5479C33.0173 12.5472 33.4844 11.4821 33.7721 10.8543C33.8387 10.7088 33.9066 10.5629 33.9709 10.4442C34.0133 10.3658 34.1314 10.1422 34.3417 9.98764C34.4752 9.88957 34.7092 9.77317 35.011 9.80863C35.2981 9.84248 35.4871 9.99606 35.5817 10.0933C35.7447 10.2611 35.8327 10.4749 35.8734 10.5745C36.0974 11.1225 36.3656 12.2209 36.6836 15.386C37.0037 18.5738 37.3734 23.9213 37.5783 26.7511C37.7843 29.5955 37.814 29.7513 37.8523 30.0215C37.898 30.3441 37.9483 30.7346 38.0232 31.244L38.1451 32.0761L36.4525 32.317L36.33 31.4848C36.2558 30.9805 36.1988 30.5378 36.1585 30.2536C36.1108 29.917 36.0774 29.7025 35.8723 26.8704C35.6661 24.0232 35.2986 18.7094 34.9814 15.5514C34.8772 14.5135 34.7777 13.7217 34.6897 13.1152C34.5069 13.6196 34.3002 14.2417 34.0733 15.0143C33.7893 15.9813 33.4801 17.1557 33.1819 18.2579C32.8892 19.3396 32.6009 20.376 32.3668 21.01C32.2532 21.3174 32.1262 21.6065 31.967 21.8229C31.8862 21.9327 31.756 22.0816 31.5594 22.1864C31.3327 22.3073 31.0611 22.3452 30.7938 22.2675C30.5618 22.1999 30.4034 22.0658 30.3144 21.9768C30.2208 21.8831 30.1476 21.7819 30.0939 21.7014C29.991 21.5469 29.8843 21.3481 29.8005 21.1972C29.4393 20.5466 28.8533 19.5655 28.1786 18.3067C27.8332 17.6623 27.4779 16.9353 27.1441 16.2669C26.8041 15.5862 26.4873 14.968 26.2025 14.4959C25.6917 13.6491 25.2603 13.0172 24.9041 12.53C24.8279 13.5651 24.7329 14.7659 24.6647 16.0101C24.6005 17.1796 24.596 18.4629 24.7387 20.4822C24.8103 21.4939 24.9226 22.6698 25.0327 23.7899C25.1422 24.9029 25.2502 25.9681 25.31 26.7363C25.452 28.561 25.4548 28.9149 25.4548 28.9622V29.8031H23.7443V28.9584C23.7441 28.9501 23.7436 28.9341 23.7426 28.908C23.7407 28.8549 23.7368 28.762 23.7282 28.6107C23.7108 28.3079 23.6754 27.7761 23.6046 26.8649C23.5465 26.1186 23.4414 25.0779 23.3306 23.952C23.2206 22.8331 23.1061 21.6362 23.0327 20.5988C22.8858 18.5201 22.888 17.1669 22.9565 15.9192C23.0853 13.5698 23.2836 11.7109 23.3128 10.4606C23.3153 10.3546 23.3227 10.2124 23.3573 10.0774C23.3727 10.0177 23.4147 9.87075 23.5294 9.72596Z" fill="#0000FF"/>
-<path d="M83.4862 13.1924C83.4862 13.2064 83.4864 14.9254 83.5519 17.884C83.5924 19.7131 83.9527 20.6116 84.131 20.9788C84.1512 20.9801 84.1774 20.9816 84.2106 20.9815C84.3462 20.9809 84.5172 20.9632 84.744 20.935C84.7538 20.9309 84.7871 20.9152 84.8464 20.8632C84.9458 20.7762 85.0552 20.6463 85.2006 20.457C85.3293 20.2894 85.4541 20.0704 85.5719 18.8147C85.5953 18.5661 85.6137 18.3213 85.6298 18.0817C85.6059 17.2024 85.5848 16.3948 85.5714 15.7649V15.7391L85.5937 13.4902L87.2997 13.4119V13.413C87.2997 13.4136 87.3001 13.4144 87.3002 13.4152C87.3004 13.4169 87.3005 13.4195 87.3008 13.4223C87.3013 13.4281 87.302 13.4362 87.303 13.4464C87.305 13.4671 87.308 13.4969 87.3114 13.5351C87.3181 13.6116 87.3275 13.7225 87.3375 13.8641C87.3577 14.1477 87.3813 14.5553 87.396 15.0565C87.4197 15.8668 87.4183 16.9277 87.3414 18.1134C87.3962 20.1201 87.4665 22.478 87.5023 23.981C87.5309 25.1772 87.4931 25.9656 87.4027 26.5523C87.3081 27.1656 87.1585 27.5382 87.009 27.8837L86.9773 27.9571L86.9322 28.0228C86.3729 28.8417 85.6596 29.4968 84.8832 29.9383L84.8704 29.9454L84.857 29.9525C84.3315 30.2279 83.4667 30.649 82.2028 31.1471L81.4094 31.4597L80.773 29.8989L81.5669 29.5857C82.7563 29.1171 83.5597 28.7254 84.0358 28.4766C84.5535 28.1802 85.056 27.7299 85.4678 27.1458C85.5719 26.9005 85.6533 26.6786 85.7117 26.3C85.7803 25.8547 85.82 25.1784 85.7924 24.0204C85.7808 23.5309 85.7627 22.9426 85.7451 22.3014C85.5354 22.4424 85.2774 22.5643 84.9673 22.603C84.7376 22.6317 84.4706 22.6622 84.2178 22.6633C83.9775 22.6643 83.6465 22.6413 83.337 22.4892C83.036 22.3412 82.786 22.1043 82.607 21.7435C82.3212 21.1672 81.8882 20.03 81.8414 17.9207C81.7756 14.948 81.7757 13.2167 81.7757 13.1924V12.3515H83.4862V13.1924Z" fill="#0000FF"/>
-<path d="M94.8987 10.2373C94.8987 10.2383 94.898 10.2332 94.9778 13.499C95.0045 14.5939 95.0405 16.0558 95.0825 17.7685H98.2311V11.1439H99.9416V27.5405H98.2311V19.4503H95.1237C95.1992 22.5307 95.289 26.2003 95.3804 29.9312L95.401 30.7721L93.6905 30.8126L93.6699 29.9717C93.5781 26.2245 93.4882 22.539 93.4127 19.4503H93.0413V17.7685H93.3715C93.33 16.0733 93.2944 14.6258 93.2679 13.5395C93.1887 10.2992 93.1883 10.2652 93.1883 10.2373V9.3964H94.8987V10.2373Z" fill="#0000FF"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M50.8199 12.8628L50.8856 12.865C51.3621 12.879 52.1519 12.9304 52.9524 13.0287C53.7281 13.124 54.6105 13.2739 55.2146 13.5149C56.243 13.925 56.8963 14.6799 57.2792 15.2098C57.8616 16.0157 58.0731 17.0924 58.2575 18.4364C58.5406 20.5002 58.4617 21.8943 58.2007 22.9129C57.9343 23.9524 57.4881 24.5443 57.2102 24.9483L57.1528 25.0321L57.0771 25.1C55.69 26.3389 53.6118 27.816 52.3544 28.5303L52.3483 28.5341L52.3422 28.5374C51.7746 28.8474 51.3576 29.0458 50.6233 29.3607L49.8394 29.6969L49.1556 28.1553L49.5448 27.9883C49.4198 26.9757 49.3122 26.0016 49.2431 23.6306C49.1703 21.1339 49.1396 17.1878 49.1245 15.2152C49.1093 13.2435 49.1094 13.222 49.1094 13.2023V12.3614H50.8199V12.8628ZM50.8349 15.2026C50.8501 17.1817 50.8802 21.1074 50.9524 23.5824C51.0073 25.4648 51.0859 26.4276 51.1779 27.2438C51.2813 27.1902 51.3868 27.135 51.4986 27.074C52.6241 26.4347 54.5509 25.0687 55.8522 23.9197C56.1132 23.5425 56.37 23.173 56.542 22.5018C56.7324 21.7587 56.828 20.5949 56.5626 18.6609C56.3723 17.2739 56.1896 16.6052 55.885 16.1837C55.5785 15.7596 55.1581 15.3074 54.5715 15.0734C54.1946 14.9231 53.5107 14.792 52.7403 14.6973C51.9947 14.6058 51.2585 14.5581 50.8344 14.5457L50.8299 14.5452C50.8314 14.7358 50.833 14.9536 50.8349 15.2026Z" fill="#0000FF"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M41.2821 12.3964C41.8839 12.0013 42.6177 12.0489 43.0627 12.1123C43.9633 12.2406 44.4747 12.9948 44.7999 13.6139C44.9738 13.945 45.1422 14.3354 45.3116 14.7576L45.8294 16.0928L45.8366 16.1103L45.8422 16.1278C46.1635 17.0809 46.5821 18.4493 46.9719 19.8691C47.2144 19.8639 47.2929 19.8608 47.3717 19.857L48.2264 19.8165L48.3082 21.4966L47.4541 21.5366C47.4389 21.5373 47.4236 21.537 47.4079 21.5377C47.4661 21.7734 47.5234 22.0063 47.5766 22.2352C48.0733 24.3725 48.2992 26.0584 48.5643 27.9034L48.684 28.7361L46.9903 28.9715L46.8706 28.1388C46.6034 26.2798 46.3869 24.6656 45.909 22.6096C45.8304 22.2714 45.7441 21.9234 45.6546 21.5711C44.3686 21.5876 42.2465 21.6113 41.1529 21.6231C41.1464 21.6232 41.1399 21.623 41.1334 21.6231C41.1084 23.4011 41.1001 25.2198 41.095 26.3717C41.0864 28.3033 41.0866 28.3254 41.0866 28.3326V29.1735H39.3762V28.3326C39.3762 28.3206 39.3765 28.2979 39.3851 26.364C39.3901 25.227 39.3989 23.4172 39.4235 21.6357H39.1084V19.9539H39.4525C39.4667 19.3014 39.4835 18.6866 39.5048 18.1495C39.6295 15.0051 40.0287 13.9778 40.2448 13.5034C40.488 12.9695 40.9335 12.6253 41.2821 12.3964ZM42.3923 13.7568C42.2792 13.7674 42.2374 13.7915 42.232 13.7951C41.9548 13.9771 41.8463 14.1024 41.806 14.191C41.7094 14.403 41.3338 15.1985 41.2142 18.2152C41.1938 18.729 41.1773 19.3163 41.1635 19.9408C42.15 19.9302 43.9302 19.9099 45.2052 19.8943C44.8601 18.6647 44.5027 17.5028 44.2225 16.6703C43.8417 15.6889 43.5679 14.9343 43.2798 14.3858C43.1381 14.116 43.0202 13.9512 42.9263 13.857C42.8824 13.8131 42.852 13.7932 42.8366 13.7847C42.8239 13.7778 42.819 13.7773 42.8177 13.7771C42.6483 13.753 42.5049 13.7463 42.3923 13.7568Z" fill="#0000FF"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M103.428 11.9136C104.272 11.8089 105.02 11.9459 105.474 12.12C106.242 12.4141 106.674 13.1351 106.982 13.8597C107.223 14.4273 107.446 15.1438 107.683 15.9817L107.925 16.8587L107.93 16.8773C108.075 17.4626 108.248 18.1831 108.435 18.9658L108.9 19.0375L108.72 20.1718C109.16 22.0356 109.624 24.0346 109.923 25.3436C110.414 27.4918 110.449 27.7099 110.473 27.9768L110.549 28.8144L108.845 28.9633L108.769 28.1257C108.758 27.9992 108.759 27.9193 108.254 25.712C107.954 24.3974 107.488 22.391 107.048 20.5271C106.93 20.5245 106.792 20.5215 106.629 20.5195C105.752 20.5086 104.243 20.5075 103.319 20.5074C103.413 23.4934 103.467 25.3618 103.467 25.4V26.2408H101.757V25.4C101.756 25.3883 101.739 24.7712 101.705 23.6421C101.681 22.832 101.648 21.77 101.609 20.5074H101.297V18.8256H101.557C101.512 17.3828 101.496 16.0821 101.513 15.0899C101.522 14.5849 101.539 14.149 101.566 13.8116C101.579 13.6438 101.596 13.4884 101.617 13.3555C101.634 13.2486 101.667 13.069 101.745 12.9077L101.819 12.7709C102.216 12.1224 102.967 11.9707 103.428 11.9136ZM104.853 13.6868C104.661 13.6132 104.2 13.5125 103.642 13.5816C103.471 13.6029 103.364 13.631 103.301 13.655C103.291 13.7247 103.28 13.8198 103.271 13.9424C103.248 14.2311 103.232 14.6283 103.223 15.1178C103.207 16.0863 103.221 17.3782 103.267 18.8256C104.182 18.8257 105.74 18.826 106.646 18.8371C106.509 18.2659 106.383 17.7404 106.273 17.2939C105.933 16.0459 105.672 15.1408 105.404 14.5085C105.121 13.8444 104.922 13.7131 104.853 13.6868Z" fill="#0000FF"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M75.0486 10.6911C75.6628 10.6964 76.5051 10.7186 77.2496 10.7612C77.6648 10.7849 78.0642 10.8157 78.381 10.8548C78.5374 10.8741 78.6922 10.8975 78.8259 10.9276C78.8921 10.9426 78.9703 10.9632 79.0486 10.9917C79.1005 11.0106 79.2184 11.0556 79.3381 11.1466L79.3893 11.1882L79.4834 11.278C79.6928 11.4939 79.8309 11.7534 79.9272 12.0017C80.0391 12.2903 80.1152 12.6177 80.17 12.9619C80.2518 13.4767 80.2947 14.0907 80.3158 14.7784L80.3303 15.49L80.3281 15.5913C80.2977 16.0933 80.0055 16.5393 79.7468 16.862C79.4417 17.2426 79.0292 17.6356 78.5742 18.0193C77.9123 18.5775 77.1061 19.1602 76.2847 19.7125C77.1104 20.0723 77.8246 20.3988 78.4289 20.7132C79.2842 21.1583 79.9847 21.6085 80.4879 22.1372C81.0536 22.7315 81.1978 23.5978 81.2279 24.2936C81.2598 25.0321 81.1691 25.8109 81.0731 26.4248C80.9565 27.1698 80.4617 27.6644 79.9862 27.9883C79.5177 28.3074 78.9542 28.5376 78.5074 28.7169L78.4289 28.7487L78.3459 28.764C77.7345 28.8798 76.6964 28.9044 75.4434 28.8472L75.4217 28.8461L75.3999 28.8445C74.7634 28.7835 74.2954 28.6635 73.788 28.5106L72.9701 28.2637L73.4718 26.6558L73.528 26.6728C73.4635 21.3639 73.4024 16.3095 73.371 13.7163C73.3382 11.0063 73.3381 10.9816 73.3381 10.9599V10.119H75.0486V10.6911ZM75.244 27.1299C75.3413 27.1447 75.4425 27.1576 75.5503 27.1682C76.7016 27.2197 77.5251 27.1902 77.9473 27.1244C78.3766 26.9507 78.739 26.7922 79.0124 26.606C79.297 26.4122 79.3669 26.2694 79.3827 26.1691C79.4728 25.5931 79.5439 24.9404 79.5191 24.3647C79.4923 23.7463 79.3613 23.4148 79.239 23.2863C78.9306 22.9622 78.4293 22.6167 77.6288 22.2001C76.9768 21.8609 76.1679 21.4962 75.1705 21.0674C75.1936 22.9694 75.2186 25.0351 75.244 27.1299ZM75.0815 13.6961C75.0955 14.8537 75.1152 16.5021 75.1388 18.4446C75.9919 17.8774 76.8136 17.2888 77.4606 16.7432C77.8772 16.3919 78.1966 16.0798 78.4038 15.8213C78.5813 15.5998 78.6137 15.4946 78.6193 15.4862L78.6199 15.5092C78.6087 14.5444 78.5692 13.7827 78.4801 13.222C78.4357 12.9427 78.3832 12.7405 78.3292 12.6012C78.3204 12.5785 78.3108 12.5592 78.303 12.542C78.2642 12.5362 78.219 12.5298 78.1677 12.5234C77.9067 12.4912 77.5515 12.4631 77.1505 12.4402C76.449 12.4001 75.6507 12.379 75.0653 12.3734C75.0695 12.7212 75.0749 13.155 75.0815 13.6961Z" fill="#0000FF"/>
-<path d="M60.7296 12.7068H65.7034V14.3886H60.7296V15.4014C60.7296 16.4377 60.7311 17.8949 60.7374 19.4262H64.9161V21.108H60.7463C60.7585 22.709 60.779 24.2539 60.8165 25.3523C60.8381 25.9867 60.8642 26.4427 60.9 26.773C60.917 26.9298 60.9356 27.0444 60.9518 27.1272C61.8541 27.1295 62.6379 27.1219 63.2597 27.0981C63.9059 27.0734 64.3059 27.0325 64.4857 26.9908C64.8183 26.8947 65.282 26.7403 65.9178 26.5386L66.7313 26.2808L67.2563 27.881L66.4423 28.1394C65.8356 28.3318 65.3056 28.5085 64.9406 28.6129L64.9245 28.6173L64.9072 28.6217C64.539 28.7113 63.9683 28.7542 63.326 28.7788C62.8246 28.798 62.2334 28.8067 61.5765 28.8089H60.8889C60.7623 28.8071 60.4551 28.8122 60.1695 28.7027C59.7955 28.5592 59.5596 28.2793 59.4212 27.9549C59.3012 27.6737 59.2406 27.3293 59.1996 26.9509C59.157 26.5578 59.1285 26.0522 59.1066 25.4087C59.0188 22.8351 59.0192 17.8781 59.0192 15.4014V12.0231H60.7296V12.7068Z" fill="#0000FF"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M121.513 13.6972C122.016 13.7313 122.68 13.8182 123.372 13.9857C124.251 14.1983 125.266 14.5608 126.044 15.1775C127.323 16.1914 127.63 17.4995 127.892 18.7698C128.169 20.1079 127.858 21.2121 127.573 21.7529L127.533 21.8295L127.478 21.8963C126.54 23.0316 125.258 24.1546 123.48 25.0945C123.164 25.278 122.895 25.4127 122.63 25.5527C122.357 25.6973 122.041 25.8727 121.573 26.1664L121.513 26.2036V27.3084H119.803V13.2614H121.513V13.6972ZM121.513 24.2377C121.623 24.1772 121.723 24.1227 121.82 24.0718C122.129 23.908 122.341 23.8039 122.624 23.6394L122.639 23.6306L122.655 23.6224C124.192 22.812 125.286 21.86 126.085 20.9131C126.207 20.6354 126.393 19.9636 126.216 19.1043C125.953 17.8316 125.728 17.0877 124.97 16.4869C124.474 16.0939 123.74 15.8063 122.964 15.6187C122.423 15.4877 121.905 15.416 121.513 15.3833V24.2377Z" fill="#0000FF"/>
-<path d="M117.465 10.9999C117.517 11.8862 117.546 12.356 117.802 13.9736C118.058 15.5941 118.536 18.3403 118.777 20.1061L118.779 20.122L118.781 20.1384C118.903 21.4044 118.98 22.3615 119 22.9967C119.01 23.3043 119.009 23.5827 118.982 23.7932C118.971 23.8764 118.945 24.062 118.846 24.2394C118.795 24.3316 118.67 24.5194 118.421 24.6302C118.13 24.7597 117.847 24.708 117.658 24.6166C117.425 24.5037 117.271 24.3172 117.188 24.2125C117.087 24.0839 116.972 23.9145 116.838 23.7061C116.569 23.2855 116.162 22.6088 115.525 21.5525C114.77 20.2992 113.603 18.3799 112.666 16.8176C112.746 17.8498 112.815 18.7435 112.871 19.8412C113.017 22.6756 113.107 24.5333 113.107 24.5717V25.4125H111.397V24.5717C111.395 24.553 111.31 22.7797 111.163 19.926C111.072 18.1514 110.952 16.9794 110.797 14.7368C110.768 14.3143 110.731 13.9767 110.702 13.7158C110.688 13.5885 110.675 13.468 110.666 13.3692C110.659 13.2855 110.649 13.1558 110.659 13.0342L110.667 12.969C110.672 12.9375 110.681 12.8974 110.694 12.8535C110.705 12.82 110.803 12.483 111.181 12.3269C111.632 12.1407 111.98 12.3939 112.046 12.4451C112.141 12.5197 112.196 12.597 112.21 12.6165C112.248 12.6682 112.271 12.7139 112.273 12.7189C112.281 12.7325 112.286 12.744 112.288 12.7484C112.292 12.7566 112.297 12.7681 112.298 12.7703C112.301 12.7754 112.304 12.7809 112.307 12.7878C112.32 12.8152 112.35 12.8749 112.408 12.9855C112.526 13.2091 112.761 13.6348 113.219 14.416C114.138 15.9841 115.946 18.9529 116.996 20.6952C117.044 20.775 117.091 20.8527 117.136 20.9278C117.118 20.7324 117.1 20.5265 117.079 20.3103C116.84 18.5638 116.375 15.8967 116.112 14.2315C115.848 12.5576 115.812 12.0341 115.757 11.0973L115.708 10.2575L117.415 10.1606L117.465 10.9999Z" fill="#0000FF"/>
-<path d="M16.805 18.2048H15.0946V8.1307H16.805V18.2048Z" fill="#0000FF"/>
-<path d="M5.88638 5.23415C5.88638 7.16088 5.8864 10.9975 5.85966 15.0318L5.85409 15.8727L4.14363 15.8618L4.1492 15.0209C4.1759 10.9925 4.17592 7.16082 4.17592 5.23415V2.42957H5.88638V5.23415Z" fill="#0000FF"/>
-<path d="M13.6603 4.75568C13.6603 6.33595 13.6602 9.48203 13.6469 11.2681C13.6337 13.0554 13.6074 13.4344 13.4977 14.1378L13.3685 14.9689L11.6776 14.7143L11.8073 13.8827C11.8969 13.3081 11.9233 13.0327 11.9365 11.2555C11.9497 9.47702 11.9498 6.33857 11.9498 4.75568V2.29271H13.6603V4.75568Z" fill="#0000FF"/>
-<path d="M10.4164 0.84088C10.4164 0.860138 10.4163 4.50833 10.4031 10.1639V10.1672C10.3898 12.1907 10.3635 12.4999 10.334 12.8793C10.3072 13.2241 10.2803 13.6248 10.2522 14.0437L10.1959 14.8829L8.48882 14.7723L8.54506 13.9331C8.57299 13.5167 8.60094 13.1065 8.62857 12.7512C8.65353 12.4303 8.67942 12.1668 8.69261 10.1563C8.70582 4.50436 8.70597 0.859196 8.70597 0.84088V0H10.4164V0.84088Z" fill="#0000FF"/>
-            </svg>
-        </div>
+        <img src="img/srsly.jpg" alt="The letters DNC WTH M3 in yarn weaved in paper"/>
     </div>
 
     <br><br>
