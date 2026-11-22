@@ -1,0 +1,702 @@
+/*
+ * Mondrian's styles, on Codex: the design tokens and component styles come
+ * from vendor/codex/ (Codex with changes 1304941 and 1354777 applied), loaded before this
+ * file. Components wear Codex classes in the markup (cdx-button, cdx-card,
+ * cdx-thumbnail, cdx-label, cdx-dialog, cdx-text-input, cdx-menu-item,
+ * cdx-info-chip, cdx-message); this file adds layout and only the deltas, in
+ * Codex tokens, so a different Codex shows through without edits here.
+ *
+ * The one palette of our own is the painting's: Mondrian's red, blue, yellow
+ * and grey. They are the artwork, not interface colours. Its white ground is
+ * Codex's base background, so it follows light and dark.
+ */
+
+:root {
+  --paint-red: #ff2b00;
+  --paint-blue: #1d5ee0;
+  --paint-yellow: #f5bb1b;
+  --paint-grey: #ede8dc;
+  color-scheme: light;
+}
+/* Dark: when the theme is dark (data-theme on <html>, set by the head
+   script in index.html from the toggle, or from the system when it's on
+   System), as Codex's dark tokens are. */
+:root[data-theme="dark"] {
+    --paint-grey: #6e6e6a;
+    color-scheme: dark;
+    /* Quieter than Codex's dark theme: borders muted toward the background,
+       and text and icons a step dimmer, so the painting and the paint
+       colours carry the page. Light mode keeps Codex's own. (Focus rings
+       stay brighter, below, so the keyboard's place is always clear.) */
+    --border-color-emphasized: #3d3d3d; /* Codex: #ebebeb. The cards, controls, knob and track. */
+    --box-shadow-color-emphasized: #3d3d3d;
+    --border-color-base: #4d4d4d; /* Codex: #787878. Framed buttons. */
+    --border-color-subtle: #2e2e2e; /* Codex: #595959. The roll's row lines, dividers. */
+    --border-color-muted: #2a2a2a;
+    --color-base: #c4c4c4; /* Codex: #ebebeb */
+    --color-emphasized: #d6d6d6; /* Codex: #f3f3f3 */
+    --color-subtle: #8f8f8f; /* Codex: #a8a8a8 */
+    --color-base--hover: #d6d6d6;
+}
+
+/* Focus is dark grey, never blue: Codex's focus colours (rings on inputs,
+   cards, the knob and slider) take the emphasized border colour, in both
+   themes. */
+:root {
+  --focus-color: var(--border-color-emphasized);
+  --border-color-progressive--focus: var(--focus-color);
+  --box-shadow-color-progressive--focus: var(--focus-color);
+  --outline-color-progressive--focus: var(--focus-color);
+}
+:root[data-theme="dark"] { --focus-color: #8f8f8f; } /* brighter than dark mode's muted borders */
+:focus-visible { outline-color: var(--focus-color); }
+/* And a click leaves no ring behind: Codex rings a button on any focus, so
+   after a click it stays ringed. Only keyboard focus keeps the ring. */
+.cdx-button:enabled:focus:not(:focus-visible):not(:active):not(.cdx-button--is-active) { border-color: var(--border-color-base); box-shadow: none; }
+.cdx-button--weight-quiet:enabled:focus:not(:focus-visible):not(:active):not(.cdx-button--is-active) { border-color: var(--border-color-transparent); }
+/* Keyboard focus on a button: Codex's ring, in the focus colour. */
+.cdx-button:enabled:focus-visible:not(:active):not(.cdx-button--is-active) { border-color: var(--focus-color); box-shadow: 0 0 0 1px var(--focus-color); }
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+/* Body text: Codex's Body style. */
+body {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color-base);
+  color: var(--color-base);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-medium);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-medium);
+}
+
+/* Codex's typography: every element one of its text styles (see the codex-typography rules). */
+h1 {
+  margin: 0;
+  font-family: var(--font-family-serif);
+  font-size: var(--font-size-x-large);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-x-large);
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+h2 {
+  margin: 0;
+  font-family: var(--font-family-serif);
+  font-size: var(--font-size-xx-large);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-xx-large);
+}
+p { margin: 0; }
+small {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-small);
+}
+a { color: var(--color-progressive); }
+a:hover { color: var(--color-progressive--hover); }
+a:active { color: var(--color-progressive--active); }
+a:visited { color: var(--color-visited); }
+
+/* Anything else focusable takes Codex's focus outline (Pitch and Mood show focus their own way). */
+:focus-visible { outline: var(--border-width-thick) var(--border-style-base) var(--outline-color-progressive--focus); outline-offset: var(--spacing-12); }
+.cdx-button:focus-visible, .cdx-card:focus-visible, .cdx-text-input__input:focus-visible, .cdx-menu-item__content:focus-visible { outline: none; } /* Codex draws its own */
+
+.visually-hidden {
+  position: absolute;
+  width: var(--size-absolute-1);
+  height: var(--size-absolute-1);
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Page: the painting fills the left half, edge to edge; the title and
+   controls fill the right. On narrow screens the painting sits on top. */
+
+.page {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.instrument {
+  position: relative;
+  min-height: 0;
+  background-color: var(--background-color-base);
+}
+
+#painting {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none; /* no long-press menu */
+  cursor: pointer;
+}
+
+/* No tap highlight on a phone: the painting and the knob and slider show
+   their own presses, and the browser's flash would cover them. */
+#painting, .knob, .infinity { -webkit-tap-highlight-color: transparent; }
+
+.panel {
+  border-left: var(--border-width-base) var(--border-style-base) var(--border-color-emphasized); /* between the halves */
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-125);
+  padding: var(--spacing-250) max(var(--spacing-300), env(safe-area-inset-right)) var(--spacing-150) var(--spacing-300);
+  container: panel / inline-size; /* the deck lays out by the panel's width, not the window's */
+}
+.panel > * { width: 100%; }
+
+/* The title with the icon buttons on its row, then the description. */
+.bar { display: flex; flex-direction: column; gap: var(--spacing-25); }
+.title-row { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-75); }
+.tagline { color: var(--color-base); }
+/* Quiet icon buttons: nudged so the last glyph lines up with the panel's edge. */
+.actions { display: flex; gap: var(--spacing-25); margin-right: calc(-1 * var(--spacing-50)); }
+
+/* The deck: the article cards, then the sound controls. With room, the
+   controls stack in a column to the right of the cards (the container
+   query after the tuning styles below). */
+/* The cards and the controls card always match: side by side they share a
+   height (the shorter one stretches, the four cards evenly); stacked they
+   share a width. */
+.deck { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spacing-50); align-items: stretch; }
+.slots { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spacing-50); }
+
+@media (max-width: 820px) {
+  body { height: auto; }
+  .page { grid-template-columns: minmax(0, 1fr); }
+  .instrument { height: min(100vw, 64dvh); }
+  .panel {
+    border-left: 0;
+    border-top: var(--border-width-base) var(--border-style-base) var(--border-color-emphasized);
+    overflow: visible;
+    gap: var(--spacing-100);
+    padding: var(--spacing-125) max(var(--spacing-100), env(safe-area-inset-right)) var(--spacing-100) max(var(--spacing-100), env(safe-area-inset-left));
+  }
+}
+
+/* Slot cards: Codex Cards, one row each. The deltas: a button, not a link,
+   so its text aligns left; a trust-signal icon in the supporting text; the
+   Trending chip at the end. Long text wraps, as in Codex. */
+
+.slot {
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.slot .cdx-card__text { flex: 1; min-width: 0; }
+/* Dense: no gaps between the three lines (Codex spaces the supporting text apart). */
+.slot .cdx-card__text__supporting-text { margin-top: 0; padding-top: 0; } /* Codex spaces it with either, by version */
+.slot-signal .cdx-icon[hidden] { display: none; }
+.slot-signal { color: var(--color-base); } /* the third line: the trust signal behind the sound above it, in the cards' dark grey */
+.slot-signal, .slot-sound { display: flex; align-items: flex-start; gap: var(--spacing-25); min-width: 0; }
+/* The icon centred on the first line, however many the text wraps to. */
+.slot-signal .cdx-icon, .slot-sound .pedal-knob { margin-top: calc((var(--line-height-small) - var(--size-icon-small)) / 2); }
+.slot-signal .spinner { flex: none; margin-top: calc((var(--line-height-small) - var(--size-icon-x-small)) / 2); }
+.slot-signal .cdx-icon { flex: none; color: inherit; } /* the icon in the line's colour */
+.slot-trend { flex: none; }
+.slot-trend[hidden] { display: none; }
+.slot.loading .cdx-card__text { opacity: 0.5; }
+
+.spinner {
+  width: var(--size-icon-x-small);
+  height: var(--size-icon-x-small);
+  border: var(--border-width-thick) var(--border-style-base) var(--border-color-subtle);
+  border-top-color: var(--border-color-progressive);
+  border-radius: var(--border-radius-circle);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Each article card is styled as a pedal: the article's lead image fills
+   the card, and a panel sits over it, inset by a narrow frame of the image.
+   The panel holds, on the left, the pedal face, then the text (see pedal.js):
+   a knob turned to the article's value and a dark display drawing the slot's
+   sound, side by side, the same height, centred on the text. The display is
+   a device screen, so it stays dark in both themes. With no lead image, the
+   card shows Codex's neutral background. */
+/* Every border on the article and control cards: dark and 1px. */
+.slot.cdx-card, .tuning > .control.cdx-card, .sequencer.cdx-card { border: var(--border-width-base) var(--border-style-base) var(--border-color-emphasized); }
+/* Hover, press and keyboard focus in the same dark grey (Codex's link card
+   uses blue). A click leaves no ring behind: only keyboard focus keeps one. */
+.slot.cdx-card--is-link:focus:not(:focus-visible) { border-color: var(--border-color-emphasized); box-shadow: none; }
+.slot.cdx-card--is-link:hover,
+.slot.cdx-card--is-link:focus-visible { border-color: var(--focus-color); box-shadow: 0 0 0 1px var(--focus-color); }
+.slot.cdx-card--is-link:active { border-color: var(--border-color-emphasized); box-shadow: inset 0 0 0 1px var(--border-color-emphasized); }
+.slot.cdx-card {
+  padding: var(--spacing-35);
+  background-color: var(--background-color-neutral);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.pedal-panel {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start; /* everything from the top */
+  gap: var(--spacing-50);
+  min-width: 0;
+  padding: var(--spacing-35) var(--spacing-50);
+  background-color: var(--background-color-base);
+  border: var(--border-width-base) var(--border-style-base) var(--border-color-emphasized);
+  border-radius: var(--border-radius-base);
+}
+
+.pedal { display: contents; }
+/* The display: as wide as the card's three lines of text are tall, and as
+   tall as the panel's content, so it grows with the text if a line wraps. */
+.pedal-screen {
+  display: block;
+  flex: none;
+  align-self: stretch;
+  width: calc(3 * var(--line-height-small));
+  height: auto;
+  min-height: calc(3 * var(--line-height-small));
+  border-radius: var(--border-radius-base);
+  background-color: #141414;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14); /* an edge on a dark panel too */
+}
+.pedal-trace {
+  fill: none;
+  stroke: #f2f2f2;
+  stroke-width: 1.5;
+  stroke-linejoin: miter;
+  stroke-linecap: butt; /* square ends, like the knob's tick */
+  vector-effect: non-scaling-stroke;
+}
+/* The knob: the size of the signal icon below it, leading the sound line it
+   sets, its pointer turning from −135° (lowest) to 135° (highest) with --turn (0–1). */
+.pedal-knob {
+  flex: none;
+  position: relative;
+  box-sizing: border-box;
+  width: var(--size-icon-small);
+  height: var(--size-icon-small);
+  border-radius: var(--border-radius-circle);
+  background-color: var(--background-color-base);
+  border: var(--border-width-base) var(--border-style-base) var(--border-color-emphasized);
+  transform: rotate(calc(-135deg + var(--turn, 0) * 270deg));
+  transition: transform var(--transition-duration-medium) cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+.pedal-knob-pointer {
+  position: absolute;
+  left: calc(50% - 1px);
+  top: 0; /* touching the rim */
+  width: 2px;
+  height: 6px;
+  background-color: var(--color-base);
+}
+@media (prefers-reduced-motion: reduce) { .pedal-knob { transition: none; } }
+/* On a narrow panel (a phone), a smaller display and knob leave the text room. */
+/* @container panel (max-width: 420px) {
+  .pedal-screen { width: 48px; height: 28px; }
+  .pedal-knob { width: 28px; height: 28px; }
+  .pedal-knob-pointer { top: 2px; height: 8px; }
+} */
+
+/* Hidden halves of a Codex Thumbnail (image or placeholder). */
+.cdx-thumbnail [hidden] { display: none; }
+
+/* Tuning: a Codex Card holding the Pitch slider, the Mood knob and the Octave buttons. */
+
+/* The controls, each in its own Codex Card, with the same gap as the article
+   cards. In a row: Pitch, Mood and Octave side by side, filling the width,
+   Pitch taking the most room and never narrower than 160px, Mood giving way
+   first; each control centred in its card. (The controls have no titles;
+   screen readers get aria-label.) */
+.tuning {
+  display: grid;
+  grid-template-columns: minmax(160px, 1.6fr) minmax(72px, 1fr) auto;
+  gap: var(--spacing-50);
+}
+.tuning > .control { display: grid; place-items: center; min-width: 0; }
+
+/* The Mood knob (see knob.js): notches round a face and the mood's name as
+   its pointer, snapping between them. The current notch and the name are the
+   base colour. */
+.knob {
+  width: min(100%, 112px); /* as big as its card allows */
+  aspect-ratio: 1;
+  border-radius: var(--border-radius-circle);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.knob.turning { cursor: grabbing; }
+/* A picture face: a circle filling the face (radius 38 of 100, so inset 12%),
+   under the SVG so the face's outline rings it. Framed by knob.js. */
+.knob { position: relative; }
+.knob svg { position: relative; }
+.knob .picture {
+  position: absolute;
+  inset: 20%;
+  overflow: hidden;
+  border-radius: var(--border-radius-circle);
+  border: var(--border-width-base) var(--border-style-base) var(--border-color-emphasized);
+}
+.knob .picture img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.knob:has(.picture) .face { fill: none; }
+.knob svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.knob .tick { fill: transparent; stroke: var(--border-color-emphasized); stroke-width: 1; vector-effect: non-scaling-stroke; transition: fill var(--transition-duration-base); } /* unlit: a dark grey ring */
+.knob .tick.on { fill: var(--color-base); stroke: none; }
+.knob .face {
+  fill: var(--background-color-base);
+  stroke: var(--border-color-emphasized);
+  stroke-width: var(--border-width-base);
+  vector-effect: non-scaling-stroke;
+  transition: fill var(--transition-duration-base);
+}
+.knob .pointer {
+  fill: var(--color-base);
+  transform-box: view-box;
+  transform-origin: 50px 50px;
+  transition: transform 0.12s cubic-bezier(0.3, 1.5, 0.5, 1); /* a snap, overshooting a touch */
+}
+.knob .pointer-text {
+  fill: var(--color-base);
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  transition: fill var(--transition-duration-base);
+}
+/* Hover, turning and keyboard focus: the face's ring thickens, still dark
+   grey, as the cards' border does (no outline round the whole knob). */
+.knob .face { transition: stroke-width var(--transition-duration-base), stroke var(--transition-duration-base); }
+.knob:is(:hover, .turning, :focus-visible) .face { stroke-width: var(--border-width-thick); }
+.knob:focus-visible { outline: none; }
+.knob:focus-visible .face { stroke: var(--focus-color); }
+
+/* Pitch (see infinity.js): a thumb that slides round an infinity-shaped
+   track, snapping notch to notch, with the note inside it. The thumb is
+   inverted. */
+.infinity {
+  position: relative;
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 2 / 1;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.infinity.sliding { cursor: grabbing; }
+.infinity svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.infinity .track { fill: none; stroke: var(--border-color-emphasized); stroke-width: var(--border-width-base); vector-effect: non-scaling-stroke; transition: stroke-width var(--transition-duration-base), stroke var(--transition-duration-base); }
+.infinity .tick { fill: var(--border-color-emphasized); }
+.infinity .thumb {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  min-width: var(--size-200);
+  height: var(--size-200);
+  padding: 0 var(--spacing-25);
+  transform: translate(-50%, -50%);
+  color: var(--color-inverted);
+  background-color: var(--background-color-inverted);
+  border: var(--border-width-thick) var(--border-style-base) var(--background-color-inverted);
+  border-radius: var(--border-radius-pill);
+  font-weight: var(--font-weight-bold);
+  pointer-events: none;
+  transition-property: left, top, background-color, border-color;
+  transition-duration: 0.1s, 0.1s, var(--transition-duration-base), var(--transition-duration-base);
+  transition-timing-function: ease-out;
+}
+/* Hover, sliding and keyboard focus: the track thickens, still dark grey,
+   as the cards' border does; the thumb stays dark (no outline round the
+   whole slider). */
+.infinity:is(:hover, .sliding, :focus-visible) .track { stroke-width: var(--border-width-thick); }
+.infinity:focus-visible { outline: none; }
+.infinity:focus-visible .track { stroke: var(--focus-color); }
+
+/* Octave: Codex icon buttons that show where the octave is by their sizes
+   (see sizeButton() in app.js). Each sits in a large button's space, so the
+   layout holds still as they grow and shrink. */
+.octave { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-50); }
+.octave > * { flex: none; }
+.octave .cdx-button--size-medium { margin: calc((var(--size-275) - var(--size-200)) / 2); }
+.octave .cdx-button--size-small { margin: calc((var(--size-275) - var(--size-150)) / 2); }
+
+/* The loop (see sequencer.js): a card across the whole deck, under the
+   articles and controls. Narrow: the steps across the top, and Play, the
+   tempo and New loop evenly along the bottom. Wide: all in one row. */
+.sequencer.cdx-card {
+  --loop-height: calc(var(--size-400) * 1.75); /* seven rows a finger can tell apart */
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); /* the tempo in the very middle */
+  grid-template-areas:
+    "roll roll roll"
+    "play tempo new";
+  align-items: center;
+  gap: var(--spacing-50) var(--spacing-75);
+  padding: var(--spacing-50) var(--spacing-75);
+}
+.loop-play { grid-area: play; justify-self: start; }
+.loop { grid-area: roll; }
+.tempo { grid-area: tempo; justify-self: center; }
+.loop-dice { grid-area: new; justify-self: end; display: flex; align-items: center; gap: var(--spacing-25); }
+.loop-back { order: 1; }
+.loop-new { order: 2; }
+.loop-forward { order: 3; }
+@container panel (min-width: 560px) {
+  .sequencer.cdx-card {
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    grid-template-areas: "play roll tempo new";
+  }
+  /* In one row, back goes above the die and forward below it, the stack
+     overhanging the padding (as the tempo's does) so the card stays as
+     tall as the steps. */
+  .loop-dice {
+    flex-direction: column;
+    margin-block: calc((var(--loop-height) - 2 * var(--size-150) - var(--size-275) - 2 * var(--spacing-25)) / 2);
+  }
+  /* In one row, the tempo stacks (+ above the number, − below) to leave
+     the steps more width. */
+  .tempo {
+    flex-direction: column-reverse;
+    /* Two small buttons and a line of text are a touch taller than the
+       steps; let the stack overhang the padding by the difference, so the
+       card stays as tall as the steps. */
+    margin-block: calc((var(--loop-height) - 2 * var(--size-150) - var(--line-height-small)) / 2);
+  }
+}
+
+/* The steps, a piano roll you can write in: sixteen columns and four rows,
+   one per size, squares on top, every cell 2px from its neighbours, across
+   and down, beats included. A note is a block in its colour; an empty
+   cell shows a dot. The step playing gets a dark bar under its column; the
+   cell under the pointer gets a dark outline inside it; keyboard focus
+   rings the cell being edited. */
+.loop {
+  display: grid;
+  /* Sixteen equal steps. Each step's 1px padding on either side makes the
+     2px between neighbouring cells. */
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  column-gap: 0;
+  height: var(--loop-height);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  border-radius: var(--border-radius-base);
+}
+.loop:focus-visible { outline: none; }
+.loop-step {
+  display: grid;
+  grid-template-rows: repeat(7, minmax(0, 1fr)); /* four sizes, then hi-hat, snare and kick */
+  row-gap: 2px;
+  padding: 1px 1px 4px; /* 1px a side makes the 2px between cells; the bottom leaves room for the playing bar */
+  border-radius: var(--border-radius-sharp);
+  /* background-image: repeating-linear-gradient(to bottom, transparent 0 calc(25% - 1px), var(--border-color-subtle) calc(25% - 1px) 25%); faint row lines */
+  background-size: 100% calc(100% - 4px);
+  background-position: 0 2px;
+  background-repeat: no-repeat;
+}
+/* The step playing: a dark 2px bar along the bottom of its whole column. */
+.loop-step.now { box-shadow: inset 0 -2px 0 var(--border-color-emphasized); }
+/* A cell per row; a note fills its cell, outlined dark like the cards. */
+.loop-cell { border-radius: var(--border-radius-pill); }
+/* An empty cell: a small dot in its middle, so the grid shows where notes can go. */
+.loop-cell:not(.loop-note, .loop-drum) { display: grid; place-items: center; }
+.loop-cell:not(.loop-note, .loop-drum)::after {
+  content: '';
+  width: 3px;
+  height: 3px;
+  border-radius: var(--border-radius-circle);
+  background-color: var(--border-color-emphasized); /* the cards' dark grey */
+}
+/* The cell a click would change (see hoverAt in app.js): a dark 2px outline inside it. */
+.loop-cell.hover { box-shadow: inset 0 0 0 2px var(--border-color-emphasized); }
+/* The drums, in the three rows under the notes: a hi-hat is a cell filled
+   mid grey, a snare a cell outlined dark grey, a kick a cell filled dark grey. (A hovered kick shows a light ring
+   inside, as its dark outline wouldn't show on its dark fill.) */
+.loop-kick { background-color: var(--border-color-emphasized); }
+.loop-hat { background-color: var(--border-color-base); }
+.loop-snare { box-shadow: inset 0 0 0 1px var(--border-color-emphasized); }
+.loop-kick.hover { box-shadow: inset 0 0 0 2px var(--border-color-emphasized), inset 0 0 0 3px var(--background-color-base); }
+/* The keyboard's cell: a dark ring round it. */
+.loop:focus-visible .loop-cell.cursor { box-shadow: 0 0 0 var(--border-width-thick) var(--focus-color); }
+.loop-note[data-paint="red"] { background-color: var(--paint-red); }
+.loop-note[data-paint="blue"] { background-color: var(--paint-blue); }
+.loop-note[data-paint="yellow"] { background-color: var(--paint-yellow); }
+.loop-note[data-paint="grey"] { background-color: var(--paint-grey); }
+.tempo { display: flex; align-items: center; }
+/* The number scrubs: drag it sideways (see setUpLoop in app.js). */
+.tempo-readout { cursor: ew-resize; touch-action: none; user-select: none; -webkit-user-select: none; border-radius: var(--border-radius-base); }
+html.scrubbing, html.scrubbing * { cursor: ew-resize !important; }
+.tempo-readout:hover, .tempo-readout.scrubbing { background-color: var(--background-color-interactive-subtle--hover); }
+.tempo-readout:focus-visible { outline: var(--border-width-thick) var(--border-style-base) var(--focus-color); outline-offset: 0; }
+.tempo-readout { min-width: 5.5em; text-align: center; font-variant-numeric: tabular-nums; font-family: var(--font-family-monospace); }
+
+/* With room (see .deck): the controls in a column beside the cards. */
+@container panel (min-width: 560px) {
+  .deck { grid-template-columns: minmax(0, 1fr) 17rem; }
+  .slots { grid-auto-rows: 1fr; } /* the four cards share the height evenly */
+  /* Stacked: Pitch's card across the top half, Mood's and Octave's side by
+     side across the bottom, together as tall as the article cards. */
+  .tuning { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr 1fr; }
+  .tuning > .control-pitch { grid-column: 1 / -1; }
+  .tuning > .control-pitch .infinity { max-width: none; }
+  .knob { width: min(100%, 124px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .knob .pointer, .knob .tick, .knob .face, .knob .pointer-text, .infinity .thumb { transition: none; }
+}
+
+.hint { color: var(--color-base); }
+kbd {
+  font-family: var(--font-family-monospace);
+  font-size: var(--font-size-x-small);
+  line-height: var(--line-height-x-small);
+  padding: 0 var(--spacing-25);
+  border: var(--border-width-base) var(--border-style-base) var(--border-color-base);
+  border-radius: var(--border-radius-base);
+  background-color: var(--background-color-neutral-subtle);
+}
+@media (hover: none) { .hint .keys { display: none; } }
+
+/* Credits: Codex's Small style, with a divider above. */
+.credits {
+  margin-top: auto;
+  padding-top: var(--spacing-100);
+  color: var(--color-base);
+  border-top: var(--border-width-base) var(--border-style-base) var(--border-color-divider);
+}
+
+/* The painting */
+
+/* No seams between the squares of a street. */
+#painting { shape-rendering: crispEdges; }
+.shape[data-paint="red"] { fill: var(--paint-red); }
+.shape[data-paint="blue"] { fill: var(--paint-blue); }
+.shape[data-paint="yellow"] { fill: var(--paint-yellow); }
+.shape[data-paint="grey"] { fill: var(--paint-grey); }
+/* Pressed (see press() in app.js): shrinks toward its centre fast, then springs
+   back, overshooting a little. */
+.shape {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.26s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.shape.pressing { transition: transform 0.06s ease-out; }
+@media (prefers-reduced-motion: reduce) { .shape, .shape.pressing { transition: none; } }
+
+/* Dialogs: a native <dialog> for the modal behaviour, holding a Codex Dialog.
+   The deltas: the <dialog> itself is invisible, its backdrop is Codex's, and
+   the Codex Dialog gets Codex's own desktop width. */
+
+dialog {
+  padding: 0;
+  border: 0;
+  background: none;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+}
+dialog::backdrop { background-color: var(--background-color-backdrop-dark); }
+dialog .cdx-dialog { max-width: 32rem; max-height: calc(100dvh - var(--spacing-200)); }
+/* On a phone the picker sits at the top, not the middle, so the on-screen
+   keyboard (which covers the bottom of the screen) never hides its search
+   field or the suggestions under it. */
+@media (max-width: 640px) {
+  #picker { margin-top: var(--spacing-100); margin-bottom: auto; }
+}
+dialog .cdx-dialog__body { display: flex; flex-direction: column; gap: var(--spacing-75); }
+#about .cdx-dialog__body ul { margin: 0; padding-left: var(--spacing-125); display: grid; gap: var(--spacing-50); } /* How it works's bullet lists (not the picker's menu) */
+
+/* The search field fills the dialog (Codex's default is a minimum width). */
+.cdx-text-input { min-width: 0; width: 100%; }
+/* Only Codex icons: hide the browser's own clear button. */
+.cdx-text-input__input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+
+/* The picker's search: a Codex TypeaheadSearch filling the dialog's width.
+   Its menu drops down over the dialog (the dialog's body lets it out), and
+   scrolls past about seven suggestions, or sooner if the window ends first. */
+.cdx-typeahead-search, .cdx-search-input { width: 100%; }
+#picker .cdx-dialog, #picker .cdx-dialog__body { overflow: visible; }
+.cdx-typeahead-search__menu[hidden] { display: none; }
+.cdx-typeahead-search__menu .cdx-menu__listbox { max-height: 26rem; } /* and never past the window: see fitMenu() in app.js */
+.cdx-menu-item__text { min-width: 0; }
+
+/* Surprise me: a Codex button the full width of the dialog (past Codex's
+   maximum button width), in Codex's dark (inverted) colours. */
+.wide { width: 100%; max-width: none; }
+.cdx-button.wide:enabled {
+  color: var(--color-inverted);
+  background-color: var(--background-color-inverted);
+  border-color: var(--background-color-inverted);
+}
+.cdx-button.wide:enabled:hover { background-color: var(--color-base--hover); border-color: var(--color-base--hover); }
+.cdx-button.wide:enabled:active { background-color: var(--color-emphasized); }
+.cdx-button.wide:enabled:focus:not(:focus-visible):not(:active) { border-color: var(--background-color-inverted); } /* after a click, as at rest */
+
+/* Toast: a Codex Message (notice), floating at the bottom. */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: max(var(--spacing-125), env(safe-area-inset-bottom));
+  max-width: calc(100vw - var(--spacing-200));
+  transform: translate(-50%, var(--spacing-125));
+  opacity: 0;
+  pointer-events: none;
+  transition-property: opacity, transform;
+  transition-duration: var(--transition-duration-medium);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+/* The toast wears the other theme: on a light page, dark mode's base
+   background, text and notice icon; on a dark page, light mode's. So its
+   icon is always in the notice grey made for that background. No edge or
+   shadow; it stands out on its own. (The values are Codex's tokens from the
+   other theme's file, and this page's own dark text.) */
+:root[data-theme="light"] .toast {
+  --toast-background: #171717; /* dark --background-color-base */
+  --toast-color: #c4c4c4; /* dark --color-base, as this page dims it */
+  --toast-icon: #a8a8a8; /* dark --color-icon-notice */
+}
+:root[data-theme="dark"] .toast {
+  --toast-background: #fff; /* light --background-color-base */
+  --toast-color: #171717; /* light --color-base */
+  --toast-icon: #424242; /* light --color-icon-notice */
+}
+.toast.cdx-message { background-color: var(--toast-background); color: var(--toast-color); border-color: transparent; box-shadow: none; }
+.toast .cdx-message__icon--vue { color: var(--toast-icon); }
+
+/* Text size: every piece of text, headings aside, in Codex's Small style
+   (its size and line height). Set on the text itself, not by remapping
+   --font-size-* tokens, because Codex also sizes its icons from those. Last
+   in the file, so it wins. */
+body,
+small,
+.cdx-button,
+.cdx-card__text,
+.cdx-card__text__title,
+.cdx-card__text__supporting-text,
+.cdx-info-chip__text,
+.cdx-dialog__body,
+.cdx-text-input__input,
+.cdx-menu-item,
+.cdx-message__content,
+.infinity .thumb {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+

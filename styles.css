@@ -113,7 +113,7 @@ body {
   width: 100%;
   max-width: 450px;
   height: auto;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 .gallery iframe {
   aspect-ratio: 16/9;
