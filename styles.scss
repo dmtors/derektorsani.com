@@ -232,8 +232,10 @@ a {
     break-inside: avoid;
   }
 
-  img {
+  img,
+  video {
     width: 100%;
+    height: auto;
     display: block;
     margin-bottom: 20px;
     border-radius: 12px;

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Akt:wght@100..900&family=Geist:ital,wght@0,100..900;1,100..900&family=Google+Sans+Code:ital,wght,MONO@0,300..800,1;1,300..800,1&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Akt:wght@400;600;900&family=Geist:wght@700;900&family=Google+Sans+Code:wght,MONO@400..500,1&family=Hanken+Grotesk:ital,wght@0,400;0,700;0,800;1,400&family=Old+Standard+TT:wght@400&family=Spectral:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="stageshow-demos.css" />
     <script>
@@ -28,10 +28,20 @@
             items.forEach(el => frag.appendChild(el));
             container.appendChild(frag);
         });
+        // Play looping videos (former GIFs) only while on screen; this also defers their download.
+        document.addEventListener('DOMContentLoaded', () => {
+            const vids = document.querySelectorAll('video[data-lazy-video]');
+            if (!('IntersectionObserver' in window)) { vids.forEach(v => { v.preload = 'auto'; v.play().catch(() => {}); }); return; }
+            const io = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.play().catch(() => {});
+                    else e.target.pause();
+                });
+            }, { rootMargin: '200px' });
+            vids.forEach(v => io.observe(v));
+        });
     </script>
     <script src="stageshow-demos.js" defer></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144041212-1"></script>
     <title>DEREK TORSANI</title>
 </head>
 
@@ -170,6 +180,12 @@
         </div>
     </div>
 
+    <div class="grid bar-small">
+        <div class="bottom">
+            <a href="/derektorsani-resume.pdf" target="_blank" aria-label="Open Derek Torsani's résumé in a new tab.">Résumé</a>
+        </div>
+    </div>
+
     <br><br><br><br>
 
     <div class="grid bar-medium">
@@ -221,33 +237,33 @@
         <figure>
             <stageshow-demo name="codex-icons"></stageshow-demo>
         </figure>
-        <img src="img/wiki-404.png" alt="404 page for Wikipedia"/>
-        <img src="img/wiki-collage-1.jpg" alt="Collage art for Wikipedia"/>
-        <img src="img/wiki-collage-2.jpg" alt="Collage art for Wikipedia"/>
-        <img src="img/wiki-collage-3.jpg" alt="Collage art for Wikipedia"/>
-        <img src="img/ani-marshmallow.gif" alt="Android Marshmallow booting animation"/>
-        <img src="img/ani-bell.gif" alt="Animation of a bell receiving a notification"/>
-        <img src="img/ani-eye.gif" alt="Animation of an open eye closing"/>
-        <img src="img/ani-pin.gif" alt="Animation of a toggle switch being pinned"/>
-        <img src="img/ani-steps.gif" alt="Animation of a step sequence transitioning steps"/>
-        <img src="img/ani-credit-card.gif" alt="Animation of a credit card chip being scanned"/>
-        <img src="img/ani-airplane.gif" alt="Animation of a small airplane flying inside a circle"/>
-        <img src="img/ani-khanacademy.gif" alt="Khan Academy logo spinning up and down"/>
-        <img src="img/ani-sign-code.gif" alt="Buildings and signs being animated into being"/>
-        <img src="img/ani-leak.gif" alt="Filmic light leak"/>
-        <img src="img/belowtheline.gif" alt="Title sequence for cancelled web show"/>
-        <img src="img/datagrid.png" alt="Responsive table component for Gusto"/>
-        <img src="img/datefield.png" alt="Date picker component for Gusto"/>
-        <img src="img/seeds-soundcolor.jpg" alt="In front of a colorful computer screen in the dark"/>
-        <img src="img/soundcolor-example.gif" alt="Projected color changing to the sound of music"/>
-        <img src="img/soundcolor-nav.gif" alt="Navigating the Sound Color Project menu"/>
-        <img src="img/tree-billboard.jpg" alt="Billboard advertising A Tree Like Me"/>
-        <img src="img/tree-book-2.jpg" alt="Page from the book A Tree Like Me"/>
-        <img src="img/tree-yoto.jpg" alt="Page from the book A Tree Like Me"/>
-        <img src="img/tree-record.jpg" alt="Page from the book A Tree Like Me"/>
-        <img src="img/dj-joey-d.jpg" alt="Logo for DJ Joey D"/>
-        <img src="img/halfdollar.jpg" alt="Logo for Halfdollar"/>
-        <img src="img/weiigh.jpg" alt="Logo for Weigh"/>
+        <img src="img/wiki-404.webp" alt="404 page for Wikipedia" width="900" height="2000" loading="lazy" decoding="async"/>
+        <img src="img/wiki-collage-1.webp" alt="Collage art for Wikipedia" width="900" height="600" loading="lazy" decoding="async"/>
+        <img src="img/wiki-collage-2.webp" alt="Collage art for Wikipedia" width="900" height="1350" loading="lazy" decoding="async"/>
+        <img src="img/wiki-collage-3.webp" alt="Collage art for Wikipedia" width="900" height="600" loading="lazy" decoding="async"/>
+        <video muted loop playsinline preload="none" width="800" height="600" role="img" aria-label="Android Marshmallow booting animation" data-lazy-video><source src="img/ani-marshmallow.webm" type="video/webm"><source src="img/ani-marshmallow.mp4" type="video/mp4"></video>
+        <video muted loop playsinline preload="none" width="800" height="600" role="img" aria-label="Animation of a bell receiving a notification" data-lazy-video><source src="img/ani-bell.webm" type="video/webm"><source src="img/ani-bell.mp4" type="video/mp4"></video>
+        <video muted loop playsinline preload="none" width="800" height="600" role="img" aria-label="Animation of an open eye closing" data-lazy-video><source src="img/ani-eye.webm" type="video/webm"><source src="img/ani-eye.mp4" type="video/mp4"></video>
+        <video muted loop playsinline preload="none" width="800" height="600" role="img" aria-label="Animation of a toggle switch being pinned" data-lazy-video><source src="img/ani-pin.webm" type="video/webm"><source src="img/ani-pin.mp4" type="video/mp4"></video>
+        <video muted loop playsinline preload="none" width="800" height="600" role="img" aria-label="Animation of a step sequence transitioning steps" data-lazy-video><source src="img/ani-steps.webm" type="video/webm"><source src="img/ani-steps.mp4" type="video/mp4"></video>
+        <video muted loop playsinline preload="none" width="800" height="600" role="img" aria-label="Animation of a credit card chip being scanned" data-lazy-video><source src="img/ani-credit-card.webm" type="video/webm"><source src="img/ani-credit-card.mp4" type="video/mp4"></video>
+        <video muted loop playsinline preload="none" width="800" height="600" role="img" aria-label="Animation of a small airplane flying inside a circle" data-lazy-video><source src="img/ani-airplane.webm" type="video/webm"><source src="img/ani-airplane.mp4" type="video/mp4"></video>
+        <video muted loop playsinline preload="none" width="800" height="600" role="img" aria-label="Khan Academy logo spinning up and down" data-lazy-video><source src="img/ani-khanacademy.webm" type="video/webm"><source src="img/ani-khanacademy.mp4" type="video/mp4"></video>
+        <video muted loop playsinline preload="none" width="800" height="600" role="img" aria-label="Buildings and signs being animated into being" data-lazy-video><source src="img/ani-sign-code.webm" type="video/webm"><source src="img/ani-sign-code.mp4" type="video/mp4"></video>
+        <video muted loop playsinline preload="none" width="400" height="300" role="img" aria-label="Filmic light leak" data-lazy-video><source src="img/ani-leak.webm" type="video/webm"><source src="img/ani-leak.mp4" type="video/mp4"></video>
+        <video muted loop playsinline preload="none" width="400" height="225" role="img" aria-label="Title sequence for cancelled web show" data-lazy-video><source src="img/belowtheline.webm" type="video/webm"><source src="img/belowtheline.mp4" type="video/mp4"></video>
+        <img src="img/datagrid.webp" alt="Responsive table component for Gusto" width="900" height="900" loading="lazy" decoding="async"/>
+        <img src="img/datefield.webp" alt="Date picker component for Gusto" width="900" height="900" loading="lazy" decoding="async"/>
+        <img src="img/seeds-soundcolor.webp" alt="In front of a colorful computer screen in the dark" width="900" height="900" loading="lazy" decoding="async"/>
+        <video muted loop playsinline preload="none" width="642" height="450" role="img" aria-label="Projected color changing to the sound of music" data-lazy-video><source src="img/soundcolor-example.webm" type="video/webm"><source src="img/soundcolor-example.mp4" type="video/mp4"></video>
+        <video muted loop playsinline preload="none" width="480" height="360" role="img" aria-label="Navigating the Sound Color Project menu" data-lazy-video><source src="img/soundcolor-nav.webm" type="video/webm"><source src="img/soundcolor-nav.mp4" type="video/mp4"></video>
+        <img src="img/tree-billboard.webp" alt="Billboard advertising A Tree Like Me" width="900" height="900" loading="lazy" decoding="async"/>
+        <img src="img/tree-book-2.webp" alt="Page from the book A Tree Like Me" width="900" height="601" loading="lazy" decoding="async"/>
+        <img src="img/tree-yoto.webp" alt="Page from the book A Tree Like Me" width="900" height="696" loading="lazy" decoding="async"/>
+        <img src="img/tree-record.webp" alt="Page from the book A Tree Like Me" width="900" height="600" loading="lazy" decoding="async"/>
+        <img src="img/dj-joey-d.webp" alt="Logo for DJ Joey D" width="900" height="900" loading="lazy" decoding="async"/>
+        <img src="img/halfdollar.webp" alt="Logo for Halfdollar" width="900" height="900" loading="lazy" decoding="async"/>
+        <img src="img/weiigh.webp" alt="Logo for Weigh" width="900" height="900" loading="lazy" decoding="async"/>
     </div>
 
     <br><br><br><br>
@@ -282,7 +298,7 @@
     <br><br>
 
     <div class="gallery">
-        <img src="img/mondrian.jpg" alt="Abstract image of the Mondrian instrument."/>
+        <img src="img/mondrian.webp" alt="Abstract image of the Mondrian instrument." width="900" height="600" loading="lazy" decoding="async"/>
     </div>
 
     <br><br><br><br>
@@ -325,7 +341,7 @@
     <br><br>
 
     <div class="gallery">
-        <img src="img/simsum.jpg" alt="Logo for Simsum"/>
+        <img src="img/simsum.webp" alt="Logo for Simsum" width="900" height="594" loading="lazy" decoding="async"/>
     </div>
 
     <br><br><br><br>
@@ -372,7 +388,7 @@
     <br><br>
 
     <div class="gallery">
-        <img src="img/wiki-interfaceshumanknowledge.jpg" alt="Title for Interfaces for Human Knowledge"/>
+        <img src="img/wiki-interfaceshumanknowledge.webp" alt="Title for Interfaces for Human Knowledge" width="900" height="600" loading="lazy" decoding="async"/>
     </div>
 
     <br><br><br><br>
@@ -460,7 +476,7 @@
     <br><br>
 
     <div class="gallery">
-        <img src="img/codex-shirt.jpg" alt="Photograph of a shirt with the Codex logo"/>
+        <img src="img/codex-shirt.webp" alt="Photograph of a shirt with the Codex logo" width="900" height="497" loading="lazy" decoding="async"/>
     </div>
 
     <br><br><br><br>
@@ -519,7 +535,7 @@
     <br><br>
 
     <div class="gallery">
-        <iframe src="https://www.youtube.com/embed/Pq69nNQIjsA?si=kqFZAHrc4igzpGPn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe loading="lazy" src="https://www.youtube.com/embed/Pq69nNQIjsA?si=kqFZAHrc4igzpGPn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
 
     <br><br><br><br>
@@ -527,7 +543,7 @@
     <div class="grid bar-medium">
         <div></div>
         <div>
-            <img src="img/atreelikeme.png" alt="" style="width: 230px;"/>
+            <img src="img/atreelikeme.webp" alt="" width="900" height="587" loading="lazy" decoding="async" style="width: 230px; height: auto;"/>
         </div>
         <div></div>
         <div></div>
@@ -565,7 +581,7 @@
     <br><br>
 
     <div class="gallery">
-        <iframe src="https://www.youtube.com/embed/jLaT8MHjsio?si=7bMUIUTCTAQJHoUG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe loading="lazy" src="https://www.youtube.com/embed/jLaT8MHjsio?si=7bMUIUTCTAQJHoUG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
 
     <br><br><br><br>
@@ -575,7 +591,7 @@
             <span>20</span>
         </div>
         <div>
-            <img src="img/seeds.png" alt="" style="width: 200px;"/>
+            <img src="img/seeds.webp" alt="" width="900" height="350" loading="lazy" decoding="async" style="width: 200px; height: auto;"/>
         </div>
         <div></div>
         <div class="middle">
@@ -612,7 +628,7 @@
     <br><br>
 
     <div class="gallery">
-        <iframe src="https://www.youtube.com/embed/G-zZRb5CPi8?si=VxgYarxig1G71ZB4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe loading="lazy" src="https://www.youtube.com/embed/G-zZRb5CPi8?si=VxgYarxig1G71ZB4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
 
     <br><br><br><br>
@@ -668,7 +684,7 @@
     <br><br>
 
     <div class="gallery">
-        <img src="img/nx10-after.jpg" alt="Photograph of a torn up concert flyer"/>
+        <img src="img/nx10-after.webp" alt="Photograph of a torn up concert flyer" width="900" height="600" loading="lazy" decoding="async"/>
     </div>
 
     <br><br><br><br>
@@ -698,15 +714,15 @@
     <br><br>
 
     <div class="gallery">
-        <a href="https://derektorsani.bandcamp.com/album/moss-castle" target="_blank" title="Moss Castle" aria-label="Open Moss Castle on Bandcamp"><img src="img/music-moss-castle.jpg" alt="Cover art for Moss Castle"/></a>
-        <a href="https://derektorsani.bandcamp.com/album/fruit-and-labor" target="_blank" title="Fruit & Labor" aria-label="Open Fruit & Labor on Bandcamp"><img src="img/music-fruit-and-labor.png" alt="Cover art for Fruit & Labor"/></a>
-        <a href="https://derektorsani.bandcamp.com/album/a-tree-like-me" target="_blank" title="A Tree Like Me" aria-label="Open A Tree Like Me on Bandcamp"><img src="img/music-atreelikeme.jpg" alt="Cover art for A Tree Like Me"/></a>
-        <a href="https://derektorsani.bandcamp.com/album/conversational-etchings" target="_blank" title="Conversational Etchings" aria-label="Open Conversational Etchings on Bandcamp"><img src="img/music-conversational-etchings.jpg" alt="Cover art for Conversational Etchings"/></a>
-        <a href="https://derektorsani.bandcamp.com/track/the-motion-backwards" target="_blank" title="The Motion Backwards" aria-label="Open The Motion Backwards on Bandcamp"><img src="img/music-motion-backwards.jpg" alt="Cover art for The Motion Backwards"/></a>
-        <a href="https://derektorsani.bandcamp.com/album/new-life" target="_blank" title="New Life" aria-label="Open New Life on Bandcamp"><img src="img/music-new-life.jpg" alt="Cover art for New Life"/></a>
-        <a href="https://derektorsani.bandcamp.com/album/say-their-names" target="_blank" title="Say Their Names" aria-label="Open Say Their Names on Bandcamp"><img src="img/music-saytheirnames.jpg" alt="Cover art for Say Their Names"/></a>
-        <a href="https://derektorsani.bandcamp.com/track/ghost-with-casey-reed" target="_blank" title="Ghost" aria-label="Open Ghost on Bandcamp"><img src="img/music-ghost.jpg" alt="Cover art for Ghost"/></a>
-        <a href="https://derektorsani.bandcamp.com/album/seeds" target="_blank" title="Seeds" aria-label="Open Seeds on Bandcamp"><img src="img/music-seeds.jpg" alt="Cover art for Seeds"/></a>
+        <a href="https://derektorsani.bandcamp.com/album/moss-castle" target="_blank" title="Moss Castle" aria-label="Open Moss Castle on Bandcamp"><img src="img/music-moss-castle.webp" alt="Cover art for Moss Castle" width="900" height="900" loading="lazy" decoding="async"/></a>
+        <a href="https://derektorsani.bandcamp.com/album/fruit-and-labor" target="_blank" title="Fruit & Labor" aria-label="Open Fruit & Labor on Bandcamp"><img src="img/music-fruit-and-labor.webp" alt="Cover art for Fruit & Labor" width="900" height="900" loading="lazy" decoding="async"/></a>
+        <a href="https://derektorsani.bandcamp.com/album/a-tree-like-me" target="_blank" title="A Tree Like Me" aria-label="Open A Tree Like Me on Bandcamp"><img src="img/music-atreelikeme.webp" alt="Cover art for A Tree Like Me" width="900" height="900" loading="lazy" decoding="async"/></a>
+        <a href="https://derektorsani.bandcamp.com/album/conversational-etchings" target="_blank" title="Conversational Etchings" aria-label="Open Conversational Etchings on Bandcamp"><img src="img/music-conversational-etchings.webp" alt="Cover art for Conversational Etchings" width="900" height="900" loading="lazy" decoding="async"/></a>
+        <a href="https://derektorsani.bandcamp.com/track/the-motion-backwards" target="_blank" title="The Motion Backwards" aria-label="Open The Motion Backwards on Bandcamp"><img src="img/music-motion-backwards.webp" alt="Cover art for The Motion Backwards" width="900" height="900" loading="lazy" decoding="async"/></a>
+        <a href="https://derektorsani.bandcamp.com/album/new-life" target="_blank" title="New Life" aria-label="Open New Life on Bandcamp"><img src="img/music-new-life.webp" alt="Cover art for New Life" width="900" height="900" loading="lazy" decoding="async"/></a>
+        <a href="https://derektorsani.bandcamp.com/album/say-their-names" target="_blank" title="Say Their Names" aria-label="Open Say Their Names on Bandcamp"><img src="img/music-saytheirnames.webp" alt="Cover art for Say Their Names" width="900" height="900" loading="lazy" decoding="async"/></a>
+        <a href="https://derektorsani.bandcamp.com/track/ghost-with-casey-reed" target="_blank" title="Ghost" aria-label="Open Ghost on Bandcamp"><img src="img/music-ghost.webp" alt="Cover art for Ghost" width="900" height="900" loading="lazy" decoding="async"/></a>
+        <a href="https://derektorsani.bandcamp.com/album/seeds" target="_blank" title="Seeds" aria-label="Open Seeds on Bandcamp"><img src="img/music-seeds.webp" alt="Cover art for Seeds" width="900" height="900" loading="lazy" decoding="async"/></a>
     </div>
 
     <br><br><br><br>
@@ -728,23 +744,23 @@
     <br><br>
 
     <div class="gallery">
-        <img src="img/art-quartet-improvisation.jpg" alt="Abstract gestural drawing of an experimental quartet"/>
-        <img src="img/art-distanza.jpg" alt="Abstract gestural drawing of a person with a sign"/>
-        <img src="img/art-jantar-mantar.jpg" alt="Abstract gestural drawings of Jantar Mantar in New Delhi"/>
-        <img src="img/art-untitled.jpg" alt="Abstract gestural drawing"/>
-        <img src="img/art-childs-play.jpg" alt="Abstract gestural drawing of a child playing"/>
-        <img src="img/art-pickup-cricket.jpg" alt="Abstract gestural drawing of people playing cricket in India"/>
-        <img src="img/art-portrait-friend.jpg" alt="Abstract gestural drawing of a person"/>
-        <img src="img/art-dream.jpg" alt="Abstract gestural drawing of a dream"/>
-        <img src="img/art-cellist.jpg" alt="Abstract gestural drawing of a cellist"/>
-        <img src="img/art-guitarist.jpg" alt="Abstract gestural drawing of a guitarist"/>
-        <img src="img/art-arthur.jpg" alt="Painting of a goldendoodle"/>
-        <img src="img/art-april-in-bloom.jpg" alt="Photograph of the cherry blossoms in DC"/>
-        <img src="img/art-auto.jpg" alt="Photograph of an auto in India"/>
-        <img src="img/art-1111.jpg" alt="Photograph from the 1111 parking garage in Miami"/>
-        <img src="img/art-lost.jpg" alt="Photograph of a mountain in Switzerland"/>
-        <img src="img/art-luna.jpg" alt="Photograph of the moon next to a mountain"/>
-        <img src="img/srsly.jpg" alt="The letters DNC WTH M3 in yarn weaved in paper"/>
+        <img src="img/art-quartet-improvisation.webp" alt="Abstract gestural drawing of an experimental quartet" width="900" height="841" loading="lazy" decoding="async"/>
+        <img src="img/art-distanza.webp" alt="Abstract gestural drawing of a person with a sign" width="866" height="1077" loading="lazy" decoding="async"/>
+        <img src="img/art-jantar-mantar.webp" alt="Abstract gestural drawings of Jantar Mantar in New Delhi" width="900" height="500" loading="lazy" decoding="async"/>
+        <img src="img/art-untitled.webp" alt="Abstract gestural drawing" width="867" height="1155" loading="lazy" decoding="async"/>
+        <img src="img/art-childs-play.webp" alt="Abstract gestural drawing of a child playing" width="900" height="1350" loading="lazy" decoding="async"/>
+        <img src="img/art-pickup-cricket.webp" alt="Abstract gestural drawing of people playing cricket in India" width="900" height="1200" loading="lazy" decoding="async"/>
+        <img src="img/art-portrait-friend.webp" alt="Abstract gestural drawing of a person" width="900" height="1350" loading="lazy" decoding="async"/>
+        <img src="img/art-dream.webp" alt="Abstract gestural drawing of a dream" width="900" height="1350" loading="lazy" decoding="async"/>
+        <img src="img/art-cellist.webp" alt="Abstract gestural drawing of a cellist" width="900" height="1454" loading="lazy" decoding="async"/>
+        <img src="img/art-guitarist.webp" alt="Abstract gestural drawing of a guitarist" width="900" height="1350" loading="lazy" decoding="async"/>
+        <img src="img/art-arthur.webp" alt="Painting of a goldendoodle" width="900" height="665" loading="lazy" decoding="async"/>
+        <img src="img/art-april-in-bloom.webp" alt="Photograph of the cherry blossoms in DC" width="900" height="1203" loading="lazy" decoding="async"/>
+        <img src="img/art-auto.webp" alt="Photograph of an auto in India" width="885" height="1323" loading="lazy" decoding="async"/>
+        <img src="img/art-1111.webp" alt="Photograph from the 1111 parking garage in Miami" width="900" height="673" loading="lazy" decoding="async"/>
+        <img src="img/art-lost.webp" alt="Photograph of a mountain in Switzerland" width="900" height="676" loading="lazy" decoding="async"/>
+        <img src="img/art-luna.webp" alt="Photograph of the moon next to a mountain" width="880" height="1219" loading="lazy" decoding="async"/>
+        <img src="img/srsly.webp" alt="The letters DNC WTH M3 in yarn weaved in paper" width="900" height="599" loading="lazy" decoding="async"/>
     </div>
 
     <br><br>

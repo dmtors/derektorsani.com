@@ -215,8 +215,10 @@ a:active {
   -moz-column-break-inside: avoid;
        break-inside: avoid;
 }
-.tldr img {
+.tldr img,
+.tldr video {
   width: 100%;
+  height: auto;
   display: block;
   margin-bottom: 20px;
   border-radius: 12px;
